@@ -1,3 +1,44 @@
+.gradle
+build/
+
+
+### IntelliJ IDEA ###
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
+*.iws
+*.iml
+*.ipr
+out/
+
+### Kotlin ###
+.kotlin
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+
 # Compiled class file
 *.class
 
@@ -22,6 +63,27 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+/kotlin-js-store/
+.gradle/
 
-# Kotlin Gradle plugin data, see https://kotlinlang.org/docs/whatsnew20.html#new-directory-for-kotlin-data-in-gradle-projects
-.kotlin/
+local.properties
+
+
+build
+captures
+.externalNativeBuild
+.cxx
+xcuserdata
+# So we don't accidentally commit our private keys
+*.gpg
+_*Test.txt
+
+*.pyc
+*.pyo
+/dist
+/build
+/ez_setup.py
+/*.egg-info
+*.egg-info
+/.venv
+/*.py

@@ -16,4 +16,4 @@ description = "Automatically generates Kotlin Utf8 code."
 generate = "org.angproj.utf:utf_generate"
 
 [tool.setuptools.packages.find]
-where = ["src/utf_generator"]
+where = ["generator/src/utf_generator"]

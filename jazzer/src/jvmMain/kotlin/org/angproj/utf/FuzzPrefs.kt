@@ -12,7 +12,7 @@
  * Contributors:
  *      Kristoffer Paulsson - initial implementation
  */
-package org.angproj.sec
+package org.angproj.utf
 
 import kotlin.time.Duration.Companion.minutes
 

@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "utf8-generator"
+version = "0.1.0"
+dependencies = ["lxml>=5.3.0", "natsort"]
+requires-python = ">=3.10"
+authors = [
+  {name = "Kristoffer Paulsson"},
+]
+description = "Automatically generates Kotlin Utf8 code."
+
+[project.scripts]
+generate = "org.angproj.utf:utf_generate"
+
+[tool.setuptools.packages.find]
+where = ["src/utf_generator"]

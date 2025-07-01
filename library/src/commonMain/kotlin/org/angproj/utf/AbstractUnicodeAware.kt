@@ -223,8 +223,8 @@ public abstract class AbstractUnicodeAware {
      * */
     protected inline fun <reified R : Any> digitToNumber(cp: Int): Int = when(cp) {
         in 0x30..0x39 -> cp - 0x30          // [0-9]
-        in 0x41..0x46 -> cp - 0x41 - 10     // [A-F]
-        in 0x61..0x66 -> cp - 0x61 - 10     // [a-f]
+        in 0x41..0x46 -> cp - 0x41 + 10     // [A-F]
+        in 0x61..0x66 -> cp - 0x61 + 10     // [a-f]
         else -> throw UnicodeError("Illegal glyph digit $cp")
     }
 

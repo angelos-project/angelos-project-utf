@@ -40,3 +40,6 @@ public fun Int.toCodePoint(): CodePoint = CodePoint(this)
  * @return The code point corresponding to the given character.
  */
 public fun Char.toCodePoint(): CodePoint = CodePoint(this.code)
+
+
+public fun CodePoint.octets(): Int = octetSize(value)

@@ -13,11 +13,11 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.vanniktech.mavenPublish)
     alias(libs.plugins.dokka)
-    jacoco
+    alias(libs.plugins.kover)
 }
 
 group = "org.angproj.utf"
-version = "0.1.0"
+version = "0.1.4"
 
 kotlin {
     explicitApi()
@@ -78,7 +78,6 @@ kotlin {
         }
         jvmTest.dependencies {
             implementation(libs.kotlin.mockito)
-
         }
     }
 }
@@ -149,38 +148,11 @@ tasks.dokkaHtml {
     }
 }
 
-jacoco {
-    toolVersion = "0.8.12"
-    reportsDirectory.set(layout.buildDirectory.dir("reports/jacoco"))
-}
-
-tasks {
-    withType<Test> {
-        finalizedBy(withType(JacocoReport::class))
-    }
-    register("jacocoTestReport", JacocoReport::class) {
-        dependsOn(withType(Test::class))
-        val coverageSourceDirs = arrayOf(
-            "src/commonMain",
-        )
-
-        val buildDirectory = layout.buildDirectory
-
-        val classFiles = buildDirectory.dir("classes/kotlin/jvm").get().asFile
-            .walkBottomUp()
-            .toSet()
-
-        classDirectories.setFrom(classFiles)
-        sourceDirectories.setFrom(files(coverageSourceDirs))
-
-        buildDirectory.files("jacoco/jvmTest.exec").let {
-            executionData.setFrom(it)
-        }
-
-        reports {
-            xml.required.set(true)
-            csv.required.set(true)
-            html.required.set(true)
+kover {
+    reports {
+        total {
+            xml.onCheck.set(true)
+            html.onCheck.set(true)
         }
     }
 }

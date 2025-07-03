@@ -50,7 +50,7 @@ public enum class Ascii(public val cp: Int) {
     CTRL_US(0x1F),
     CTRL_DEL(0x7F),
 
-    PRNT_NOBR(0x20), //   - SPACE
+    PRNT_SPACE(0x20), //   - SPACE
     PRNT_EXCL(0x21), // ! - EXCLAMATION MARK
     PRNT_QUOT(0x22), // " - QUOTATION MARK
     PRNT_HASH(0x23), // # - NUMBER SIGN

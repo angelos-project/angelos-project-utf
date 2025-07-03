@@ -13,8 +13,8 @@
  *      Kristoffer Paulsson - initial implementation
  */
 package org.angproj.utf
-
 import org.angproj.utf.Language.*
+
 
 public abstract class LanguageMap {
 

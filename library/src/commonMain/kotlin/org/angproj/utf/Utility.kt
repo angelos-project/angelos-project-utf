@@ -47,6 +47,18 @@ public class LangFilter internal constructor(
         this.blocks = blks.toHashSet()
     }
 
+    public fun addLanguage(language: UtfLanguage) {
+        language.scripts.forEach { addScript(it) }
+    }
+
+    public fun addScript(script: Script) {
+        script.blocks.forEach { addBlock(it) }
+    }
+
+    public fun addBlock(block: UtfBlock) {
+        blocks.add(block)
+    }
+
     /**
      * Adds the [BasicLatin] block to the filter.
      *

@@ -553,6 +553,7 @@ import org.angproj.utf.lng.OldProvencalTo1500
 import org.angproj.utf.lng.OldTurkish
 import org.angproj.utf.lng.OriyaMacrolanguage
 import org.angproj.utf.lng.Oromo
+import org.angproj.utf.lng.OrphanedScripts
 import org.angproj.utf.lng.Osage
 import org.angproj.utf.lng.Oscan
 import org.angproj.utf.lng.Ossetian
@@ -1625,5 +1626,6 @@ public enum class Language(public val lang: UtfLanguage) {
     ZOROASTRIAN_DARI(ZoroastrianDari),
     ZULU(Zulu),
     ZUNI(Zuni),
+    OTHERS(OrphanedScripts),
     UNKNOWN(Undefined);
 }

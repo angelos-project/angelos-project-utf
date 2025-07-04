@@ -80,6 +80,10 @@ class DummyBuffer(buffer: ByteArray, policy: Policy) : UnicodeAware, CodePointIt
         _buffer[_position++]
     }
 
+    fun readTrust(): CodePoint = readGlyphBlk(remaining) {
+        _buffer[_position++]
+    }
+
     /**
      * Writes a [CodePoint] to the current position in the buffer using the configured [policy].
      *
@@ -88,6 +92,10 @@ class DummyBuffer(buffer: ByteArray, policy: Policy) : UnicodeAware, CodePointIt
      * @throws Exception if writing fails or there is insufficient space.
      */
     fun write(codePoint: CodePoint): Int = writeGlyphByPolicyBlk(codePoint, remaining, policy) {
+        buffer[_position++] = it
+    }
+
+    fun writeTrust(codePoint: CodePoint): Int = writeGlyphBlk(codePoint, remaining) {
         buffer[_position++] = it
     }
 

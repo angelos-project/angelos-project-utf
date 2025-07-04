@@ -47,4 +47,5 @@ public object Unicode: UnicodeAware {
         }
         return utfString
     }
+
 }

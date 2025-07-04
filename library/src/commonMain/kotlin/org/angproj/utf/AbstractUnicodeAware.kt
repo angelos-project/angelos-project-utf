@@ -175,33 +175,42 @@ public abstract class AbstractUnicodeAware {
     }
 
     protected inline fun <reified R : Any> innerGlyphSizeWithPassThrough(
-        codePoint: CodePoint
-    ): Int = unicodeOctetSize<Unit>(glyphWithPassThrough<Unit>(codePoint))
+        cp: Int
+    ): Int = unicodeOctetSize<Unit>(glyphWithPassThrough<Unit>(cp))
 
     protected inline fun <reified R : Any> innerGlyphSizeWithEscape(
-        codePoint: CodePoint, filter: LangFilter
-    ): Int = unicodeOctetSize<Unit>(glyphWithEscape<Unit>(codePoint, filter))
+        cp: Int, filter: LangFilter
+    ): Int = unicodeOctetSize<Unit>(glyphWithEscape<Unit>(cp, filter))
 
     protected inline fun <reified R : Any> innerGlyphSizeWithSecurity(
-        codePoint: CodePoint, filter: LangFilter
-    ): Int = unicodeOctetSize<Unit>(glyphWithSecurity<Unit>(codePoint, filter))
+        cp: Int, filter: LangFilter
+    ): Int = unicodeOctetSize<Unit>(glyphWithSecurity<Unit>(cp, filter))
 
     protected inline fun <reified R : Any> glyphWithPassThrough(
-        codePoint: CodePoint,
-    ): Int = escapeNonUtf8<Unit>(codePoint.value)
+        cp: Int,
+    ): Int = escapeNonUtf8<Unit>(cp)
 
     protected inline fun <reified R : Any> glyphWithEscape(
-        codePoint: CodePoint, filter: LangFilter,
-    ): Int = when(!isSurrogate<Unit>(codePoint.value) && filter.isValid(codePoint)) {
-        true -> codePoint.value
+        cp: Int, filter: LangFilter,
+    ): Int = when(!isSurrogate<Unit>(cp) && filter.isValid(cp)) {
+        true -> cp
         else -> REPLACEMENT_CHARACTER
     }
 
     protected inline fun <reified R : Any> glyphWithSecurity(
-        codePoint: CodePoint, filter: LangFilter,
-    ): Int = when(filter.isValid(codePoint)) {
-        true -> codePoint.value
-        else -> throw UnicodeError("Illegal codepoint ${codePoint.value}")
+        cp: Int, filter: LangFilter,
+    ): Int = when(filter.isValid(cp)) {
+        true -> cp
+        else -> throw UnicodeError("Illegal codepoint ${cp}")
+    }
+
+    protected inline fun <reified R: Any> filterGlyphByPolicy(
+        cp: Int,
+        policy: Policy
+    ): Int = when(policy.level) {
+        FilterPolicy.PASSTHROUGH -> glyphWithPassThrough<R>(cp)
+        FilterPolicy.ESCAPE -> glyphWithEscape<R>(cp, policy.filter)
+        FilterPolicy.SECURITY -> glyphWithSecurity<R>(cp, policy.filter)
     }
 
     protected inline fun <reified R : Any> isGlyphAsciiCtrl(cp: Int): Boolean = cp in 0x00..0x1F || cp == 0x7F

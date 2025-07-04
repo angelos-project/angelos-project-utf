@@ -47,5 +47,9 @@ public interface UtfBlock {
      * @param codePoint The code point to check.
      * @return `true` if the code point is valid, `false` otherwise.
      */
-    public fun isValid(codePoint: CodePoint): Boolean = codePoint.value in range && codePoint.value !in noUse
+    public fun isValid(codePoint: CodePoint): Boolean = isValid<Unit>(codePoint.value, this)
+
+    public companion object {
+        internal inline fun <reified R: Any>isValid(cp: Int, block: UtfBlock): Boolean = cp in block.range && cp !in block.noUse
+    }
 }

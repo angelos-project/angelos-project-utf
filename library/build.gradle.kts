@@ -17,7 +17,7 @@ plugins {
 }
 
 group = "org.angproj.utf"
-version = "0.1.6"
+version = "0.1.8"
 
 kotlin {
     explicitApi()

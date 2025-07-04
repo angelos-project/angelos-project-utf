@@ -34,7 +34,9 @@ public class LangFilter internal constructor(private val languages: List<UtfLang
     public fun isLanguageLoaded(lang: Language): Boolean = languages.contains(lang.lang)
     public fun isLanguageLoaded(lang: UtfLanguage): Boolean = languages.contains(lang)
 
-    public fun isValid(codePoint: CodePoint): Boolean = blocks.any { it.isValid(codePoint) }
+    public fun isValid(codePoint: CodePoint): Boolean = isValid(codePoint.value)
+
+    public fun isValid(cp: Int): Boolean = blocks.any { UtfBlock.isValid<Unit>(cp, it) }
 
 
     public companion object : LanguageMap() {

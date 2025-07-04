@@ -15,41 +15,71 @@
 package org.angproj.utf
 
 /**
- * Represents a block of Unicode characters.
- * */
+ * Represents a contiguous block of Unicode code points, typically corresponding to a named Unicode block.
+ *
+ * A `UtfBlock` defines a range of code points, a human-readable name, a meta description, and
+ * optionally a set of code points that are not in use or not allowed within the block. It also
+ * provides a flag indicating whether the block contains control characters.
+ *
+ * Implementations of this interface are used to group and validate code points according to
+ * Unicode block definitions, which are useful for language, script, and text processing.
+ */
 public interface UtfBlock {
 
     /**
-     * The name of the block.
+     * The human-readable name of the Unicode block (e.g., "Basic Latin", "Cyrillic").
      */
     public val name: String
 
     /**
-     * A meta description of the block.
+     * A meta description of the block, providing additional context or information.
      */
     public val meta: String
 
     /**
-     * The range of code points that are valid within this block.
+     * The inclusive range of Unicode code points that belong to this block.
+     *
+     * This range defines the valid code points for the block, subject to exclusions in [noUse].
      */
     public val range: IntRange
 
+    /**
+     * Indicates whether this block contains no control characters.
+     *
+     * If `true`, the block is free of control characters; if `false`, control characters may be present.
+     */
     public val noCtrl: Boolean
 
     /**
-     * The set of code points that are not allowed in this block.
+     * The set of code points within [range] that are not allowed or not in use in this block.
+     *
+     * These code points are excluded from the set of valid code points for the block.
      */
     public val noUse: Set<Int>
 
     /**
-     * Checks if the given code point is valid within this block.
+     * Checks if the given [codePoint] is valid within this block.
      *
-     * @param codePoint The code point to check.
-     * @return `true` if the code point is valid, `false` otherwise.
+     * A code point is considered valid if it is within [range] and not present in [noUse].
+     *
+     * @param codePoint The [CodePoint] to check.
+     * @return `true` if the code point is valid for this block, `false` otherwise.
      */
     public fun isValid(codePoint: CodePoint): Boolean = isValid<Unit>(codePoint.value, this)
 
+    /**
+     * Companion object providing utility methods for block validation.
+     */
     public companion object {
+        /**
+         * Checks if the given code point integer [cp] is valid for the specified [block].
+         *
+         * A code point is valid if it is within the block's [range] and not in [noUse].
+         *
+         * @param cp The code point as an [Int].
+         * @param block The [UtfBlock] to validate against.
+         * @return `true` if the code point is valid, `false` otherwise.
+         */
         internal inline fun <reified R: Any>isValid(cp: Int, block: UtfBlock): Boolean = cp in block.range && cp !in block.noUse
     }
 }

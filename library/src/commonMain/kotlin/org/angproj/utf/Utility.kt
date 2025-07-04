@@ -16,33 +16,98 @@ package org.angproj.utf
 
 import org.angproj.utf.blk.BasicLatin
 
-public class LangFilter internal constructor(private val languages: List<UtfLanguage>) {
+/**
+ * Provides a filter for validating Unicode code points against a set of languages and their scripts.
+ *
+ * The `LangFilter` class aggregates all Unicode blocks used by the provided [UtfLanguage]s and
+ * allows checking if a code point is valid for any of those languages. It also supports adding
+ * the [BasicLatin] block, which is commonly required for whitespace and control characters.
+ *
+ * @property languages The list of [UtfLanguage]s included in this filter.
+ * @constructor Internal. Use [buildFilter] to create an instance.
+ */
+public class LangFilter internal constructor(
+    private val languages: List<UtfLanguage>
+) {
 
+    /**
+     * The set of all [UtfBlock]s used by the included languages' scripts.
+     */
     private val blocks: HashSet<UtfBlock>
 
     init {
         val blks = mutableSetOf<UtfBlock>()
-        languages.forEach { lng -> lng.scripts.forEach { scr -> scr.blocks.forEach { blk -> blks.add(blk) } } }
+        languages.forEach { lng ->
+            lng.scripts.forEach { scr ->
+                scr.blocks.forEach { blk ->
+                    blks.add(blk)
+                }
+            }
+        }
         this.blocks = blks.toHashSet()
     }
 
     /**
-     * BasicLatin is needed for several type of normal invisible signs such as whitespace.
-     * */
+     * Adds the [BasicLatin] block to the filter.
+     *
+     * This is necessary for supporting common invisible signs such as whitespace.
+     */
     public fun withBasicLatin() { blocks.add(BasicLatin) }
 
+    /**
+     * Checks if the specified [Language] is included in this filter.
+     *
+     * @param lang The [Language] to check.
+     * @return `true` if the language is loaded, `false` otherwise.
+     */
     public fun isLanguageLoaded(lang: Language): Boolean = languages.contains(lang.lang)
+
+    /**
+     * Checks if the specified [UtfLanguage] is included in this filter.
+     *
+     * @param lang The [UtfLanguage] to check.
+     * @return `true` if the language is loaded, `false` otherwise.
+     */
     public fun isLanguageLoaded(lang: UtfLanguage): Boolean = languages.contains(lang)
 
+    /**
+     * Checks if the given [CodePoint] is valid for any of the filter's blocks.
+     *
+     * @param codePoint The [CodePoint] to validate.
+     * @return `true` if the code point is valid, `false` otherwise.
+     */
     public fun isValid(codePoint: CodePoint): Boolean = isValid(codePoint.value)
 
+    /**
+     * Checks if the given code point integer is valid for any of the filter's blocks.
+     *
+     * @param cp The code point as an [Int].
+     * @return `true` if the code point is valid, `false` otherwise.
+     */
     public fun isValid(cp: Int): Boolean = blocks.any { UtfBlock.isValid<Unit>(cp, it) }
 
-
+    /**
+     * Companion object providing factory methods and default filters.
+     */
     public companion object : LanguageMap() {
+
+        /**
+         * A basic filter containing only the [BasicLatin] block.
+         */
         public val basic: LangFilter by lazy { LangFilter(listOf()).apply { withBasicLatin() } }
+
+        /**
+         * A filter for the unknown language, including the [BasicLatin] block.
+         */
         public val wide: LangFilter by lazy { LangFilter(listOf(Language.UNKNOWN.lang)).apply { withBasicLatin() } }
 
+        /**
+         * Builds a [LangFilter] for the specified ISO language codes.
+         *
+         * @param isoCode One or more ISO 639-1 (2-letter) or ISO 639-3 (3-letter) language codes.
+         * @return A [LangFilter] for the specified languages.
+         * @throws IllegalArgumentException if an unknown code is provided.
+         */
         public fun buildFilter(vararg isoCode: String): LangFilter {
             val languages = mutableListOf<UtfLanguage>()
 

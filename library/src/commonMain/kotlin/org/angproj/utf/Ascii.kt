@@ -146,7 +146,7 @@ public enum class Ascii(internal val cp: Int) : Alphabet<Ascii> {
     PRNT_RBRACE(0x7d), // } - RIGHT CURLY BRACKET
     PRNT_TILDE(0x7e); // ~ - TILDE
 
-    public fun toInt(): Int = cp
+    override fun toInt(): Int = cp
 
-    public fun toCodePoint(): CodePoint = cp.toCodePoint()
+    override fun toCodePoint(): CodePoint = cp.toCodePoint()
 }

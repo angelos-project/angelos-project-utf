@@ -15,7 +15,7 @@
 package org.angproj.utf
 
 
-public enum class Ascii(public val cp: Int) {
+public enum class Ascii(internal val cp: Int) {
     CTRL_NUL(0x00),
     CTRL_SOH(0x01),
     CTRL_STX(0x02),
@@ -145,4 +145,8 @@ public enum class Ascii(public val cp: Int) {
     PRNT_VBAR(0x7c), // | - VERTICAL LINE
     PRNT_RBRACE(0x7d), // } - RIGHT CURLY BRACKET
     PRNT_TILDE(0x7e); // ~ - TILDE
+
+    public fun toInt(): Int = cp
+
+    public fun toCodePoint(): CodePoint = cp.toCodePoint()
 }

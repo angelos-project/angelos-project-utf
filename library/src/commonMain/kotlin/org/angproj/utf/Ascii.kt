@@ -15,7 +15,7 @@
 package org.angproj.utf
 
 
-public enum class Ascii(internal val cp: Int) {
+public enum class Ascii(internal val cp: Int) : Alphabet<Ascii> {
     CTRL_NUL(0x00),
     CTRL_SOH(0x01),
     CTRL_STX(0x02),

@@ -20,3 +20,9 @@ public interface Alphabet<E: Enum<E>> {
 
     public fun toCodePoint(): CodePoint
 }
+
+public fun alphabetOf(vararg characters: Alphabet<*>): Set<Int> {
+    val ints = mutableSetOf<Int>()
+    characters.forEach { ints.add(it.toInt()) }
+    return ints.toSet()
+}

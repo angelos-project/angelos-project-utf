@@ -17,6 +17,7 @@ package org.angproj.utf
 import kotlin.jvm.JvmInline
 
 
+
 /**
  * A code point is a number that maps to a character in the Unicode standard.
  * It is an integer value that represents a specific character in the Unicode character set.
@@ -25,7 +26,14 @@ import kotlin.jvm.JvmInline
  * @param value The integer value representing the code point.
  */
 @JvmInline
-public value class CodePoint(public val value: Int): UnicodeAware {}
+public value class CodePoint(public val value: Int): UnicodeAware {
+
+    public fun isNull(): Boolean = this == nullCodePoint
+
+    public companion object {
+        public val nullCodePoint: CodePoint = CodePoint(Int.MIN_VALUE)
+    }
+}
 
 /**
  * Converts an integer to a code point.

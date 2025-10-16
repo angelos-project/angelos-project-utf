@@ -17,6 +17,23 @@ package org.angproj.utf.iter
 import org.angproj.utf.CodePoint
 
 public interface CodePointIterator : Iterator<CodePoint> {
+
+    /**
+     * Prevoiously [CodePoint] given by next()
+     * */
+    public val previous: CodePoint
+
+    /**
+     * Byte position indicator
+     * */
+    public val position: Int
+
+    /**
+     * Number of [CodePoint]s iterated
+     * */
+    public val count: Int
+
+
     override fun next(): CodePoint
 
     override fun hasNext(): Boolean

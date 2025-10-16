@@ -17,6 +17,7 @@ package org.angproj.utf
 import kotlin.jvm.JvmInline
 
 
+public typealias CodePointPredicate = (CodePoint) -> Boolean
 
 /**
  * A code point is a number that maps to a character in the Unicode standard.

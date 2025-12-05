@@ -1,35 +1,26 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidLibrary)
+    application
 }
 
 group = "org.angproj.utf"
 version = "1.0-SNAPSHOT"
 
+application {
+    mainClass.set("org.angproj.utf.UtfInfoGenerator")
+}
+
 kotlin {
     jvmToolchain(libs.versions.jvm.toolchain.get().toInt())
 
     jvm()
-    androidTarget {
-        publishLibraryVariants("release")
-    }
 
     sourceSets {
         jvmMain.dependencies {
             api(project(":library"))
+        }
+        jvmTest.dependencies {
             implementation(libs.kotlin.test)
         }
-    }
-}
-
-android {
-    namespace = group.toString()
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
-    defaultConfig {
-        minSdk = libs.versions.android.minSdk.get().toInt()
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
     }
 }

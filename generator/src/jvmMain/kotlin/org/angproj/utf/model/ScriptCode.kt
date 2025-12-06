@@ -14,19 +14,11 @@
  */
 package org.angproj.utf.model
 
-data class SearchName(
-    val canonical: String
-) {
-    val slug: String = slugify(canonical)
-    val klazz: String = klazzify(canonical)
-
-    companion object {
-        fun slugify(name: String): String {
-            return name.lowercase().replace(" ", "_").replace("-", "_")
-        }
-
-        fun klazzify(name: String): String {
-            return name.split(" ", "-", "_").joinToString("") { it.capitalize() }
-        }
-    }
-}
+data class ScriptCode(
+    val code: String,
+    val number: Int,
+    val name: String,
+    val pva: String,
+    val version: String,
+    val date: String
+)

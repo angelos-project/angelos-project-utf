@@ -34,7 +34,7 @@ class ScriptLoaderDialog(parent: JFrame, scripts: List<Scripts>) : JDialog(paren
 
         // Collect all unique search terms
         val searchTerms = scripts.flatMap {
-            listOf(it.name, it.searchName.slug, it.searchName.klass)
+            listOf(it.name, it.searchName.slug, it.searchName.klazz)
         }.distinct().sorted()
 
         val comboBox = JComboBox(searchTerms.toTypedArray())
@@ -62,19 +62,19 @@ class ScriptLoaderDialog(parent: JFrame, scripts: List<Scripts>) : JDialog(paren
             allScripts.filter {
                 it.name.lowercase().contains(query) ||
                 it.searchName.slug.contains(query) ||
-                it.searchName.klass.contains(query)
+                it.searchName.klazz.contains(query)
             }
         }
 
         for (script in filteredScripts) {
             tableModel.addRow(
                 arrayOf(
-                    "U+%04X".format(script.start),
-                    if(script.end != -1)"U+%04X".format(script.end) else "",
+                    "0x%04X".format(script.start),
+                    if(script.end != -1)"0x%04X".format(script.end) else "",
                     script.name,
                     script.type,
                     script.searchName.slug,
-                    script.searchName.klass
+                    script.searchName.klazz
                 )
             )
         }

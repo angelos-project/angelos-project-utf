@@ -15,6 +15,7 @@
 package org.angproj.utf.helper
 
 import org.angproj.utf.model.Block
+import org.angproj.utf.model.SearchName
 import java.io.File
 
 object BlockLoader {
@@ -33,11 +34,15 @@ object BlockLoader {
                     if (range.size == 2) {
                         val start = range[0].toInt(16)
                         val end = range[1].toInt(16)
-                        blocks.add(Block(start, end, name))
+                        blocks.add(Block(start, end, name, SearchName(name), meta = "", range = start..end, noCtrl = false, noUse = emptySet()))
                     }
                 }
             }
         }
         return blocks
+    }
+
+    val allBlocks: List<Block> by lazy {
+        loadBlocks("/Blocks.txt")
     }
 }

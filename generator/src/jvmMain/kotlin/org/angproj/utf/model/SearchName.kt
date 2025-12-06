@@ -14,15 +14,19 @@
  */
 package org.angproj.utf.model
 
-import org.angproj.utf.UtfBlock
+data class SearchName(
+    val name: String
+) {
+    val slug: String = slugify(name)
+    val klass: String = klassify(name)
 
-data class Block(
-    val start: Int,
-    val end: Int,
-    override val name: String,
-    val searchName: SearchName,
-    override val meta: String,
-    override val range: IntRange,
-    override val noCtrl: Boolean,
-    override val noUse: Set<Int>
-) : UtfBlock
+    companion object {
+        fun slugify(name: String): String {
+            return name.lowercase().replace(" ", "_").replace("-", "_")
+        }
+
+        fun klassify(name: String): String {
+            return name.split(" ", "-", "_").joinToString("") { it.capitalize() }
+        }
+    }
+}

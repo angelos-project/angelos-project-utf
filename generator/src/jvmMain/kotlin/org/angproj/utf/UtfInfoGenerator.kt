@@ -15,7 +15,10 @@
 package org.angproj.utf
 
 import org.angproj.utf.helper.BlockLoader
+import org.angproj.utf.helper.ScriptLoader
+import org.angproj.utf.model.Scripts
 import org.angproj.utf.ui.BlockViewerDialog
+import org.angproj.utf.ui.ScriptLoaderDialog
 
 import java.awt.BorderLayout
 import javax.swing.JFrame
@@ -51,11 +54,18 @@ class UtfInfoGenerator : JFrame() {
         val viewMenu = JMenu("View")
         val blocksItem = JMenuItem("Show Unicode Blocks")
         blocksItem.addActionListener {
-            val blocks = BlockLoader.loadBlocks("/Blocks.txt")
+            val blocks = BlockLoader.allBlocks
             BlockViewerDialog(this, blocks).isVisible = true
         }
 
+        val scriptsItem = JMenuItem("Show Unicode Scripts")
+        scriptsItem.addActionListener {
+            val script = ScriptLoader.allScripts
+            ScriptLoaderDialog(this, script).isVisible = true
+        }
+
         viewMenu.add(blocksItem)
+        viewMenu.add(scriptsItem)
         menuBar.add(viewMenu)
 
         menuBar.add(fileMenu)

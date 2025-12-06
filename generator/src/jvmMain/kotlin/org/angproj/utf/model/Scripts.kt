@@ -14,15 +14,10 @@
  */
 package org.angproj.utf.model
 
-import org.angproj.utf.UtfBlock
-
-data class Block(
+data class Scripts (
     val start: Int,
     val end: Int,
-    override val name: String,
+    val name: String,
     val searchName: SearchName,
-    override val meta: String,
-    override val range: IntRange,
-    override val noCtrl: Boolean,
-    override val noUse: Set<Int>
-) : UtfBlock
+    val type: String
+)

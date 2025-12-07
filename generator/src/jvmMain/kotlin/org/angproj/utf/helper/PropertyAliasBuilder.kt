@@ -37,11 +37,28 @@ class PropertyAliasBuilder(val pva: PropertyValueAlias) : DataLoader<Pair<Search
         val stream = resourceStream(resourcePath)
         return lineIterator(stream) { line ->
             val parts = line.split(";")
-            val pva = SearchName(parts[2].trim())
+            val pva = SearchName(parts[2].split("#")[0].trim())
             val abbr = parts[1].trim()
             Pair(pva, abbr)
         }
     }
+
+    fun generateEnumFile() {
+        val klazzName = SearchName(pva.canonical).klazz
+        File("library/src/commonMain/kotlin/org/angproj/utf/pla/$klazzName.kt").printWriter().use { out ->
+            fileHeader(out, "pla")
+            out.println("public enum class $klazzName(public val canonical: String, public val abbr: String) {")
+            allData.forEachIndexed { idx, data ->
+                if (idx != allData.lastIndex) {
+                    out.println("    ${data.first.constant}(\"${data.first.canonical}\", \"${data.second}\"),")
+                } else {
+                    out.println("    ${data.first.constant}(\"${data.first.canonical}\", \"${data.second}\");")
+                }
+            }
+            out.println("}")
+        }
+    }
+
 
     override val allData: List<Pair<SearchName, String>> by lazy {
         loadData("/PropertyValueAliases.txt")
@@ -50,39 +67,19 @@ class PropertyAliasBuilder(val pva: PropertyValueAlias) : DataLoader<Pair<Search
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            generateScriptEnumFile()
+            generateGeneralCategoryEnumFile()
         }
 
         fun generateBlockEnumFile() {
-            File("library/src/commonMain/kotlin/org/angproj/utf/pla/Block.kt").printWriter().use { out ->
-                val pva = PropertyAliasBuilder(PropertyValueAlias.BLOCK)
-                fileHeader(out, "pla")
-                out.println("public enum class " + SearchName(PropertyValueAlias.BLOCK.canonical).klazz + "(public val canonical: String, public val abbr: String) {")
-                pva.allData.forEachIndexed { idx, data ->
-                    if (idx != pva.allData.lastIndex) {
-                        out.println("    ${data.first.constant}(\"${data.first.canonical}\", \"${data.second}\"),")
-                    } else {
-                        out.println("    ${data.first.constant}(\"${data.first.canonical}\", \"${data.second}\");")
-                    }
-                }
-                out.println("}")
-            }
+            PropertyAliasBuilder(PropertyValueAlias.BLOCK).generateEnumFile()
         }
 
         fun generateScriptEnumFile() {
-            File("library/src/commonMain/kotlin/org/angproj/utf/pla/Script.kt").printWriter().use { out ->
-                val pva = PropertyAliasBuilder(PropertyValueAlias.SCRIPT)
-                fileHeader(out, "pla")
-                out.println("public enum class " + SearchName(PropertyValueAlias.SCRIPT.canonical).klazz + "(public val canonical: String, public val abbr: String) {")
-                pva.allData.forEachIndexed { idx, data ->
-                    if (idx != pva.allData.lastIndex) {
-                        out.println("    ${data.first.constant}(\"${data.first.canonical}\", \"${data.second}\"),")
-                    } else {
-                        out.println("    ${data.first.constant}(\"${data.first.canonical}\", \"${data.second}\");")
-                    }
-                }
-                out.println("}")
-            }
+            PropertyAliasBuilder(PropertyValueAlias.SCRIPT).generateEnumFile()
+        }
+
+        fun generateGeneralCategoryEnumFile() {
+            PropertyAliasBuilder(PropertyValueAlias.GENERAL_CATEGORY).generateEnumFile()
         }
     }
 }

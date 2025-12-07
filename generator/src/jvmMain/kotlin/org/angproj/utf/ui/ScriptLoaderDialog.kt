@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel
 
 
 class ScriptLoaderDialog(parent: JFrame, scripts: List<Scripts>) : JDialog(parent, "Unicode Script", true) {
-    private val columnNames = arrayOf("Start", "End", "Name", "Type", "Slug", "Class")
+    private val columnNames = arrayOf("Start", "End", "Name", "Type")
     private val allScripts = scripts
     private val tableModel = DefaultTableModel(columnNames, 0)
     private val table = JTable(tableModel).apply {
@@ -72,9 +72,7 @@ class ScriptLoaderDialog(parent: JFrame, scripts: List<Scripts>) : JDialog(paren
                     "0x%04X".format(script.start),
                     if(script.end != -1)"0x%04X".format(script.end) else "",
                     script.name,
-                    script.type,
-                    script.searchName.slug,
-                    script.searchName.klazz
+                    script.genCat.canonical,
                 )
             )
         }

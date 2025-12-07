@@ -14,6 +14,9 @@
  */
 package org.angproj.utf.pla
 
+public fun GeneralCategory.Companion.byAbbr(abbr: String): GeneralCategory = GeneralCategory.entries.find {
+    it.abbr == abbr } ?: error("Unknown General Category abbreviation: $abbr")
+
 public fun GeneralCategory.isOther(): Boolean =
     when (this) {
         GeneralCategory.OTHER,

@@ -16,6 +16,8 @@ package org.angproj.utf.helper
 
 import org.angproj.utf.model.Scripts
 import org.angproj.utf.model.SearchName
+import org.angproj.utf.pla.GeneralCategory
+import org.angproj.utf.pla.byAbbr
 
 object ScriptLoader {
     fun loadScript(name: String): List<Scripts> {
@@ -36,8 +38,9 @@ object ScriptLoader {
                 if (parts.size >= 2) {
                     val rangePart = parts[0].trim()
                     val namePart = parts[1].trim().split("#")[0].trim()
-                    val typePart =
-                        parts[1].trim().split("#").getOrNull(1)?.trim()?.split(" ")?.getOrNull(0) ?: "n/a"
+                    val typePart = GeneralCategory.byAbbr(
+                        parts[1].trim().split("#").getOrNull(1)?.trim()?.split(" ")?.getOrNull(0)?.replace("&", "") ?: error("Invalid type part")
+                    )
                     val rangeBounds = rangePart.split("..")
                     val start = rangeBounds[0].toInt(16)
                     val end = if (rangeBounds.size == 2) rangeBounds[1].toInt(16) else -1

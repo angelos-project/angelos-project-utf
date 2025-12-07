@@ -14,10 +14,12 @@
  */
 package org.angproj.utf.model
 
+import org.angproj.utf.pla.GeneralCategory
+
 data class Scripts (
     val start: Int,
     val end: Int,
     val name: String,
     val searchName: SearchName,
-    val type: String
+    val genCat: GeneralCategory
 )

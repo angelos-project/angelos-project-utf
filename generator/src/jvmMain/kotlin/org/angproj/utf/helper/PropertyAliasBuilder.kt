@@ -50,10 +50,30 @@ class PropertyAliasBuilder(val pva: PropertyValueAlias) : DataLoader<Pair<Search
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
+            generateScriptEnumFile()
+        }
+
+        fun generateBlockEnumFile() {
             File("library/src/commonMain/kotlin/org/angproj/utf/pla/Block.kt").printWriter().use { out ->
                 val pva = PropertyAliasBuilder(PropertyValueAlias.BLOCK)
                 fileHeader(out, "pla")
                 out.println("public enum class " + SearchName(PropertyValueAlias.BLOCK.canonical).klazz + "(public val canonical: String, public val abbr: String) {")
+                pva.allData.forEachIndexed { idx, data ->
+                    if (idx != pva.allData.lastIndex) {
+                        out.println("    ${data.first.constant}(\"${data.first.canonical}\", \"${data.second}\"),")
+                    } else {
+                        out.println("    ${data.first.constant}(\"${data.first.canonical}\", \"${data.second}\");")
+                    }
+                }
+                out.println("}")
+            }
+        }
+
+        fun generateScriptEnumFile() {
+            File("library/src/commonMain/kotlin/org/angproj/utf/pla/Script.kt").printWriter().use { out ->
+                val pva = PropertyAliasBuilder(PropertyValueAlias.SCRIPT)
+                fileHeader(out, "pla")
+                out.println("public enum class " + SearchName(PropertyValueAlias.SCRIPT.canonical).klazz + "(public val canonical: String, public val abbr: String) {")
                 pva.allData.forEachIndexed { idx, data ->
                     if (idx != pva.allData.lastIndex) {
                         out.println("    ${data.first.constant}(\"${data.first.canonical}\", \"${data.second}\"),")

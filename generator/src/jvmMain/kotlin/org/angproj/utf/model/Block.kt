@@ -14,15 +14,7 @@
  */
 package org.angproj.utf.model
 
-import org.angproj.utf.UtfBlock
-
 data class Block(
-    val start: Int,
-    val end: Int,
-    override val name: String,
+    val unicodeBounds: Pair<Int, Int>,
     val searchName: SearchName,
-    override val meta: String,
-    override val range: IntRange,
-    override val noCtrl: Boolean,
-    override val noUse: Set<Int>
-) : UtfBlock
+)

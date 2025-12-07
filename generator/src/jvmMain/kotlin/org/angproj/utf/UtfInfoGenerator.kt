@@ -54,7 +54,7 @@ class UtfInfoGenerator : JFrame() {
         val viewMenu = JMenu("View")
         val blocksItem = JMenuItem("Show Unicode Blocks")
         blocksItem.addActionListener {
-            val blocks = BlockLoader.allBlocks
+            val blocks = BlockLoader.allData
             BlockViewerDialog(this, blocks).isVisible = true
         }
 

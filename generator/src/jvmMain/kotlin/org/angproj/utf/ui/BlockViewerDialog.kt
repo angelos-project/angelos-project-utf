@@ -33,7 +33,7 @@ class BlockViewerDialog(parent: JFrame, blocks: List<Block>) : JDialog(parent, "
 
         // Collect all unique search terms
         val searchTerms = blocks.flatMap {
-            listOf(it.name, it.searchName.slug, it.searchName.klazz)
+            listOf(it.searchName.canonical, it.searchName.slug, it.searchName.klazz)
         }.distinct().sorted()
 
         val comboBox = JComboBox(searchTerms.toTypedArray())
@@ -55,15 +55,15 @@ class BlockViewerDialog(parent: JFrame, blocks: List<Block>) : JDialog(parent, "
     private fun updateTable(query: String) {
         tableModel.setRowCount(0)
         val filtered = if (query.isEmpty()) allBlocks else allBlocks.filter {
-            it.name.lowercase().contains(query) ||
+            it.searchName.canonical.lowercase().contains(query) ||
                     it.searchName.slug.lowercase().contains(query) ||
                     it.searchName.klazz.lowercase().contains(query)
         }
         for (block in filtered) {
             tableModel.addRow(arrayOf(
-                "0x%04X".format(block.start),
-                "0x%04X".format(block.end),
-                block.name,
+                "0x%04X".format(block.unicodeBounds.first),
+                "0x%04X".format(block.unicodeBounds.second),
+                block.searchName.canonical,
                 block.searchName.slug,
                 block.searchName.klazz
             ))

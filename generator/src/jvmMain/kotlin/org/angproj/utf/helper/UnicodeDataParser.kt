@@ -40,4 +40,11 @@ interface UnicodeDataParser {
         )
         return action(triple)
     }
+
+    fun rangeBounds(rangePart: String): Pair<Int, Int> {
+        val rangeBounds = rangePart.split("..")
+        val start = rangeBounds[0].toInt(16)
+        val end = if (rangeBounds.size == 2) rangeBounds[1].toInt(16) else -1
+        return Pair(start, end)
+    }
 }

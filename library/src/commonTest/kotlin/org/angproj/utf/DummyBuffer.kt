@@ -102,6 +102,13 @@ class DummyBuffer(buffer: ByteArray, policy: Policy) : UnicodeAware, CodePointIt
     override fun iterator(): CodePointIterator {
         rewind()
         return object : CodePointIterator {
+            override val previous: CodePoint
+                get() = TODO("Not yet implemented")
+            override val position: Int
+                get() = TODO("Not yet implemented")
+            override val count: Int
+                get() = TODO("Not yet implemented")
+
             override fun next(): CodePoint = read()
 
             override fun hasNext(): Boolean = remaining > 0

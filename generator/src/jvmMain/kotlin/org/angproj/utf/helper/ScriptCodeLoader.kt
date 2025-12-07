@@ -15,17 +15,20 @@
 package org.angproj.utf.helper
 
 import org.angproj.utf.model.ScriptCode
+import org.angproj.utf.pla.Script
+import org.angproj.utf.pla.byAbbr
 
 object ScriptCodeLoader : DataLoader<ScriptCode>() {
 
     private val parser = object : UnicodeDataParser {
         fun parseLine(line: String): ScriptCode {
             val parts = line.split(';')
+            val script = Script.byAbbr(parts[0])
+            //if(script.canonical != parts[4]) { println("Unknown script code: ${parts} - ${script}") }
             return ScriptCode(
-                code = parts[0],
+                script = script,
                 number = parts[1].toInt(),
                 name = parts[2], // Skip french name parts[3]
-                pva = parts[4],
                 version = parts[5],
                 date = parts[6]
             )
@@ -45,11 +48,11 @@ object ScriptCodeLoader : DataLoader<ScriptCode>() {
     }
 
     val byCode: Map<String, ScriptCode> by lazy {
-        allData.associateBy { it.code }
+        allData.associateBy { it.script.abbr }
     }
 
     val byPva: Map<String, ScriptCode> by lazy {
-        allData.associateBy { it.pva }
+        allData.associateBy { it.script.canonical }
     }
 
     val byVersion: Map<String, List<ScriptCode>> by lazy {

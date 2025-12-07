@@ -191,4 +191,6 @@ public enum class Script(public val canonical: String, public val abbr: String) 
     INHERITED("Inherited", "Zinh"),
     COMMON("Common", "Zyyy"),
     UNKNOWN("Unknown", "Zzzz");
+
+    public companion object
 }

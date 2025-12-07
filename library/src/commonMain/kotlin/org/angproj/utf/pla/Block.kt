@@ -362,4 +362,6 @@ public enum class Block(public val canonical: String, public val abbr: String) {
     YIJING_HEXAGRAM_SYMBOLS("Yijing_Hexagram_Symbols", "Yijing"),
     ZANABAZAR_SQUARE("Zanabazar_Square", "Zanabazar_Square"),
     ZNAMENNY_MUSICAL_NOTATION("Znamenny_Musical_Notation", "Znamenny_Music");
+
+    public companion object
 }

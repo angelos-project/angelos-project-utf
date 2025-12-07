@@ -53,4 +53,6 @@ public enum class GeneralCategory(public val canonical: String, public val abbr:
     LINE_SEPARATOR("Line_Separator", "Zl"),
     PARAGRAPH_SEPARATOR("Paragraph_Separator", "Zp"),
     SPACE_SEPARATOR("Space_Separator", "Zs");
+
+    public companion object
 }

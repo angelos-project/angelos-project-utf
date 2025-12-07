@@ -55,6 +55,7 @@ class PropertyAliasBuilder(val pva: PropertyValueAlias) : DataLoader<Pair<Search
                     out.println("    ${data.first.constant}(\"${data.first.canonical}\", \"${data.second}\");")
                 }
             }
+            out.println("\n    public companion object")
             out.println("}")
         }
     }

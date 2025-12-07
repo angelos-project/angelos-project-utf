@@ -14,8 +14,8 @@
  */
 package org.angproj.utf.pla
 
-public fun GeneralCategory.isOther(category: GeneralCategory): Boolean =
-    when (category) {
+public fun GeneralCategory.isOther(): Boolean =
+    when (this) {
         GeneralCategory.OTHER,
         GeneralCategory.CONTROL,
         GeneralCategory.FORMAT,
@@ -25,8 +25,8 @@ public fun GeneralCategory.isOther(category: GeneralCategory): Boolean =
         else -> false
     }
 
-public fun GeneralCategory.isNumber(category: GeneralCategory): Boolean =
-    when (category) {
+public fun GeneralCategory.isNumber(): Boolean =
+    when (this) {
         GeneralCategory.NUMBER,
         GeneralCategory.DECIMAL_NUMBER,
         GeneralCategory.LETTER_NUMBER,
@@ -34,8 +34,8 @@ public fun GeneralCategory.isNumber(category: GeneralCategory): Boolean =
         else -> false
     }
 
-public fun GeneralCategory.isPunctuation(category: GeneralCategory): Boolean =
-    when (category) {
+public fun GeneralCategory.isPunctuation(): Boolean =
+    when (this) {
         GeneralCategory.PUNCTUATION,
         GeneralCategory.CONNECTOR_PUNCTUATION,
         GeneralCategory.DASH_PUNCTUATION,
@@ -47,8 +47,8 @@ public fun GeneralCategory.isPunctuation(category: GeneralCategory): Boolean =
         else -> false
     }
 
-public fun GeneralCategory.isSymbol(category: GeneralCategory): Boolean =
-    when (category) {
+public fun GeneralCategory.isSymbol(): Boolean =
+    when (this) {
         GeneralCategory.SYMBOL,
         GeneralCategory.CURRENCY_SYMBOL,
         GeneralCategory.MODIFIER_SYMBOL,
@@ -57,8 +57,8 @@ public fun GeneralCategory.isSymbol(category: GeneralCategory): Boolean =
         else -> false
     }
 
-public fun GeneralCategory.isSeparator(category: GeneralCategory): Boolean =
-    when (category) {
+public fun GeneralCategory.isSeparator(): Boolean =
+    when (this) {
         GeneralCategory.SEPARATOR,
         GeneralCategory.LINE_SEPARATOR,
         GeneralCategory.PARAGRAPH_SEPARATOR,
@@ -66,8 +66,8 @@ public fun GeneralCategory.isSeparator(category: GeneralCategory): Boolean =
         else -> false
     }
 
-public fun GeneralCategory.isMark(category: GeneralCategory): Boolean =
-    when (category) {
+public fun GeneralCategory.isMark(): Boolean =
+    when (this) {
         GeneralCategory.MARK,
         GeneralCategory.ENCLOSING_MARK,
         GeneralCategory.NONSPACING_MARK,
@@ -75,8 +75,8 @@ public fun GeneralCategory.isMark(category: GeneralCategory): Boolean =
         else -> false
     }
 
-public fun GeneralCategory.isLetter(category: GeneralCategory): Boolean =
-    when (category) {
+public fun GeneralCategory.isLetter(): Boolean =
+    when (this) {
         GeneralCategory.LETTER,
         GeneralCategory.CASED_LETTER,
         GeneralCategory.LOWERCASE_LETTER,

@@ -89,7 +89,7 @@ class UtfInfoGenerator : JFrame() {
 
     companion object {
         @JvmStatic
-        fun main(args: Array<String?>?) {
+        fun main(args: Array<String>) {
             SwingUtilities.invokeLater({
                 val window = UtfInfoGenerator()
                 window.setVisible(true)

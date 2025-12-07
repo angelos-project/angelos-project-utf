@@ -19,6 +19,7 @@ data class SearchName(
 ) {
     val slug: String = slugify(canonical)
     val klazz: String = klazzify(canonical)
+    val constant: String = constantify(canonical)
 
     companion object {
         fun slugify(name: String): String {
@@ -27,6 +28,10 @@ data class SearchName(
 
         fun klazzify(name: String): String {
             return name.split(" ", "-", "_").joinToString("") { it.capitalize() }
+        }
+
+        fun constantify(name: String): String {
+            return name.uppercase().replace(" ", "_").replace("-", "_")
         }
     }
 }

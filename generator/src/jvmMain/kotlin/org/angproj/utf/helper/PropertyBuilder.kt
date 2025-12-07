@@ -14,8 +14,12 @@
  */
 package org.angproj.utf.helper
 
+import org.angproj.utf.copyrightNotice
+import org.angproj.utf.fileHeader
 import org.angproj.utf.model.SearchName
+import java.io.File
 import java.io.InputStream
+import java.io.PrintWriter
 
 object PropertyBuilder : DataLoader<Pair<SearchName, String>>() {
     private fun resourceStream(resourcePath: String): InputStream = ScriptLoader::class.java.getResourceAsStream(resourcePath)
@@ -45,16 +49,24 @@ object PropertyBuilder : DataLoader<Pair<SearchName, String>>() {
         loadData("/PropertyValueAliases.txt")
     }
 
-    @JvmStatic
-    fun main(args: Array<String>) {
-        println("enum class PropertyValueAlias(val alias: String) {")
+    fun printPropertyValueAliasEnum(pw: PrintWriter) {
+        pw.println("enum class PropertyValueAlias(val alias: String) {")
         allData.forEachIndexed { idx, data ->
             if(idx != allData.lastIndex) {
-                println("    ${data.first.constant}(\"${data.second}\"),")
+                pw.println("    ${data.first.constant}(\"${data.second}\"),")
             } else {
-                println("    ${data.first.constant}(\"${data.second}\");")
+                pw.println("    ${data.first.constant}(\"${data.second}\");")
             }
         }
-        println("}")
+        pw.println("}")
+    }
+
+    @JvmStatic
+    fun main(args: Array<String>) {
+        // src/jvmMain/kotlin/org/angproj/utf/blk/
+        File("test.kt").printWriter().use { out ->
+            fileHeader(out, "pla")
+            printPropertyValueAliasEnum(out)
+        }
     }
 }

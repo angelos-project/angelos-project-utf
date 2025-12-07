@@ -14,7 +14,7 @@
  */
 package org.angproj.utf.model
 
-data class Block(
+data class BlockRange(
     val unicodeBounds: Pair<Int, Int>,
     val searchName: SearchName,
 )

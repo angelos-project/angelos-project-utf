@@ -27,7 +27,7 @@ data class SearchName(
         }
 
         fun klazzify(name: String): String {
-            return name.split(" ", "-", "_").joinToString("") { it.capitalize() }
+            return name.replace(" ", "_").replace("-", "_")
         }
 
         fun constantify(name: String): String {

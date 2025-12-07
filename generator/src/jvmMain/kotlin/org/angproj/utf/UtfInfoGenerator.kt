@@ -14,9 +14,8 @@
  */
 package org.angproj.utf
 
-import org.angproj.utf.helper.BlockLoader
+import org.angproj.utf.helper.BlockRangeLoader
 import org.angproj.utf.helper.ScriptLoader
-import org.angproj.utf.model.Scripts
 import org.angproj.utf.ui.BlockViewerDialog
 import org.angproj.utf.ui.ScriptLoaderDialog
 
@@ -54,7 +53,7 @@ class UtfInfoGenerator : JFrame() {
         val viewMenu = JMenu("View")
         val blocksItem = JMenuItem("Show Unicode Blocks")
         blocksItem.addActionListener {
-            val blocks = BlockLoader.allData
+            val blocks = BlockRangeLoader.allData
             BlockViewerDialog(this, blocks).isVisible = true
         }
 

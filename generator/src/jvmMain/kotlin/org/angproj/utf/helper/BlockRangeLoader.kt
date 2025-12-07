@@ -14,20 +14,20 @@
  */
 package org.angproj.utf.helper
 
-import org.angproj.utf.model.Block
+import org.angproj.utf.model.BlockRange
 import org.angproj.utf.model.SearchName
 
-object BlockLoader : DataLoader<Block>() {
+object BlockRangeLoader : DataLoader<BlockRange>() {
 
     private val parser = object : UnicodeDataParser {
-        fun parseLine(line: String): Block {
+        fun parseLine(line: String): BlockRange {
             // 0000..007F; Basic Latin
             val parts = line.split(';')
-            return Block(rangeBounds(parts.get(0)), SearchName(parts.get(1).trim()))
+            return BlockRange(rangeBounds(parts.get(0)), SearchName(parts.get(1).trim()))
         }
     }
 
-    override fun loadData(resourcePath: String): List<Block> {
+    override fun loadData(resourcePath: String): List<BlockRange> {
         with(parser) {
             return lineIterator(resourceStream(resourcePath)) { line ->
                 parseLine(line)
@@ -35,7 +35,7 @@ object BlockLoader : DataLoader<Block>() {
         }
     }
 
-    override val allData: List<Block> by lazy {
+    override val allData: List<BlockRange> by lazy {
         loadData("/Blocks.txt")
     }
 

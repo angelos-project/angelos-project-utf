@@ -14,12 +14,12 @@
  */
 package org.angproj.utf.ui
 
-import org.angproj.utf.model.Block
+import org.angproj.utf.model.BlockRange
 import javax.swing.*
 import java.awt.*
 import javax.swing.table.DefaultTableModel
 
-class BlockViewerDialog(parent: JFrame, blocks: List<Block>) : JDialog(parent, "Unicode Blocks", true) {
+class BlockViewerDialog(parent: JFrame, blocks: List<BlockRange>) : JDialog(parent, "Unicode Blocks", true) {
     private val columnNames = arrayOf("Start", "End", "Name", "Slug", "Class")
     private val allBlocks = blocks
     private val tableModel = DefaultTableModel(columnNames, 0)

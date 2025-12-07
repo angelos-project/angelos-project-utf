@@ -18,9 +18,8 @@ import org.angproj.utf.fileHeader
 import org.angproj.utf.model.SearchName
 import java.io.File
 import java.io.InputStream
-import java.io.PrintWriter
 
-object PropertyBuilder : DataLoader<Pair<SearchName, String>>() {
+class PropertyAliasBuilder(val pva: PropertyValueAlias) : DataLoader<Pair<SearchName, String>>() {
     private fun resourceStream(resourcePath: String): InputStream = ScriptLoader::class.java.getResourceAsStream(resourcePath)
         ?: throw IllegalArgumentException("Resource not found: $resourcePath")
 
@@ -28,7 +27,7 @@ object PropertyBuilder : DataLoader<Pair<SearchName, String>>() {
         val results = mutableListOf<E>()
         stream.bufferedReader().lineSequence().forEach { line ->
             val trimmed = line.trim()
-            if (!(trimmed.startsWith("#") && trimmed.endsWith(")"))) return@forEach
+            if (!trimmed.startsWith(pva.alias)) return@forEach
             results.add(action(trimmed))
         }
         return results
@@ -37,9 +36,9 @@ object PropertyBuilder : DataLoader<Pair<SearchName, String>>() {
     override fun loadData(resourcePath: String): List<Pair<SearchName, String>> {
         val stream = resourceStream(resourcePath)
         return lineIterator(stream) { line ->
-            val parts = line.split(" ")
-            val pva = SearchName(parts[1].trim())
-            val abbr = parts[2].replace("(", "").replace(")", "").trim()
+            val parts = line.split(";")
+            val pva = SearchName(parts[2].trim())
+            val abbr = parts[1].trim()
             Pair(pva, abbr)
         }
     }
@@ -48,23 +47,22 @@ object PropertyBuilder : DataLoader<Pair<SearchName, String>>() {
         loadData("/PropertyValueAliases.txt")
     }
 
-    fun printPropertyValueAliasEnum(pw: PrintWriter) {
-        pw.println("enum class PropertyValueAlias(val canonical: String, val alias: String) {")
-        allData.forEachIndexed { idx, data ->
-            if(idx != allData.lastIndex) {
-                pw.println("    ${data.first.constant}(\"${data.first.canonical}\", \"${data.second}\"),")
-            } else {
-                pw.println("    ${data.first.constant}(\"${data.first.canonical}\", \"${data.second}\");")
+    companion object {
+        @JvmStatic
+        fun main(args: Array<String>) {
+            File("library/src/commonMain/kotlin/org/angproj/utf/pla/Block.kt").printWriter().use { out ->
+                val pva = PropertyAliasBuilder(PropertyValueAlias.BLOCK)
+                fileHeader(out, "pla")
+                out.println("public enum class " + SearchName(PropertyValueAlias.BLOCK.canonical).klazz + "(public val canonical: String, public val abbr: String) {")
+                pva.allData.forEachIndexed { idx, data ->
+                    if (idx != pva.allData.lastIndex) {
+                        out.println("    ${data.first.constant}(\"${data.first.canonical}\", \"${data.second}\"),")
+                    } else {
+                        out.println("    ${data.first.constant}(\"${data.first.canonical}\", \"${data.second}\");")
+                    }
+                }
+                out.println("}")
             }
-        }
-        pw.println("}")
-    }
-
-    @JvmStatic
-    fun main(args: Array<String>) {
-        File("generator/src/jvmMain/kotlin/org/angproj/utf/helper/PropertyValueAlias.kt").printWriter().use { out ->
-            fileHeader(out, "helper")
-            printPropertyValueAliasEnum(out)
         }
     }
 }

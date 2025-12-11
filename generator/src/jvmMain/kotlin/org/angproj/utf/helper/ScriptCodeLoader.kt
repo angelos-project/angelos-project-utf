@@ -58,9 +58,4 @@ object ScriptCodeLoader : DataLoader<ScriptCode>() {
     val byVersion: Map<String, List<ScriptCode>> by lazy {
         allData.groupBy { it.version }
     }
-
-    @JvmStatic
-    fun main(args: Array<String>) {
-        allData.forEach { println(it) }
-    }
 }

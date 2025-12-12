@@ -14,6 +14,10 @@
  */
 package org.angproj.utf.helper
 
+import org.angproj.utf.fileHeader
+import org.angproj.utf.model.SearchName
+import java.io.File
+
 
 object DerivedGeneralCategoryLoader : DataLoader<Triple<String, String, String>>() {
 
@@ -46,14 +50,14 @@ object DerivedGeneralCategoryLoader : DataLoader<Triple<String, String, String>>
     fun generateUnassignedCategories() {
         val unassigned = UnassignedCategory()
         allData.forEach {
-            if(it.second != "Cn") return@forEach
+            if (it.second != "Cn") return@forEach
             val rangeBounds = it.first.split("..")
             val start = rangeBounds[0].toInt(16)
             val end = if (rangeBounds.size == 2) rangeBounds[1].toInt(16) else -1
 
             if (end - start >= 128 && end != -1) {
                 unassigned.ranges += (start..end)
-            } else if ( end == -1) {
+            } else if (end == -1) {
                 unassigned.values += start
             } else {
                 for (value in start..end) {
@@ -62,12 +66,69 @@ object DerivedGeneralCategoryLoader : DataLoader<Triple<String, String, String>>
             }
         }
 
-        println("Unassigned values:")
-        unassigned.values.sorted().forEach { println("0x${it.toString(16).uppercase().padStart(4, '0')}") }
-        println("Unassigned ranges:")
-        unassigned.ranges.sortedBy { it.first }.forEach { println("0x${it.first.toString(16).uppercase().padStart(4, '0')}..0x${it.last.toString(16).uppercase().padStart(4, '0')}") }
-
-        println(unassigned.values.size)
-        println(unassigned.ranges.size)
+        File("library/src/commonMain/kotlin/org/angproj/utf/util/ExactValidator.kt").printWriter().use { out ->
+            fileHeader(out, "util")
+            startValidator(out)
+            unassigned.values.sorted().forEachIndexed { index, i ->
+                print("add(0x${i.toString(16).uppercase().padStart(4, '0')}); ")
+                if ((index + 1) % 8 == 0) println()
+            }
+            middleValidator(out)
+            unassigned.ranges.sortedBy { it.first }.forEach {
+                println(
+                    "add(0x${
+                        it.first.toString(16).uppercase().padStart(4, '0')
+                    }..0x${it.last.toString(16).uppercase().padStart(4, '0')})"
+                )
+            }
+            endValidator(out)
+        }
     }
+}
+
+fun startValidator(out: java.io.PrintWriter) {
+    out.println(
+        """
+ public class GlobalValidator : Validator() {
+
+    private val values: Set<Int> = buildValuesSet()
+    private val ranges: Set<IntRange> = buildRangesSet()
+
+    override fun isValid(cp: Int): Boolean = isUtf8<Unit>(cp) && !isUnassigned<Unit>(cp)
+
+    private inline fun <reified R: Any> isUnassigned(cp: Int): Boolean {
+        for (range in ranges) {
+            if (cp in range) return true
+        }
+        return values.contains(cp)
+    }
+
+    private companion object : AbstractUnicodeAware() {
+        private fun buildValuesSet(): Set<Int> {
+            return buildSet {
+    """.trimIndent()
+    )
+}
+
+fun middleValidator(out: java.io.PrintWriter) {
+    out.println(
+        """
+                    }
+        }
+
+        private fun buildRangesSet(): Set<IntRange> {
+            return buildSet {
+    """.trimIndent()
+    )
+}
+
+fun endValidator(out: java.io.PrintWriter) {
+    out.println(
+        """
+            }
+        }
+    }
+}
+    """.trimIndent()
+    )
 }

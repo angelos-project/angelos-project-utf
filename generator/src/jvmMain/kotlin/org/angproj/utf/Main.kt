@@ -14,6 +14,7 @@
  */
 package org.angproj.utf
 
+import org.angproj.utf.helper.DerivedGeneralCategoryLoader
 import org.angproj.utf.helper.ScriptCodeLoader
 import org.angproj.utf.ui.button
 import javax.swing.JOptionPane
@@ -25,7 +26,8 @@ object MainKt {
         SwingUtilities.invokeLater({
             val window = UtfInfoGenerator {
                 JOptionPane.showMessageDialog(this, "Button clicked from MainKt!")
-                ScriptCodeLoader.allData.forEach { println(it) }
+                //ScriptCodeLoader.allData.forEach { println(it) }
+                DerivedGeneralCategoryLoader.generateUnassignedCategories()
             }
             with(window) {
 

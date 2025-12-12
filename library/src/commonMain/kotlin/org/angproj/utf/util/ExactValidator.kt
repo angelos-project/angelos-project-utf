@@ -17,7 +17,7 @@ package org.angproj.utf.util
 import org.angproj.utf.Validator
 import org.angproj.utf.AbstractUnicodeAware
 
-public class GlobalValidator : Validator() {
+public class ExactValidator : Validator() {
 
     private val values: Set<Int> = buildValuesSet()
     private val ranges: Set<IntRange> = buildRangesSet()

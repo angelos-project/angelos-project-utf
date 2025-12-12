@@ -15,8 +15,10 @@
 package org.angproj.utf.helper
 
 import org.angproj.utf.fileHeader
-import org.angproj.utf.model.SearchName
-import java.io.File
+import java.io.PrintWriter
+import java.nio.file.Files
+import java.nio.file.Paths
+import kotlin.io.path.Path
 
 
 object DerivedGeneralCategoryLoader : DataLoader<Triple<String, String, String>>() {
@@ -66,16 +68,21 @@ object DerivedGeneralCategoryLoader : DataLoader<Triple<String, String, String>>
             }
         }
 
-        File("library/src/commonMain/kotlin/org/angproj/utf/util/ExactValidator.kt").printWriter().use { out ->
+        val klazzFile = "library/src/commonMain/kotlin/org/angproj/utf/util/ExactValidator.kt"
+        println(Files.createDirectories(Paths.get(klazzFile)))
+
+        // Create or overwrite the ExactValidator.kt file
+        //Files.createFile(Path(klazzFile)).toFile().printWriter().use { out ->
+        PrintWriter(System.out).use { out ->
             fileHeader(out, "util")
             startValidator(out)
             unassigned.values.sorted().forEachIndexed { index, i ->
-                print("add(0x${i.toString(16).uppercase().padStart(4, '0')}); ")
-                if ((index + 1) % 8 == 0) println()
+                out.print("add(0x${i.toString(16).uppercase().padStart(4, '0')}); ")
+                if ((index + 1) % 8 == 0) out.println()
             }
             middleValidator(out)
             unassigned.ranges.sortedBy { it.first }.forEach {
-                println(
+                out.println(
                     "add(0x${
                         it.first.toString(16).uppercase().padStart(4, '0')
                     }..0x${it.last.toString(16).uppercase().padStart(4, '0')})"

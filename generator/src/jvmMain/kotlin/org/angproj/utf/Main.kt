@@ -23,6 +23,8 @@ import javax.swing.SwingUtilities
 object MainKt {
     @JvmStatic
     fun main(args: Array<String>) {
+        DerivedGeneralCategoryLoader.generateUnassignedCategories()
+
         SwingUtilities.invokeLater({
             val window = UtfInfoGenerator {
                 JOptionPane.showMessageDialog(this, "Button clicked from MainKt!")

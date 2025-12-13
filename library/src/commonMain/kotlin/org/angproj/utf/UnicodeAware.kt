@@ -93,9 +93,9 @@ public interface UnicodeAware {
 
     public fun glyphSizeWithPassThrough(cp: CodePoint): Int = innerGlyphSizeWithPassThrough<Unit>(cp.value)
 
-    public fun glyphSizeWithEscape(cp: CodePoint, filter: LangFilter): Int = innerGlyphSizeWithEscape<Unit>(cp.value, filter)
+    public fun glyphSizeWithEscape(cp: CodePoint, validator: Validator): Int = innerGlyphSizeWithEscape<Unit>(cp.value, validator)
 
-    public fun glyphSizeWithSecurity(cp: CodePoint, filter: LangFilter): Int = innerGlyphSizeWithSecurity<Unit>(cp.value, filter)
+    public fun glyphSizeWithSecurity(cp: CodePoint, validator: Validator): Int = innerGlyphSizeWithSecurity<Unit>(cp.value, validator)
 
     public fun writeGlyphWithPassThroughBlk(
         cp: CodePoint,
@@ -106,16 +106,16 @@ public interface UnicodeAware {
     public fun writeGlyphWithEscapeBlk(
         cp: CodePoint,
         remaining: Int,
-        filter: LangFilter,
+        validator: Validator,
         writeOctet: (octet: Byte) -> Unit
-    ): Int = octetWriteBlk<Unit>(glyphWithEscape<Unit>(cp.value, filter), remaining, writeOctet)
+    ): Int = octetWriteBlk<Unit>(glyphWithEscape<Unit>(cp.value, validator), remaining, writeOctet)
 
     public fun writeGlyphWithSecurityBlk(
         cp: CodePoint,
         remaining: Int,
-        filter: LangFilter,
+        validator: Validator,
         writeOctet: (octet: Byte) -> Unit
-    ): Int = octetWriteBlk<Unit>(glyphWithSecurity<Unit>(cp.value, filter), remaining, writeOctet)
+    ): Int = octetWriteBlk<Unit>(glyphWithSecurity<Unit>(cp.value, validator), remaining, writeOctet)
 
     public fun writeGlyphWithPassThroughStrm(
         cp: CodePoint,
@@ -124,15 +124,15 @@ public interface UnicodeAware {
 
     public fun writeGlyphWithEscapeStrm(
         cp: CodePoint,
-        filter: LangFilter,
+        validator: Validator,
         writeOctet: (octet: Byte) -> Unit
-    ): Int = octetWriteStrm<Unit>(glyphWithEscape<Unit>(cp.value, filter), writeOctet)
+    ): Int = octetWriteStrm<Unit>(glyphWithEscape<Unit>(cp.value, validator), writeOctet)
 
     public fun writeGlyphWithSecurityStrm(
         cp: CodePoint,
-        filter: LangFilter,
+        validator: Validator,
         writeOctet: (octet: Byte) -> Unit
-    ): Int = octetWriteStrm<Unit>(glyphWithSecurity<Unit>(cp.value, filter), writeOctet)
+    ): Int = octetWriteStrm<Unit>(glyphWithSecurity<Unit>(cp.value, validator), writeOctet)
 
     public fun filterGlyphByPolicy(
         cp: CodePoint,

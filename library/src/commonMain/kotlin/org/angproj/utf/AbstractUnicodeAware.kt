@@ -179,27 +179,27 @@ public abstract class AbstractUnicodeAware {
     ): Int = unicodeOctetSize<Unit>(glyphWithPassThrough<Unit>(cp))
 
     protected inline fun <reified R : Any> innerGlyphSizeWithEscape(
-        cp: Int, filter: LangFilter
-    ): Int = unicodeOctetSize<Unit>(glyphWithEscape<Unit>(cp, filter))
+        cp: Int, validator: Validator
+    ): Int = unicodeOctetSize<Unit>(glyphWithEscape<Unit>(cp, validator))
 
     protected inline fun <reified R : Any> innerGlyphSizeWithSecurity(
-        cp: Int, filter: LangFilter
-    ): Int = unicodeOctetSize<Unit>(glyphWithSecurity<Unit>(cp, filter))
+        cp: Int, validator: Validator
+    ): Int = unicodeOctetSize<Unit>(glyphWithSecurity<Unit>(cp, validator))
 
     protected inline fun <reified R : Any> glyphWithPassThrough(
         cp: Int,
     ): Int = escapeNonUtf8<Unit>(cp)
 
     protected inline fun <reified R : Any> glyphWithEscape(
-        cp: Int, filter: LangFilter,
-    ): Int = when(!isSurrogate<Unit>(cp) && filter.isValid(cp)) {
+        cp: Int, validator: Validator,
+    ): Int = when(!isSurrogate<Unit>(cp) && validator.isValid(cp)) {
         true -> cp
         else -> REPLACEMENT_CHARACTER
     }
 
     protected inline fun <reified R : Any> glyphWithSecurity(
-        cp: Int, filter: LangFilter,
-    ): Int = when(filter.isValid(cp)) {
+        cp: Int, validator: Validator,
+    ): Int = when(validator.isValid(cp)) {
         true -> cp
         else -> throw UnicodeError("Illegal codepoint ${cp}")
     }
@@ -209,8 +209,8 @@ public abstract class AbstractUnicodeAware {
         policy: Policy
     ): Int = when(policy.level) {
         FilterPolicy.PASSTHROUGH -> glyphWithPassThrough<R>(cp)
-        FilterPolicy.ESCAPE -> glyphWithEscape<R>(cp, policy.filter)
-        FilterPolicy.SECURITY -> glyphWithSecurity<R>(cp, policy.filter)
+        FilterPolicy.ESCAPE -> glyphWithEscape<R>(cp, policy.validator)
+        FilterPolicy.SECURITY -> glyphWithSecurity<R>(cp, policy.validator)
     }
 
     protected inline fun <reified R : Any> isGlyphAsciiCtrl(cp: Int): Boolean = cp in 0x00..0x1F || cp == 0x7F

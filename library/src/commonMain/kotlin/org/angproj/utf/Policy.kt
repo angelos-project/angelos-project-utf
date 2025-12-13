@@ -14,11 +14,13 @@
  */
 package org.angproj.utf
 
+import org.angproj.utf.util.ExactValidator
+
 public data class Policy (
     public val level: FilterPolicy,
-    public val filter: LangFilter
+    public val validator: Validator
 ) {
     public companion object {
-        public val basic: Policy by lazy { Policy(FilterPolicy.PASSTHROUGH, LangFilter.basic) }
+        public val basic: Policy by lazy { Policy(FilterPolicy.PASSTHROUGH, ExactValidator()) }
     }
 }

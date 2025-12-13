@@ -26,7 +26,7 @@ import org.angproj.utf.blk.BasicLatin
  * @property languages The list of [UtfLanguage]s included in this filter.
  * @constructor Internal. Use [buildFilter] to create an instance.
  */
-public class LangFilter internal constructor(
+/*public class LangFilter internal constructor(
     private val languages: List<UtfLanguage>
 ) {
 
@@ -104,16 +104,6 @@ public class LangFilter internal constructor(
     public companion object : LanguageMap() {
 
         /**
-         * A basic filter containing only the [BasicLatin] block.
-         */
-        public val basic: LangFilter by lazy { LangFilter(listOf()).apply { withBasicLatin() } }
-
-        /**
-         * A filter for the unknown language, including the [BasicLatin] block.
-         */
-        public val wide: LangFilter by lazy { LangFilter(listOf(Language.UNKNOWN.lang)).apply { withBasicLatin() } }
-
-        /**
          * Builds a [LangFilter] for the specified ISO language codes.
          *
          * @param isoCode One or more ISO 639-1 (2-letter) or ISO 639-3 (3-letter) language codes.
@@ -136,4 +126,4 @@ public class LangFilter internal constructor(
             return LangFilter(languages.toList())
         }
     }
-}
+}*/

@@ -8,37 +8,31 @@ import kotlin.test.assertFailsWith
 class LangFilterTest {
     @Test
     fun testLatinLipsum() {
-        val filter = Unicode.createFilter(Language.LATIN)
         assertContentEquals(
-            Unicode.decode(TestInformationStub.latinLipsum, filter, FilterPolicy.SECURITY),
+            Unicode.decode(TestInformationStub.latinLipsum, Validator.basic, FilterPolicy.SECURITY),
             TestInformationStub.latinLipsum.encodeToByteArray()
         )
     }
 
     @Test
     fun testLatinLipsumEmoji() {
-        val filter = Unicode.createFilter(Language.LATIN)
         assertFailsWith<UnicodeError> {
-            Unicode.decode(TestInformationStub.latinLipsumEmoji, filter, FilterPolicy.SECURITY)
+            Unicode.decode(TestInformationStub.latinLipsumEmoji, Validator.basic, FilterPolicy.SECURITY)
         }
     }
 
     @Test
     fun testGreekLipsum() {
-        val filter = Unicode.createFilter(Language.ANCIENT_GREEK_TO_1453)
-        filter.withBasicLatin()
         assertContentEquals(
-            Unicode.decode(TestInformationStub.greekLipsum, filter, FilterPolicy.SECURITY),
+            Unicode.decode(TestInformationStub.greekLipsum, Validator.basic, FilterPolicy.SECURITY),
             TestInformationStub.greekLipsum.encodeToByteArray()
         )
     }
 
     @Test
     fun testChineseLipsum() {
-        val filter = Unicode.createFilter(Language.CHINESE)
-        filter.withBasicLatin()
         assertContentEquals(
-            Unicode.decode(TestInformationStub.chineseLipsum, filter, FilterPolicy.SECURITY),
+            Unicode.decode(TestInformationStub.chineseLipsum, Validator.basic, FilterPolicy.SECURITY),
             TestInformationStub.chineseLipsum.encodeToByteArray()
         )
     }

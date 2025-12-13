@@ -1,0 +1,32 @@
+/**
+ * Copyright (c) 2025 by Kristoffer Paulsson <kristoffer.paulsson@talenten.se>.
+ *
+ * This software is available under the terms of the MIT license. Parts are licensed
+ * under different terms if stated. The legal terms are attached to the LICENSE file
+ * and are made available on:
+ *
+ *      https://opensource.org/licenses/MIT
+ *
+ * SPDX-License-Identifier: MIT
+ *
+ * Contributors:
+ *      Kristoffer Paulsson - initial implementation
+ */
+package org.angproj.utf.helper
+
+import org.angproj.utf.Language
+
+object LanguageBuilder {
+
+    fun languageForEach(action: (Language) -> Unit) {
+        Language.entries.forEach { action(it) }
+    }
+
+    fun generateLanguageEnumFile() {
+        languageForEach {
+            //if(!it.lang.short.isEmpty()) println("${it.name}(\"${it.lang.name}\", \"${it.lang.short}\", \"${it.lang.long}\"),")
+            println("${it.name}(\"${it.lang.name}\", \"${it.lang.long}\"),")
+
+        }
+    }
+}

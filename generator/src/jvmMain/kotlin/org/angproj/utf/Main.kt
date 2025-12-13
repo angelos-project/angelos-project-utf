@@ -15,6 +15,7 @@
 package org.angproj.utf
 
 import org.angproj.utf.helper.DerivedGeneralCategoryLoader
+import org.angproj.utf.helper.LanguageBuilder
 import org.angproj.utf.helper.ScriptCodeLoader
 import org.angproj.utf.ui.button
 import javax.swing.JOptionPane
@@ -23,13 +24,14 @@ import javax.swing.SwingUtilities
 object MainKt {
     @JvmStatic
     fun main(args: Array<String>) {
-        DerivedGeneralCategoryLoader.generateUnassignedCategories()
+        //DerivedGeneralCategoryLoader.generateUnassignedCategories()
+        LanguageBuilder.generateLanguageEnumFile()
 
         SwingUtilities.invokeLater({
             val window = UtfInfoGenerator {
                 JOptionPane.showMessageDialog(this, "Button clicked from MainKt!")
                 //ScriptCodeLoader.allData.forEach { println(it) }
-                DerivedGeneralCategoryLoader.generateUnassignedCategories()
+                //DerivedGeneralCategoryLoader.generateUnassignedCategories()
             }
             with(window) {
 

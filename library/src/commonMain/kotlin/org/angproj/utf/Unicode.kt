@@ -17,12 +17,6 @@ package org.angproj.utf
 
 public object Unicode: UnicodeAware {
 
-    public fun createFilter(vararg languages: Language): LangFilter = mutableListOf<UtfLanguage>().apply {
-        languages.forEach { this.add(it.lang) }
-    }.let { LangFilter(it) }
-
-    public fun createFilter(vararg isoCodes: String): LangFilter = LangFilter.buildFilter(isoCode = isoCodes)
-
     public fun decode(
         data: String,
         validator: Validator = Validator.basic,

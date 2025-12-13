@@ -818,5 +818,12 @@ public enum class FullIso639(public val lang: String, public val code: String) {
     ZHUANG("Zhuang", "zha"),
     ZOROASTRIAN_DARI("Zoroastrian Dari", "gbz"),
     ZULU("Zulu", "zul"),
-    ZUNI("Zuni", "zun");
+    ZUNI("Zuni", "zun"),
+
+    UNKNOWN("Unknown", "n/a");
+    public companion object {
+        public fun fromCode(code: String): FullIso639 {
+            return entries.firstOrNull { it.code == code } ?: UNKNOWN
+        }
+    }
 }

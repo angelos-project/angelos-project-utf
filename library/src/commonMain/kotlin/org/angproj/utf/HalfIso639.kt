@@ -14,6 +14,8 @@
  */
 package org.angproj.utf
 
+import org.angproj.utf.FullIso639.UNKNOWN
+
 public enum class HalfIso639(public val lang: FullIso639, public val code: String) {
     ABKHAZIAN(FullIso639.ABKHAZIAN, "ab"),
     AFAR(FullIso639.AFAR, "aa"),
@@ -196,4 +198,12 @@ public enum class HalfIso639(public val lang: FullIso639, public val code: Strin
     YORUBA(FullIso639.YORUBA, "yo"),
     ZHUANG(FullIso639.ZHUANG, "za"),
     ZULU(FullIso639.ZULU, "zu"),
+
+    UNKNOWN(FullIso639.UNKNOWN, "");
+
+    public companion object {
+        public fun fromCode(code: String): HalfIso639 {
+            return entries.firstOrNull { it.code == code } ?: UNKNOWN
+        }
+    }
 }

@@ -25,7 +25,7 @@ object MainKt {
     @JvmStatic
     fun main(args: Array<String>) {
         //DerivedGeneralCategoryLoader.generateUnassignedCategories()
-        LanguageBuilder.generateLanguageEnumFile()
+        //LanguageBuilder.generateLanguageEnumFile()
 
         SwingUtilities.invokeLater({
             val window = UtfInfoGenerator {

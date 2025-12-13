@@ -14,21 +14,24 @@
  */
 package org.angproj.utf
 
+/**
+ * Abstract validator class for code points.
+ */
 public abstract class Validator {
 
     /**
-     * Checks if the given [CodePoint] is valid for any of the filter's blocks.
+     * Check if the given code point is valid.
      *
-     * @param codePoint The [CodePoint] to validate.
-     * @return `true` if the code point is valid, `false` otherwise.
+     * @param codePoint The code point to check.
+     * @return True if valid, false otherwise.
      */
     public fun isValid(codePoint: CodePoint): Boolean = isValid(codePoint.value)
 
     /**
-     * Checks if the given code point integer is valid for any of the filter's blocks.
+     * Check if the given integer code point is valid.
      *
-     * @param cp The code point as an [Int].
-     * @return `true` if the code point is valid, `false` otherwise.
+     * @param cp The integer code point to check.
+     * @return True if valid, false otherwise.
      */
     public abstract fun isValid(cp: Int): Boolean
 }

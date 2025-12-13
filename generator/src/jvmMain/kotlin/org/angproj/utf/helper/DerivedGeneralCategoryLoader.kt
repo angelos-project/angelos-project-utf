@@ -77,7 +77,7 @@ object DerivedGeneralCategoryLoader : DataLoader<Triple<String, String, String>>
             fileHeader(out, "util")
             startValidator(out)
             unassigned.values.sorted().forEachIndexed { index, i ->
-                out.print("add(0x${i.toString(16).uppercase().padStart(4, '0')}); ")
+                out.print("0x${i.toString(16).uppercase().padStart(4, '0')}, ")
                 if ((index + 1) % 8 == 0) out.println()
             }
             middleValidator(out)

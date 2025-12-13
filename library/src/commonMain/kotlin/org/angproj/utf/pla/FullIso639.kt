@@ -1,3 +1,5 @@
+package org.angproj.utf.pla
+
 /**
  * Copyright (c) 2025 by Kristoffer Paulsson <kristoffer.paulsson@talenten.se>.
  *
@@ -12,8 +14,6 @@
  * Contributors:
  *      Kristoffer Paulsson - initial implementation
  */
-package org.angproj.utf
-
 public enum class FullIso639(public val lang: String, public val code: String) {
     ABAZA("Abaza", "abq"),
     ABKHAZIAN("Abkhazian", "abk"),

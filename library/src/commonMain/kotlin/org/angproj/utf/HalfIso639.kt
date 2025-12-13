@@ -14,8 +14,6 @@
  */
 package org.angproj.utf
 
-import org.angproj.utf.FullIso639.UNKNOWN
-
 public enum class HalfIso639(public val lang: FullIso639, public val code: String) {
     ABKHAZIAN(FullIso639.ABKHAZIAN, "ab"),
     AFAR(FullIso639.AFAR, "aa"),

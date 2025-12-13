@@ -14,6 +14,8 @@
  */
 package org.angproj.utf
 
+import org.angproj.utf.util.ExactValidator
+
 /**
  * Abstract validator class for code points.
  */
@@ -34,4 +36,8 @@ public abstract class Validator {
      * @return True if valid, false otherwise.
      */
     public abstract fun isValid(cp: Int): Boolean
+
+    public companion object {
+        public val basic: Validator by lazy { ExactValidator() }
+    }
 }

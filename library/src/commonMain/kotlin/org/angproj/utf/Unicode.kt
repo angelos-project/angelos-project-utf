@@ -25,14 +25,14 @@ public object Unicode: UnicodeAware {
 
     public fun decode(
         data: String,
-        filter: LangFilter = LangFilter.basic,
+        validator: Validator = Validator.basic,
         policy: FilterPolicy = FilterPolicy.PASSTHROUGH
     ): ByteArray {
         var byteSize: Int = 0
         when(policy) {
             FilterPolicy.PASSTHROUGH -> loopUtf16(data) { cp -> byteSize += glyphSizeWithPassThrough(cp) }
-            FilterPolicy.ESCAPE -> loopUtf16(data) { cp -> byteSize += glyphSizeWithEscape(cp, filter) }
-            FilterPolicy.SECURITY -> loopUtf16(data) { cp -> byteSize += glyphSizeWithSecurity(cp, filter) }
+            FilterPolicy.ESCAPE -> loopUtf16(data) { cp -> byteSize += glyphSizeWithEscape(cp, validator) }
+            FilterPolicy.SECURITY -> loopUtf16(data) { cp -> byteSize += glyphSizeWithSecurity(cp, validator) }
         }
 
         val utfString = ByteArray(byteSize)
@@ -41,9 +41,9 @@ public object Unicode: UnicodeAware {
             FilterPolicy.PASSTHROUGH -> loopUtf16(data) { cp ->
                 writeGlyphWithPassThroughBlk(cp, byteSize - byteIdx) { utfString[byteIdx++] = it } }
             FilterPolicy.ESCAPE -> loopUtf16(data) { cp ->
-                writeGlyphWithEscapeBlk(cp, byteSize - byteIdx, filter) { utfString[byteIdx++] = it } }
+                writeGlyphWithEscapeBlk(cp, byteSize - byteIdx, validator) { utfString[byteIdx++] = it } }
             FilterPolicy.SECURITY -> loopUtf16(data) { cp ->
-                writeGlyphWithSecurityBlk(cp, byteSize - byteIdx, filter) { utfString[byteIdx++] = it } }
+                writeGlyphWithSecurityBlk(cp, byteSize - byteIdx, validator) { utfString[byteIdx++] = it } }
         }
         return utfString
     }

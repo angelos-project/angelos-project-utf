@@ -1,5 +1,3 @@
-package org.angproj.utf.pla
-
 /**
  * Copyright (c) 2025 by Kristoffer Paulsson <kristoffer.paulsson@talenten.se>.
  *
@@ -14,6 +12,8 @@ package org.angproj.utf.pla
  * Contributors:
  *      Kristoffer Paulsson - initial implementation
  */
+package org.angproj.utf.pla
+
 public enum class HalfIso639(public val lang: FullIso639, public val code: String) {
     ABKHAZIAN(FullIso639.ABKHAZIAN, "ab"),
     AFAR(FullIso639.AFAR, "aa"),

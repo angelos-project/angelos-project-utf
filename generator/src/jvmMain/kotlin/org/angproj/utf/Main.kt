@@ -14,9 +14,11 @@
  */
 package org.angproj.utf
 
+import org.angproj.utf.helper.BlockRangeLoader
 import org.angproj.utf.helper.DerivedGeneralCategoryLoader
 import org.angproj.utf.helper.LanguageBuilder
 import org.angproj.utf.helper.ScriptCodeLoader
+import org.angproj.utf.model.BlockRange
 import org.angproj.utf.ui.button
 import javax.swing.JOptionPane
 import javax.swing.SwingUtilities
@@ -26,6 +28,7 @@ object MainKt {
     fun main(args: Array<String>) {
         //DerivedGeneralCategoryLoader.generateUnassignedCategories()
         //LanguageBuilder.generateLanguageEnumFile()
+        println(BlockRangeLoader.generateBlockRangeEnum())
 
         SwingUtilities.invokeLater({
             val window = UtfInfoGenerator {

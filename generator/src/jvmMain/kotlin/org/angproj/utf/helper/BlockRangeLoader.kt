@@ -39,6 +39,20 @@ object BlockRangeLoader : DataLoader<BlockRange>() {
         loadData("/Blocks.txt")
     }
 
+    fun generateBlockRangeEnum(): String {
+        val sortedData = allData.sortedBy { it.searchName.canonical }
+        val sb = StringBuilder()
+        sb.appendLine("package org.angproj.utf.model")
+        sb.appendLine()
+        sb.appendLine("enum class BlockRange(val unicodeBounds: Pair<Int, Int>) {")
+        sortedData.forEachIndexed { idx, data ->
+            val lineEnding = if (idx != allData.lastIndex) "," else ";"
+            sb.appendLine("    ${data.searchName.constant}(\"${data.searchName.canonical}\", \"${data.searchName.klazz}\", \"${data.searchName.klazz}\", 0x${data.unicodeBounds.first.toString(16).uppercase()}..0x${data.unicodeBounds.second.toString(16).uppercase()})$lineEnding")
+        }
+        sb.appendLine("}")
+        return sb.toString()
+    }
+
     @JvmStatic
     fun main(args: Array<String>) {
         allData.forEach { println(it) }

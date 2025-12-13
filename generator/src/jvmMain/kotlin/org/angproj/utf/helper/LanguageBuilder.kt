@@ -24,8 +24,8 @@ object LanguageBuilder {
 
     fun generateLanguageEnumFile() {
         languageForEach {
-            //if(!it.lang.short.isEmpty()) println("${it.name}(\"${it.lang.name}\", \"${it.lang.short}\", \"${it.lang.long}\"),")
-            println("${it.name}(\"${it.lang.name}\", \"${it.lang.long}\"),")
+            if(!it.lang.short.isEmpty()) println("${it.name}(FullIso639.${it.name}, \"${it.lang.short}\"),")
+            //println("${it.name}(\"${it.lang.name}\", \"${it.lang.long}\"),")
 
         }
     }

@@ -269,7 +269,7 @@ public abstract class AbstractUnicodeAware {
 
         public val RANGE_SIZE_1: IntRange = Unicode.RANGE_START.toInt()..Unicode.RANGE_STOP.toInt()
         public val RANGE_SIZE_2: IntRange = Unicode.RANGE_START_2.toInt()..Unicode.RANGE_STOP_2.toInt()
-        public val RANGE_SIZE_3: IntRange = Unicode.RANGE_STOP_3.toInt()..Unicode.RANGE_STOP_3.toInt()
+        public val RANGE_SIZE_3: IntRange = Unicode.RANGE_START_3.toInt()..Unicode.RANGE_STOP_3.toInt()
         public val RANGE_SIZE_4: IntRange = Unicode.RANGE_START_4.toInt()..Unicode.RANGE_STOP_4.toInt()
 
         public val SURROGATE_RANGE: IntRange = Unicode.SURROGATE_START.toInt()..Unicode.SURROGATE_STOP.toInt()

@@ -55,14 +55,17 @@ public enum class Unicode(internal val cp: Int): Alphabet<Unicode> {
 
             val utfString = ByteArray(byteSize)
             var byteIdx = 0
-            when(policy.filter) {
+            /*when(policy.filter) {
                 Filter.PASSTHROUGH -> loopUtf16(data) { cp ->
                     writeGlyphWithPassThroughBlk(cp, byteSize - byteIdx) { utfString[byteIdx++] = it } }
                 Filter.ESCAPE -> loopUtf16(data) { cp ->
                     writeGlyphWithEscapeBlk(cp, byteSize - byteIdx, policy.validator) { utfString[byteIdx++] = it } }
                 Filter.SECURITY -> loopUtf16(data) { cp ->
                     writeGlyphWithSecurityBlk(cp, byteSize - byteIdx, policy.validator) { utfString[byteIdx++] = it } }
-            }
+            }*/
+
+            loopUtf16(data) { cp ->
+                writeGlyphByPolicyBlk(cp, byteSize - byteIdx, policy) { utfString[byteIdx++] = it } }
             return utfString
         }
 

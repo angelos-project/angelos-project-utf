@@ -17,7 +17,7 @@ package org.angproj.utf
 
 public enum class Unicode(internal val cp: Int): Alphabet<Unicode> {
     UTF_FIRST(0x0),
-    UTF_STOP(0x10_FFFF),
+    UTF_LAST(0x10_FFFF),
     UTF_REPLACEMENT(0xFFFD),
 
     RANGE_START(UTF_FIRST.cp),
@@ -28,7 +28,7 @@ public enum class Unicode(internal val cp: Int): Alphabet<Unicode> {
     RANGE_STOP(0x7F),
     RANGE_STOP_2(0x7FF),
     RANGE_STOP_3(0xFFFF),
-    RANGE_STOP_4(UTF_STOP.cp),
+    RANGE_STOP_4(UTF_LAST.cp),
 
     SURROGATE_START(0xD800),
     SURROGATE_STOP(0xDFFF),

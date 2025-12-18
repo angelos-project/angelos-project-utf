@@ -9,7 +9,7 @@ class UnicodeTest {
     @Test
     fun testToCodePoint() {
         assertEquals(Unicode.UTF_FIRST.toCodePoint(), CodePoint(0x00))
-        assertEquals(Unicode.UTF_STOP.toCodePoint(), CodePoint(0x10_FFFF))
+        assertEquals(Unicode.UTF_LAST.toCodePoint(), CodePoint(0x10_FFFF))
         assertEquals(Unicode.UTF_REPLACEMENT.toCodePoint(), CodePoint(0xFFFD))
 
         assertEquals(Unicode.RANGE_START.toCodePoint(), CodePoint(0x00))

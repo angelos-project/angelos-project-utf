@@ -26,7 +26,7 @@ public abstract class AbstractUnicodeAware {
     protected inline fun <reified R : Any> isUtf8(cp: Int): Boolean = isUnicode<Unit>(cp) && !isSurrogate<Unit>(cp)
     protected inline fun <reified R : Any> escapeNonUtf8(cp: Int): Int = when (isUtf8<Unit>(cp)) {
         true -> cp
-        else -> REPLACEMENT_CHARACTER
+        else -> Unicode.UTF_REPLACEMENT.toInt()
     }
 
     protected inline fun <reified R : Any> unicodeOctetSize(value: Int): Int = when (value) {
@@ -46,7 +46,7 @@ public abstract class AbstractUnicodeAware {
 
     protected inline fun <reified R : Any> surrogatesToCodePoint(
         high: Char, low: Char
-    ): Int = (((high.code - MIN_HIGH_SURROGATE) shl 10) or (low.code - MIN_LOW_SURROGATE)) + 0x10000
+    ): Int = (((high.code - Unicode.SURROGATE_MIN_HIGH.toInt()) shl 10) or (low.code - Unicode.SURROGATE_MIN_LOW.toInt())) + 0x10000
 
     protected inline fun <reified R : Any> hasSurrogatePairAt(
         seq: CharSequence, index: Int
@@ -60,7 +60,8 @@ public abstract class AbstractUnicodeAware {
     protected inline fun <reified R : Any> followDataLoop(loops: Int, cp: Int, readOctet: () -> Byte): Int {
         var value = cp
         var loop = loops
-        while (loop-- > 0 && value != REPLACEMENT_CHARACTER) value = followDataRead<Unit>(value, readOctet)
+        val replacement = Unicode.UTF_REPLACEMENT.toInt()
+        while (loop-- > 0 && value != replacement) value = followDataRead<Unit>(value, readOctet)
         return value
     }
 
@@ -68,7 +69,7 @@ public abstract class AbstractUnicodeAware {
         val octet = readOctet().toInt()
         return when {
             isFollowingOctet<Unit>(octet) -> (cp shl 6) or (octet and 0B0011_1111)
-            else -> REPLACEMENT_CHARACTER
+            else -> Unicode.UTF_REPLACEMENT.toInt()
         }
     }
 
@@ -97,7 +98,7 @@ public abstract class AbstractUnicodeAware {
             isFirstOctetOfFour<Unit>(octet) -> followDataLoop<Unit>(3, valueOfFirstOfFour<Unit>(octet), readOctet)
             isFirstOctetOfFive<Unit>(octet) -> followDataLoop<Unit>(4, valueOfFirstOfFive<Unit>(octet), readOctet)
             isFirstOctetOfSix<Unit>(octet) -> followDataLoop<Unit>(5, valueOfFirstOfSix<Unit>(octet), readOctet)
-            else -> REPLACEMENT_CHARACTER
+            else -> Unicode.UTF_REPLACEMENT.toInt()
         }
     }
 
@@ -115,7 +116,7 @@ public abstract class AbstractUnicodeAware {
                 followDataLoop<Unit>(4, valueOfFirstOfFive<Unit>(octet), readOctet) }
             isFirstOctetOfSix<Unit>(octet) -> req(remaining, 6) {
                 followDataLoop<Unit>(5, valueOfFirstOfSix<Unit>(octet), readOctet) }
-            else -> REPLACEMENT_CHARACTER
+            else -> Unicode.UTF_REPLACEMENT.toInt()
         }
     }
 
@@ -196,7 +197,7 @@ public abstract class AbstractUnicodeAware {
         cp: Int, validator: Validator,
     ): Int = when(!isSurrogate<Unit>(cp) && validator.isValid(cp)) {
         true -> cp
-        else -> REPLACEMENT_CHARACTER
+        else -> Unicode.UTF_REPLACEMENT.toInt()
     }
 
     protected inline fun <reified R : Any> glyphWithSecurity(
@@ -240,7 +241,7 @@ public abstract class AbstractUnicodeAware {
     }
 
     public companion object {
-        public const val UTF8_START: Int = 0x0
+        /*public const val UTF8_START: Int = 0x0
         public const val UTF8_STOP: Int = 0x10_FFFF
 
         public const val RANGE_1_START: Int = UTF8_START
@@ -261,18 +262,18 @@ public abstract class AbstractUnicodeAware {
         public const val MIN_LOW_SURROGATE: Int = 0xDC00
         public const val MAX_LOW_SURROGATE: Int = SURROGATE_STOP
 
-        public const val REPLACEMENT_CHARACTER: Int = 0xFFFD
+        public const val REPLACEMENT_CHARACTER: Int = 0xFFFD*/
         public const val REPLACEMENT_CHARACTER_SIZE: Int = 3
 
-        public val UTF8_RANGE: IntRange = UTF8_START..UTF8_STOP
+        public val UTF8_RANGE: IntRange = Unicode.UTF_FIRST.toInt()..Unicode.UTF_LAST.toInt()
 
-        public val RANGE_SIZE_1: IntRange = RANGE_1_START..RANGE_1_STOP
-        public val RANGE_SIZE_2: IntRange = RANGE_2_START..RANGE_2_STOP
-        public val RANGE_SIZE_3: IntRange = RANGE_3_START..RANGE_3_STOP
-        public val RANGE_SIZE_4: IntRange = RANGE_4_START..RANGE_4_STOP
+        public val RANGE_SIZE_1: IntRange = Unicode.RANGE_START.toInt()..Unicode.RANGE_STOP.toInt()
+        public val RANGE_SIZE_2: IntRange = Unicode.RANGE_START_2.toInt()..Unicode.RANGE_STOP_2.toInt()
+        public val RANGE_SIZE_3: IntRange = Unicode.RANGE_STOP_3.toInt()..Unicode.RANGE_STOP_3.toInt()
+        public val RANGE_SIZE_4: IntRange = Unicode.RANGE_START_4.toInt()..Unicode.RANGE_STOP_4.toInt()
 
-        public val SURROGATE_RANGE: IntRange= SURROGATE_START..SURROGATE_STOP
-        public val SURROGATE_LOW_RANGE: IntRange = MIN_LOW_SURROGATE..MAX_LOW_SURROGATE
-        public val SURROGATE_HIGH_RANGE: IntRange= MIN_HIGH_SURROGATE..MAX_HIGH_SURROGATE
+        public val SURROGATE_RANGE: IntRange = Unicode.SURROGATE_START.toInt()..Unicode.SURROGATE_STOP.toInt()
+        public val SURROGATE_LOW_RANGE: IntRange = Unicode.SURROGATE_MIN_LOW.toInt()..Unicode.SURROGATE_MAX_LOW.toInt()
+        public val SURROGATE_HIGH_RANGE: IntRange= Unicode.SURROGATE_MIN_HIGH.toInt()..Unicode.SURROGATE_MAX_HIGH.toInt()
     }
 }

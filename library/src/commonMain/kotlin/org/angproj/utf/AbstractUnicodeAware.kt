@@ -19,6 +19,8 @@ package org.angproj.utf
  * */
 public abstract class AbstractUnicodeAware {
 
+    protected inline fun <reified R: Any> unicodePrint(cp: Int): String = "0x${cp.toString(16).uppercase()} ($cp)"
+
     protected inline fun <reified R : Any> isUnicode(cp: Int): Boolean = cp in UTF8_RANGE
     protected inline fun <reified R : Any> isSurrogate(cp: Int): Boolean = cp in SURROGATE_RANGE
     protected inline fun <reified R : Any> isUtf8(cp: Int): Boolean = isUnicode<Unit>(cp) && !isSurrogate<Unit>(cp)
@@ -32,7 +34,7 @@ public abstract class AbstractUnicodeAware {
         in RANGE_SIZE_2 -> 2
         in RANGE_SIZE_3 -> 3
         in RANGE_SIZE_4 -> 4
-        else -> throw UnicodeError("Codepoint ${value}, out of range")
+        else -> throw UnicodeError("Codepoint ${unicodePrint<Unit>(value)}, out of range")
     }
 
     protected inline fun <reified R : Any> isSurrogate(char: Char): Boolean = isSurrogate<Unit>(char.code)
@@ -201,7 +203,7 @@ public abstract class AbstractUnicodeAware {
         cp: Int, validator: Validator,
     ): Int = when(validator.isValid(cp)) {
         true -> cp
-        else -> throw UnicodeError("Illegal codepoint ${cp}")
+        else -> throw UnicodeError("Illegal codepoint ${unicodePrint<Unit>(cp)}")
     }
 
     protected inline fun <reified R: Any> filterGlyphByPolicy(
@@ -223,7 +225,7 @@ public abstract class AbstractUnicodeAware {
     protected inline fun <reified R : Any> numberToDigit(number: Int): Int = when(number) {
         in 0..<10 -> 0x30 + number
         in 10..<16 -> 0x61 - 10 + number
-        else -> throw UnicodeError("Illegal numerical value $number")
+        else -> throw UnicodeError("Illegal numerical value ${number}")
     }
 
     /**
@@ -234,7 +236,7 @@ public abstract class AbstractUnicodeAware {
         in 0x30..0x39 -> cp - 0x30          // [0-9]
         in 0x41..0x46 -> cp - 0x41 + 10     // [A-F]
         in 0x61..0x66 -> cp - 0x61 + 10     // [a-f]
-        else -> throw UnicodeError("Illegal glyph digit $cp")
+        else -> throw UnicodeError("Illegal glyph digit ${unicodePrint<Unit>(cp)}")
     }
 
     public companion object {

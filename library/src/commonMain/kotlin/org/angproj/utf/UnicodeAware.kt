@@ -21,7 +21,7 @@ package org.angproj.utf
  * */
 public interface UnicodeAware {
 
-    public fun readGlyphStrm(readOctet: () -> Byte): CodePoint {
+    /*public fun readGlyphStrm(readOctet: () -> Byte): CodePoint {
         val value = octetReadStrm<Unit>(readOctet)
         return CodePoint(value)
     }
@@ -38,7 +38,7 @@ public interface UnicodeAware {
 
     public fun writeGlyphBlk(
         codePoint: CodePoint, remaining: Int, writeOctet: (octet: Byte) -> Unit
-    ): Int = octetWriteBlk<Unit>(codePoint.value, remaining, writeOctet)
+    ): Int = octetWriteBlk<Unit>(codePoint.value, remaining, writeOctet)*/
 
     public fun isGlyphStart(octet: Byte): Boolean {
         val value = octet.toInt()
@@ -109,7 +109,7 @@ public interface UnicodeAware {
 
     public fun glyphSizeWithSecurity(cp: CodePoint, validator: Validator): Int = innerGlyphSizeWithSecurity<Unit>(cp.value, validator)
 
-    public fun writeGlyphWithPassThroughBlk(
+    /*public fun writeGlyphWithPassThroughBlk(
         cp: CodePoint,
         remaining: Int,
         writeOctet: (octet: Byte) -> Unit
@@ -144,7 +144,7 @@ public interface UnicodeAware {
         cp: CodePoint,
         validator: Validator,
         writeOctet: (octet: Byte) -> Unit
-    ): Int = octetWriteStrm<Unit>(glyphWithSecurity<Unit>(cp.value, validator), writeOctet)
+    ): Int = octetWriteStrm<Unit>(glyphWithSecurity<Unit>(cp.value, validator), writeOctet)*/
 
     public fun filterGlyphByPolicy(
         cp: CodePoint,

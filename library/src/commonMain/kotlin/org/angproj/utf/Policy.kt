@@ -15,10 +15,12 @@
 package org.angproj.utf
 
 public data class Policy (
-    public val level: FilterPolicy,
+    public val filter: Filter,
     public val validator: Validator
 ) {
     public companion object {
-        public val basic: Policy by lazy { Policy(FilterPolicy.PASSTHROUGH, Validator.basic) }
+        public val passthrough: Policy by lazy { Policy(Filter.PASSTHROUGH, Validator.basic) }
+        public val escape: Policy by lazy { Policy(Filter.ESCAPE, Validator.basic) }
+        public val security: Policy by lazy { Policy(Filter.SECURITY, Validator.basic) }
     }
 }

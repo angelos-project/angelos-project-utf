@@ -19,25 +19,24 @@ public object Unicode: UnicodeAware {
 
     public fun decode(
         data: String,
-        validator: Validator = Validator.basic,
-        policy: FilterPolicy = FilterPolicy.PASSTHROUGH
+        policy: Policy = Policy.passthrough
     ): ByteArray {
         var byteSize: Int = 0
-        when(policy) {
-            FilterPolicy.PASSTHROUGH -> loopUtf16(data) { cp -> byteSize += glyphSizeWithPassThrough(cp) }
-            FilterPolicy.ESCAPE -> loopUtf16(data) { cp -> byteSize += glyphSizeWithEscape(cp, validator) }
-            FilterPolicy.SECURITY -> loopUtf16(data) { cp -> byteSize += glyphSizeWithSecurity(cp, validator) }
+        when(policy.filter) {
+            Filter.PASSTHROUGH -> loopUtf16(data) { cp -> byteSize += glyphSizeWithPassThrough(cp) }
+            Filter.ESCAPE -> loopUtf16(data) { cp -> byteSize += glyphSizeWithEscape(cp, policy.validator) }
+            Filter.SECURITY -> loopUtf16(data) { cp -> byteSize += glyphSizeWithSecurity(cp, policy.validator) }
         }
 
         val utfString = ByteArray(byteSize)
         var byteIdx = 0
-        when(policy) {
-            FilterPolicy.PASSTHROUGH -> loopUtf16(data) { cp ->
+        when(policy.filter) {
+            Filter.PASSTHROUGH -> loopUtf16(data) { cp ->
                 writeGlyphWithPassThroughBlk(cp, byteSize - byteIdx) { utfString[byteIdx++] = it } }
-            FilterPolicy.ESCAPE -> loopUtf16(data) { cp ->
-                writeGlyphWithEscapeBlk(cp, byteSize - byteIdx, validator) { utfString[byteIdx++] = it } }
-            FilterPolicy.SECURITY -> loopUtf16(data) { cp ->
-                writeGlyphWithSecurityBlk(cp, byteSize - byteIdx, validator) { utfString[byteIdx++] = it } }
+            Filter.ESCAPE -> loopUtf16(data) { cp ->
+                writeGlyphWithEscapeBlk(cp, byteSize - byteIdx, policy.validator) { utfString[byteIdx++] = it } }
+            Filter.SECURITY -> loopUtf16(data) { cp ->
+                writeGlyphWithSecurityBlk(cp, byteSize - byteIdx, policy.validator) { utfString[byteIdx++] = it } }
         }
         return utfString
     }

@@ -17,7 +17,7 @@ package org.angproj.utf
 /**
  * Enumeration of filter policies for UTF code points.
  */
-public enum class FilterPolicy {
+public enum class Filter {
     PASSTHROUGH,
     ESCAPE,
     SECURITY;

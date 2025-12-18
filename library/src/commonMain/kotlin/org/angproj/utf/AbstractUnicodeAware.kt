@@ -209,10 +209,10 @@ public abstract class AbstractUnicodeAware {
     protected inline fun <reified R: Any> filterGlyphByPolicy(
         cp: Int,
         policy: Policy
-    ): Int = when(policy.level) {
-        FilterPolicy.PASSTHROUGH -> glyphWithPassThrough<R>(cp)
-        FilterPolicy.ESCAPE -> glyphWithEscape<R>(cp, policy.validator)
-        FilterPolicy.SECURITY -> glyphWithSecurity<R>(cp, policy.validator)
+    ): Int = when(policy.filter) {
+        Filter.PASSTHROUGH -> glyphWithPassThrough<R>(cp)
+        Filter.ESCAPE -> glyphWithEscape<R>(cp, policy.validator)
+        Filter.SECURITY -> glyphWithSecurity<R>(cp, policy.validator)
     }
 
     protected inline fun <reified R : Any> isGlyphAsciiCtrl(cp: Int): Boolean = cp in 0x00..0x1F || cp == 0x7F

@@ -216,6 +216,15 @@ public abstract class AbstractUnicodeAware {
         Filter.SECURITY -> glyphWithSecurity<R>(cp, policy.validator)
     }
 
+    protected inline fun <reified R: Any> sizeGlyphByPolicy(
+        cp: Int,
+        policy: Policy
+    ): Int = when(policy.filter) {
+        Filter.PASSTHROUGH -> unicodeOctetSize<Unit>(glyphWithPassThrough<Unit>(cp))
+        Filter.ESCAPE -> unicodeOctetSize<Unit>(glyphWithEscape<Unit>(cp, policy.validator))
+        Filter.SECURITY -> unicodeOctetSize<Unit>(glyphWithSecurity<Unit>(cp, policy.validator))
+    }
+
     protected inline fun <reified R : Any> isGlyphAsciiCtrl(cp: Int): Boolean = cp in 0x00..0x1F || cp == 0x7F
     protected inline fun <reified R : Any> isGlyphAsciiPrintable(cp: Int): Boolean = cp in 0x20..0x7e
 

@@ -146,6 +146,11 @@ public interface UnicodeAware {
         writeOctet: (octet: Byte) -> Unit
     ): Int = octetWriteStrm<Unit>(glyphWithSecurity<Unit>(cp.value, validator), writeOctet)*/
 
+    public fun sizeGlyphByPolicy(
+        cp: CodePoint,
+        policy: Policy
+    ): Int = sizeGlyphByPolicy<Unit>(cp.value, policy)
+
     public fun filterGlyphByPolicy(
         cp: CodePoint,
         policy: Policy

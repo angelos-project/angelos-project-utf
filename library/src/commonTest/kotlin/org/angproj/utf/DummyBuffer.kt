@@ -80,10 +80,6 @@ class DummyBuffer(buffer: ByteArray, policy: Policy) : UnicodeAware, CodePointIt
         _buffer[_position++]
     }
 
-    fun readTrust(): CodePoint = readGlyphBlk(remaining) {
-        _buffer[_position++]
-    }
-
     /**
      * Writes a [CodePoint] to the current position in the buffer using the configured [policy].
      *
@@ -95,21 +91,24 @@ class DummyBuffer(buffer: ByteArray, policy: Policy) : UnicodeAware, CodePointIt
         buffer[_position++] = it
     }
 
-    fun writeTrust(codePoint: CodePoint): Int = writeGlyphBlk(codePoint, remaining) {
-        buffer[_position++] = it
-    }
-
     override fun iterator(): CodePointIterator {
         rewind()
         return object : CodePointIterator {
-            override val previous: CodePoint
-                get() = TODO("Not yet implemented")
-            override val position: Int
-                get() = TODO("Not yet implemented")
-            override val count: Int
-                get() = TODO("Not yet implemented")
+            private val buffer = this@DummyBuffer
+            private var _cnt = 0
+            private var _last: CodePoint = CodePoint(0)
 
-            override fun next(): CodePoint = read()
+            override val previous: CodePoint
+                get() = _last
+            override val position: Int
+                get() = buffer.position
+            override val count: Int
+                get() = _cnt
+
+            override fun next(): CodePoint = read().also {
+                _last = it
+                _cnt++
+            }
 
             override fun hasNext(): Boolean = remaining > 0
         }

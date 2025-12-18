@@ -15,34 +15,61 @@
 package org.angproj.utf
 
 
-public object Unicode: UnicodeAware {
+public enum class Unicode(internal val cp: Int): Alphabet<Unicode> {
+    UTF_FIRST(0x0),
+    UTF_STOP(0x10_FFFF),
+    UTF_REPLACEMENT(0xFFFD),
 
-    public fun decode(data: String): ByteArray = decode(data, Policy.passthrough)
+    RANGE_START(UTF_FIRST.cp),
+    RANGE_START_2(0x80),
+    RANGE_START_3(0x800),
+    RANGE_START_4(0x1_0000),
 
-    public fun decode(data: String, policy: Policy): ByteArray {
-        var byteSize = 0
-        when(policy.filter) {
-            Filter.PASSTHROUGH -> loopUtf16(data) { cp -> byteSize += glyphSizeWithPassThrough(cp) }
-            Filter.ESCAPE -> loopUtf16(data) { cp -> byteSize += glyphSizeWithEscape(cp, policy.validator) }
-            Filter.SECURITY -> loopUtf16(data) { cp -> byteSize += glyphSizeWithSecurity(cp, policy.validator) }
+    RANGE_STOP(0x7F),
+    RANGE_STOP_2(0x7FF),
+    RANGE_STOP_3(0xFFFF),
+    RANGE_STOP_4(UTF_STOP.cp),
+
+    SURROGATE_START(0xD800),
+    SURROGATE_STOP(0xDFFF),
+
+    SURROGATE_MIN_HIGH(SURROGATE_START.cp),
+    SURROGATE_MAX_HIGH(0xDBFF),
+    SURROGATE_MIN_LOW(0xDC00),
+    SURROGATE_MAX_LOW_(SURROGATE_STOP.cp);
+
+    override fun toInt(): Int = cp
+
+    override fun toCodePoint(): CodePoint = cp.toCodePoint()
+
+    public companion object : UnicodeAware {
+        public fun decode(data: String): ByteArray = decode(data, Policy.passthrough)
+
+        public fun decode(data: String, policy: Policy): ByteArray {
+            var byteSize = 0
+            when(policy.filter) {
+                Filter.PASSTHROUGH -> loopUtf16(data) { cp -> byteSize += glyphSizeWithPassThrough(cp) }
+                Filter.ESCAPE -> loopUtf16(data) { cp -> byteSize += glyphSizeWithEscape(cp, policy.validator) }
+                Filter.SECURITY -> loopUtf16(data) { cp -> byteSize += glyphSizeWithSecurity(cp, policy.validator) }
+            }
+
+            val utfString = ByteArray(byteSize)
+            var byteIdx = 0
+            when(policy.filter) {
+                Filter.PASSTHROUGH -> loopUtf16(data) { cp ->
+                    writeGlyphWithPassThroughBlk(cp, byteSize - byteIdx) { utfString[byteIdx++] = it } }
+                Filter.ESCAPE -> loopUtf16(data) { cp ->
+                    writeGlyphWithEscapeBlk(cp, byteSize - byteIdx, policy.validator) { utfString[byteIdx++] = it } }
+                Filter.SECURITY -> loopUtf16(data) { cp ->
+                    writeGlyphWithSecurityBlk(cp, byteSize - byteIdx, policy.validator) { utfString[byteIdx++] = it } }
+            }
+            return utfString
         }
 
-        val utfString = ByteArray(byteSize)
-        var byteIdx = 0
-        when(policy.filter) {
-            Filter.PASSTHROUGH -> loopUtf16(data) { cp ->
-                writeGlyphWithPassThroughBlk(cp, byteSize - byteIdx) { utfString[byteIdx++] = it } }
-            Filter.ESCAPE -> loopUtf16(data) { cp ->
-                writeGlyphWithEscapeBlk(cp, byteSize - byteIdx, policy.validator) { utfString[byteIdx++] = it } }
-            Filter.SECURITY -> loopUtf16(data) { cp ->
-                writeGlyphWithSecurityBlk(cp, byteSize - byteIdx, policy.validator) { utfString[byteIdx++] = it } }
-        }
-        return utfString
-    }
-
-    public fun debugString(debug: String) {
-        debug.forEachIndexed { index, ch ->
-            debugCharacter(ch, index)
+        public fun debugString(debug: String) {
+            debug.forEachIndexed { index, ch ->
+                debugCharacter(ch, index)
+            }
         }
     }
 }

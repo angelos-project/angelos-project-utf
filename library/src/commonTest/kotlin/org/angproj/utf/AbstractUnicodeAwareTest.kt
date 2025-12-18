@@ -69,6 +69,15 @@ class AbstractUnicodeAwareTest : AbstractUnicodeAware() {
     }
 
     @Test
+    fun testSurrogatesToCodePoint() {
+        val txt = "\uD83E\uDD23"
+        val txt2 = "🤣"
+        assertEquals(txt, txt2)
+        val codePoint = surrogatesToCodePoint<Unit>(txt.get(0), txt.get(1))
+        assertEquals(0x1F923, codePoint)
+    }
+
+    @Test
     fun testRanges() {
         assertEquals(0x0, UTF8_RANGE.first)
         assertEquals(0x10_FFFF, UTF8_RANGE.last)

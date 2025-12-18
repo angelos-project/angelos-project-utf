@@ -2,8 +2,60 @@ package org.angproj.utf
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertContains
 
 class HexTest: AbstractUnicodeAware() {
+
+    @Test
+    fun testHexAlphabetOf() {
+        val hex = alphabetOf(
+            Ascii.PRNT_ZERO,
+            Ascii.PRNT_ONE,
+            Ascii.PRNT_TWO,
+            Ascii.PRNT_THREE,
+            Ascii.PRNT_FOUR,
+            Ascii.PRNT_FIVE,
+            Ascii.PRNT_SIX,
+            Ascii.PRNT_SEVEN,
+            Ascii.PRNT_EIGHT,
+            Ascii.PRNT_NINE,
+            Ascii.PRNT_A_LOW,
+            Ascii.PRNT_B_LOW,
+            Ascii.PRNT_C_LOW,
+            Ascii.PRNT_D_LOW,
+            Ascii.PRNT_E_LOW,
+            Ascii.PRNT_F_LOW,
+            Ascii.PRNT_A_UP,
+            Ascii.PRNT_B_UP,
+            Ascii.PRNT_C_UP,
+            Ascii.PRNT_D_UP,
+            Ascii.PRNT_E_UP,
+            Ascii.PRNT_F_UP
+        )
+
+        assertContains(hex, Ascii.PRNT_ZERO.cp)
+        assertContains(hex, Ascii.PRNT_ONE.cp)
+        assertContains(hex, Ascii.PRNT_TWO.cp)
+        assertContains(hex, Ascii.PRNT_THREE.cp)
+        assertContains(hex, Ascii.PRNT_FOUR.cp)
+        assertContains(hex, Ascii.PRNT_FIVE.cp)
+        assertContains(hex, Ascii.PRNT_SIX.cp)
+        assertContains(hex, Ascii.PRNT_SEVEN.cp)
+        assertContains(hex, Ascii.PRNT_EIGHT.cp)
+        assertContains(hex, Ascii.PRNT_NINE.cp)
+        assertContains(hex, Ascii.PRNT_A_LOW.cp)
+        assertContains(hex, Ascii.PRNT_B_LOW.cp)
+        assertContains(hex, Ascii.PRNT_C_LOW.cp)
+        assertContains(hex, Ascii.PRNT_D_LOW.cp)
+        assertContains(hex, Ascii.PRNT_E_LOW.cp)
+        assertContains(hex, Ascii.PRNT_F_LOW.cp)
+        assertContains(hex, Ascii.PRNT_A_UP.cp)
+        assertContains(hex, Ascii.PRNT_B_UP.cp)
+        assertContains(hex, Ascii.PRNT_C_UP.cp)
+        assertContains(hex, Ascii.PRNT_D_UP.cp)
+        assertContains(hex, Ascii.PRNT_E_UP.cp)
+        assertContains(hex, Ascii.PRNT_F_UP.cp)
+    }
 
     @Test
     fun testDigitToNumber() {

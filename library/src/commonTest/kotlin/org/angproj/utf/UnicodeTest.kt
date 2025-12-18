@@ -77,6 +77,6 @@ class UnicodeTest {
     }
 
     @Test fun testDebugString() {
-        Unicode.debugString("Test 😀 String 文字")
+        Unicode.debugString("Testing 😀 debug 文字 string.")
     }
 }

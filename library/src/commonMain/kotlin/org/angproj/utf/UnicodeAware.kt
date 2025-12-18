@@ -87,12 +87,18 @@ public interface UnicodeAware {
         str: String,
         action: (it: CodePoint) -> Unit
     ) {
-        str.forEachIndexed { index, c ->
+        val strIter = str.iterator()
+        while (strIter.hasNext()) {
+            val current = strIter.nextChar()
             when {
-                !isSurrogate<Unit>(c) -> action(c.toCodePoint())
-                hasSurrogatePairAt<Unit>(str, index) -> action(
-                    surrogatesToCodePoint<Unit>(c, str[index + 1]).toCodePoint())
-                else -> throw UnicodeError("Illegal codepoint ${unicodePrint<Unit>(c.code)} at index $index")
+                !isSurrogate<Unit>(current) -> action(current.toCodePoint())
+                isHighSurrogate<Unit>(current) -> {
+                    if (!strIter.hasNext()) throw UnicodeError("Illegal high surrogate at end of string ${unicodePrint<Unit>(current.code)}")
+                    val next = strIter.nextChar()
+                    if(!isLowSurrogate<Unit>(next)) throw UnicodeError("Illegal low surrogate ${unicodePrint<Unit>(next.code)}")
+                    action(surrogatesToCodePoint<Unit>(current, next).toCodePoint())
+                }
+                else -> throw UnicodeError("Unintended parsing error at: ${unicodePrint<Unit>(current.code)}")
             }
         }
     }

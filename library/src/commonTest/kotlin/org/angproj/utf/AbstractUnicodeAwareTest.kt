@@ -2,8 +2,10 @@ package org.angproj.utf
 
 import kotlin.test.Test
 import kotlin.test.assertTrue
+import kotlin.test.assertFalse
 import kotlin.test.assertContains
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 class AbstractUnicodeAwareTest : AbstractUnicodeAware() {
 
@@ -11,6 +13,59 @@ class AbstractUnicodeAwareTest : AbstractUnicodeAware() {
     fun testUnicodePrint() {
         assertContains(unicodePrint<Unit>(Unicode.UTF_REPLACEMENT.toInt()), "0xFFFD")
         assertContains(unicodePrint<Unit>(Unicode.UTF_REPLACEMENT.toInt()), "65533")
+    }
+
+    @Test
+    fun testIsUnicode() {
+        assertTrue(isUnicode<Unit>(Unicode.UTF_REPLACEMENT.toInt()))
+        assertFalse(isUnicode<Unit>(0x20_0000))
+    }
+
+    @Test
+    fun testIsSurrogate() {
+        assertTrue(isSurrogate<Unit>(0xDB01))
+        assertFalse(isSurrogate<Unit>(Unicode.UTF_REPLACEMENT.toInt()))
+    }
+
+    @Test
+    fun testIsUtf8() {
+        assertTrue(isUtf8<Unit>(Unicode.UTF_REPLACEMENT.toInt()))
+        assertFalse(isUtf8<Unit>(0xDB01))
+    }
+
+    @Test
+    fun testEscapeNonUtf8() {
+        assertEquals(escapeNonUtf8<Unit>(Ascii.PRNT_A_UP.toInt()), Ascii.PRNT_A_UP.toInt())
+        assertEquals(escapeNonUtf8<Unit>(0xDB01), Unicode.UTF_REPLACEMENT.toInt())
+    }
+
+    @Test
+    fun testUnicodeOctetSize() {
+        assertEquals(unicodeOctetSize<Unit>(0x20), 1)
+        assertEquals(unicodeOctetSize<Unit>(0x200), 2)
+        assertEquals(unicodeOctetSize<Unit>(0x2000), 3)
+        assertEquals(unicodeOctetSize<Unit>(0x20000), 4)
+        assertFailsWith<UnicodeError> {
+            unicodeOctetSize<Unit>(-1)
+        }
+    }
+
+    @Test
+    fun testIsSurrogateChar() {
+        assertTrue(isSurrogate<Unit>('\uDB01'))
+        assertFalse(isSurrogate<Unit>('A'))
+    }
+
+    @Test
+    fun testIsHighSurrogateChar() {
+        assertTrue(isHighSurrogate<Unit>('\uDB01'))
+        assertFalse(isHighSurrogate<Unit>('A'))
+    }
+
+    @Test
+    fun testIsLowSurrogateChar() {
+        assertTrue(isLowSurrogate<Unit>('\uDC01'))
+        assertFalse(isLowSurrogate<Unit>('A'))
     }
 
     @Test

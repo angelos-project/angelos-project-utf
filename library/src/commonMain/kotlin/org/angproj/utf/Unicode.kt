@@ -36,7 +36,7 @@ public enum class Unicode(internal val cp: Int): Alphabet<Unicode> {
     SURROGATE_MIN_HIGH(SURROGATE_START.cp),
     SURROGATE_MAX_HIGH(0xDBFF),
     SURROGATE_MIN_LOW(0xDC00),
-    SURROGATE_MAX_LOW_(SURROGATE_STOP.cp);
+    SURROGATE_MAX_LOW(SURROGATE_STOP.cp);
 
     override fun toInt(): Int = cp
 

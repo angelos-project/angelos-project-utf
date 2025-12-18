@@ -32,7 +32,7 @@ class HexTest: AbstractUnicodeAware() {
     }
 
     @Test
-    fun testNuberToDigit() {
+    fun testNumberToDigit() {
         assertEquals(numberToDigit<Unit>(0), Ascii.PRNT_ZERO.cp)
         assertEquals(numberToDigit<Unit>(1), Ascii.PRNT_ONE.cp)
         assertEquals(numberToDigit<Unit>(2), Ascii.PRNT_TWO.cp)

@@ -12,34 +12,34 @@ class UnicodeAwareTest : UnicodeAware {
 
     @Test
     fun testFilterGlyphPolicy() {
-        val policy = Policy.security
+        listOf(Policy.passthrough, Policy.escape, Policy.security).forEach { policy ->
+            var inPos = 0
+            val strm1 = Unicode.decode(TestInformationStub.latinLipsum)
+            while (inPos < strm1.size) {
+                val cp = readGlyphStrm { strm1[inPos++] }
+                filterGlyphByPolicy(cp, policy)
+            }
 
-        var inPos = 0
-        val strm1 = Unicode.decode(TestInformationStub.latinLipsum)
-        while (inPos < strm1.size) {
-            val cp = readGlyphStrm { strm1[inPos++] }
-            filterGlyphByPolicy(cp, policy)
-        }
+            inPos = 0
+            val strm2 = Unicode.decode(TestInformationStub.latinLipsumEmoji)
+            while (inPos < strm2.size) {
+                val cp = readGlyphStrm { strm2[inPos++] }
+                filterGlyphByPolicy(cp, policy)
+            }
 
-        inPos = 0
-        val strm2 = Unicode.decode(TestInformationStub.latinLipsumEmoji)
-        while (inPos < strm2.size) {
-            val cp = readGlyphStrm { strm2[inPos++] }
-            filterGlyphByPolicy(cp, policy)
-        }
+            inPos = 0
+            val strm3 = Unicode.decode(TestInformationStub.greekLipsum)
+            while (inPos < strm3.size) {
+                val cp = readGlyphStrm { strm3[inPos++] }
+                filterGlyphByPolicy(cp, policy)
+            }
 
-        inPos = 0
-        val strm3 = Unicode.decode(TestInformationStub.greekLipsum)
-        while (inPos < strm3.size) {
-            val cp = readGlyphStrm { strm3[inPos++] }
-            filterGlyphByPolicy(cp, policy)
-        }
-
-        inPos = 0
-        val strm4 = Unicode.decode(TestInformationStub.chineseLipsum)
-        while (inPos < strm4.size) {
-            val cp = readGlyphStrm { strm4[inPos++] }
-            filterGlyphByPolicy(cp, policy)
+            inPos = 0
+            val strm4 = Unicode.decode(TestInformationStub.chineseLipsum)
+            while (inPos < strm4.size) {
+                val cp = readGlyphStrm { strm4[inPos++] }
+                filterGlyphByPolicy(cp, policy)
+            }
         }
     }
 

@@ -15,6 +15,11 @@ class AbstractUnicodeAwareTest : AbstractUnicodeAware() {
 
     @Test
     fun testRanges() {
+        assertEquals(0x0, UTF8_RANGE.first)
+        assertEquals(0x10_FFFF, UTF8_RANGE.last)
+        assertEquals(Unicode.UTF_FIRST.toInt(), UTF8_RANGE.first)
+        assertEquals(Unicode.UTF_LAST.toInt(), UTF8_RANGE.last)
+
         assertEquals(0x0, RANGE_SIZE_1.first)
         assertEquals(0x7F, RANGE_SIZE_1.last)
         assertEquals(Unicode.RANGE_START.toInt(), RANGE_SIZE_1.first)
@@ -34,11 +39,20 @@ class AbstractUnicodeAwareTest : AbstractUnicodeAware() {
         assertEquals(0x10_FFFF, RANGE_SIZE_4.last)
         assertEquals(Unicode.RANGE_START_4.toInt(), RANGE_SIZE_4.first)
         assertEquals(Unicode.RANGE_STOP_4.toInt(), RANGE_SIZE_4.last)
-    }
 
-    /*@Test
-    fun testCodePointValue() {
-        val cp = 0x1F600.toCodePoint() // 😀
-        assertTrue { cp.value == 0x1F600 }
-    }*/
+        assertEquals(0xD800, SURROGATE_RANGE.first)
+        assertEquals(0xDFFF, SURROGATE_RANGE.last)
+        assertEquals(Unicode.SURROGATE_START.toInt(), SURROGATE_RANGE.first)
+        assertEquals(Unicode.SURROGATE_STOP.toInt(), SURROGATE_RANGE.last)
+
+        assertEquals(0xDC00, SURROGATE_LOW_RANGE.first)
+        assertEquals(0xDFFF, SURROGATE_LOW_RANGE.last)
+        assertEquals(Unicode.SURROGATE_MIN_LOW.toInt(), SURROGATE_LOW_RANGE.first)
+        assertEquals(Unicode.SURROGATE_MAX_LOW.toInt(), SURROGATE_LOW_RANGE.last)
+
+        assertEquals(0xD800, SURROGATE_HIGH_RANGE.first)
+        assertEquals(0xDBFF, SURROGATE_HIGH_RANGE.last)
+        assertEquals(Unicode.SURROGATE_MIN_HIGH.toInt(), SURROGATE_HIGH_RANGE.first)
+        assertEquals(Unicode.SURROGATE_MAX_HIGH.toInt(), SURROGATE_HIGH_RANGE.last)
+    }
 }

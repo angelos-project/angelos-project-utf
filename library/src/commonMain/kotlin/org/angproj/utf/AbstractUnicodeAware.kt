@@ -241,28 +241,6 @@ public abstract class AbstractUnicodeAware {
     }
 
     public companion object {
-        /*public const val UTF8_START: Int = 0x0
-        public const val UTF8_STOP: Int = 0x10_FFFF
-
-        public const val RANGE_1_START: Int = UTF8_START
-        public const val RANGE_2_START: Int = 0x80
-        public const val RANGE_3_START: Int = 0x800
-        public const val RANGE_4_START: Int = 0x1_0000
-
-        public const val RANGE_1_STOP: Int = 0x7F
-        public const val RANGE_2_STOP: Int = 0x7FF
-        public const val RANGE_3_STOP: Int = 0xFFFF
-        public const val RANGE_4_STOP: Int = UTF8_STOP
-
-        public const val SURROGATE_START: Int = 0xD800
-        public const val SURROGATE_STOP: Int = 0xDFFF
-
-        public const val MIN_HIGH_SURROGATE: Int = SURROGATE_START
-        public const val MAX_HIGH_SURROGATE: Int = 0xDBFF
-        public const val MIN_LOW_SURROGATE: Int = 0xDC00
-        public const val MAX_LOW_SURROGATE: Int = SURROGATE_STOP
-
-        public const val REPLACEMENT_CHARACTER: Int = 0xFFFD*/
         public const val REPLACEMENT_CHARACTER_SIZE: Int = 3
 
         public val UTF8_RANGE: IntRange = Unicode.UTF_FIRST.toInt()..Unicode.UTF_LAST.toInt()

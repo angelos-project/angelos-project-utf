@@ -45,45 +45,47 @@ class UnicodeAwareTest : UnicodeAware {
 
     @Test
     fun testOctetReadWriteStrm() {
-        var inPos = 0
-        var outPos = 0
-        val strm1 = Unicode.decode(TestInformationStub.latinLipsum)
-        val outStrm1 = ByteArray(strm1.size)
-        while (inPos < strm1.size) {
-            val cp = readGlyphStrm { strm1[inPos++] }
-            writeGlyphStrm(cp) { outStrm1[outPos++] = it }
-        }
-        assertContentEquals(strm1, outStrm1)
+        listOf(Policy.passthrough, Policy.escape, Policy.security).forEach { policy ->
+            var inPos = 0
+            var outPos = 0
+            val strm1 = Unicode.decode(TestInformationStub.latinLipsum)
+            val outStrm1 = ByteArray(strm1.size)
+            while (inPos < strm1.size) {
+                val cp = readGlyphByPolicyStrm(policy) { strm1[inPos++] }
+                writeGlyphByPolicyStrm(cp, policy) { outStrm1[outPos++] = it }
+            }
+            assertContentEquals(strm1, outStrm1)
 
-        inPos = 0
-        outPos = 0
-        val strm2 = Unicode.decode(TestInformationStub.latinLipsumEmoji)
-        val outStrm2 = ByteArray(strm2.size)
-        while (inPos < strm2.size) {
-            val cp = readGlyphStrm { strm2[inPos++] }
-            writeGlyphStrm(cp) { outStrm2[outPos++] = it }
-        }
-        assertContentEquals(strm2, outStrm2)
+            inPos = 0
+            outPos = 0
+            val strm2 = Unicode.decode(TestInformationStub.latinLipsumEmoji)
+            val outStrm2 = ByteArray(strm2.size)
+            while (inPos < strm2.size) {
+                val cp = readGlyphByPolicyStrm(policy) { strm2[inPos++] }
+                writeGlyphByPolicyStrm(cp, policy) { outStrm2[outPos++] = it }
+            }
+            assertContentEquals(strm2, outStrm2)
 
-        inPos = 0
-        outPos = 0
-        val strm3 = Unicode.decode(TestInformationStub.greekLipsum)
-        val outStrm3 = ByteArray(strm3.size)
-        while (inPos < strm3.size) {
-            val cp = readGlyphStrm { strm3[inPos++] }
-            writeGlyphStrm(cp) { outStrm3[outPos++] = it }
-        }
-        assertContentEquals(strm3, outStrm3)
+            inPos = 0
+            outPos = 0
+            val strm3 = Unicode.decode(TestInformationStub.greekLipsum)
+            val outStrm3 = ByteArray(strm3.size)
+            while (inPos < strm3.size) {
+                val cp = readGlyphByPolicyStrm(policy) { strm3[inPos++] }
+                writeGlyphByPolicyStrm(cp, policy) { outStrm3[outPos++] = it }
+            }
+            assertContentEquals(strm3, outStrm3)
 
-        inPos = 0
-        outPos = 0
-        val strm4 = Unicode.decode(TestInformationStub.chineseLipsum)
-        val outStrm4 = ByteArray(strm4.size)
-        while (inPos < strm4.size) {
-            val cp = readGlyphStrm { strm4[inPos++] }
-            writeGlyphStrm(cp) { outStrm4[outPos++] = it }
+            inPos = 0
+            outPos = 0
+            val strm4 = Unicode.decode(TestInformationStub.chineseLipsum)
+            val outStrm4 = ByteArray(strm4.size)
+            while (inPos < strm4.size) {
+                val cp = readGlyphByPolicyStrm(policy) { strm4[inPos++] }
+                writeGlyphByPolicyStrm(cp, policy) { outStrm4[outPos++] = it }
+            }
+            assertContentEquals(strm4, outStrm4)
         }
-        assertContentEquals(strm4, outStrm4)
     }
 
     @Test

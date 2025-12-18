@@ -44,7 +44,7 @@ class AbstractUnicodeAwareTest : AbstractUnicodeAware() {
         assertEquals(unicodeOctetSize<Unit>(0x20), 1)
         assertEquals(unicodeOctetSize<Unit>(0x200), 2)
         assertEquals(unicodeOctetSize<Unit>(0x2000), 3)
-        assertEquals(unicodeOctetSize<Unit>(0x20000), 4)
+        assertEquals(unicodeOctetSize<Unit>(0x10001), 4)
         assertFailsWith<UnicodeError> {
             unicodeOctetSize<Unit>(-1)
         }
@@ -75,6 +75,84 @@ class AbstractUnicodeAwareTest : AbstractUnicodeAware() {
         assertEquals(txt, txt2)
         val codePoint = surrogatesToCodePoint<Unit>(txt.get(0), txt.get(1))
         assertEquals(0x1F923, codePoint)
+    }
+
+    @Test
+    fun testOctetReadWriteStrm() {
+        var inPos = 0
+        var outPos = 0
+        val strm1 = Unicode.decode(TestInformationStub.latinLipsum)
+        val outStrm1 = ByteArray(strm1.size)
+        while (inPos < strm1.size) {
+            val cp = octetReadStrm<Unit> { strm1[inPos++] }
+            octetWriteStrm<Unit>(cp) { outStrm1[outPos++] = it }
+        }
+
+        inPos = 0
+        outPos = 0
+        val strm2 = Unicode.decode(TestInformationStub.latinLipsumEmoji)
+        val outStrm2 = ByteArray(strm2.size)
+        while (inPos < strm1.size) {
+            val cp = octetReadStrm<Unit> { strm2[inPos++] }
+            octetWriteStrm<Unit>(cp) { outStrm2[outPos++] = it }
+        }
+
+        inPos = 0
+        outPos = 0
+        val strm3 = Unicode.decode(TestInformationStub.greekLipsum)
+        val outStrm3 = ByteArray(strm3.size)
+        while (inPos < strm3.size) {
+            val cp = octetReadStrm<Unit> { strm3[inPos++] }
+            octetWriteStrm<Unit>(cp) { outStrm3[outPos++] = it }
+        }
+
+        inPos = 0
+        outPos = 0
+        val strm4 = Unicode.decode(TestInformationStub.chineseLipsum)
+        val outStrm4 = ByteArray(strm4.size)
+        while (inPos < strm4.size) {
+            val cp = octetReadStrm<Unit> { strm4[inPos++] }
+            octetWriteStrm<Unit>(cp) { outStrm4[outPos++] = it }
+        }
+    }
+
+    @Test
+    fun testOctetReadBlk() {
+        var inPos = 0
+        var outPos = 0
+        val strm1 = Unicode.decode(TestInformationStub.latinLipsum)
+        val outStrm1 = ByteArray(strm1.size)
+        while (inPos < strm1.size) {
+            val cp = octetReadBlk<Unit>(strm1.lastIndex-inPos) { strm1[inPos++] }
+            octetWriteBlk<Unit>(cp, outStrm1.lastIndex-inPos) { outStrm1[outPos++] = it }
+        }
+
+        inPos = 0
+        outPos = 0
+        val strm2 = Unicode.decode(TestInformationStub.latinLipsumEmoji)
+        val outStrm2 = ByteArray(strm2.size)
+        while (inPos < strm2.size) {
+            val cp = octetReadBlk<Unit>(strm2.lastIndex-inPos) { strm2[inPos++] }
+            octetWriteBlk<Unit>(cp, outStrm2.lastIndex-inPos) { outStrm2[outPos++] = it }
+        }
+
+        inPos = 0
+        outPos = 0
+        val strm3 = Unicode.decode(TestInformationStub.greekLipsum)
+        val outStrm3 = ByteArray(strm3.size)
+        while (inPos < strm3.size) {
+            val cp = octetReadBlk<Unit>(strm3.lastIndex-inPos) { strm3[inPos++] }
+            octetWriteBlk<Unit>(cp, outStrm3.lastIndex-inPos) { outStrm3[outPos++] = it }
+        }
+
+        inPos = 0
+        outPos = 0
+        val strm4 = Unicode.decode(TestInformationStub.chineseLipsum)
+        val outStrm4 = ByteArray(strm4.size)
+        while (inPos < strm4.size) {
+            val cp = octetReadBlk<Unit>(strm4.lastIndex-inPos) { strm4[inPos++] }
+            octetWriteBlk<Unit>(cp, outStrm4.lastIndex-inPos) { outStrm4[outPos++] = it }
+        }
     }
 
     @Test

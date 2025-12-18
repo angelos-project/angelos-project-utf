@@ -86,7 +86,7 @@ public interface UnicodeAware {
                 !isSurrogate<Unit>(c) -> action(c.toCodePoint())
                 hasSurrogatePairAt<Unit>(str, index) -> action(
                     surrogatesToCodePoint<Unit>(c, str[index + 1]).toCodePoint())
-                else -> throw UnicodeError("Illegal codepoint ${unicodePrint<Unit>(c.code)}")
+                else -> throw UnicodeError("Illegal codepoint ${unicodePrint<Unit>(c.code)} at index $index")
             }
         }
     }

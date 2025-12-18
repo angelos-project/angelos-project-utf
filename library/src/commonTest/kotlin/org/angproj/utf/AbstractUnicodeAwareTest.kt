@@ -8,8 +8,8 @@ class AbstractUnicodeAwareTest : AbstractUnicodeAware() {
 
     @Test
     fun testUnicodePrint() {
-        assertContains(unicodePrint<Unit>(REPLACEMENT_CHARACTER), "0xFFFD")
-        println(unicodePrint<Unit>(REPLACEMENT_CHARACTER))
+        assertContains(unicodePrint<Unit>(Unicode.UTF_REPLACEMENT.toInt()), "0xFFFD")
+        assertContains(unicodePrint<Unit>(Unicode.UTF_REPLACEMENT.toInt()), "65533")
     }
 
     /*@Test

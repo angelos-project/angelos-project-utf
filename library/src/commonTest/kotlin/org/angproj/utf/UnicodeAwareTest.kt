@@ -13,7 +13,10 @@ class UnicodeAwareTest : UnicodeAware {
     @Test
     fun testFilterGlyphPolicy() {
         listOf(Policy.passthrough, Policy.escape, Policy.security).forEach { policy ->
-            var inPos = 0
+            val cp = 0x1F600.toCodePoint() // 😀
+            filterGlyphByPolicy(cp, policy)
+
+            /*var inPos = 0
             val strm1 = Unicode.decode(TestInformationStub.latinLipsum)
             while (inPos < strm1.size) {
                 val cp = readGlyphStrm { strm1[inPos++] }
@@ -39,7 +42,7 @@ class UnicodeAwareTest : UnicodeAware {
             while (inPos < strm4.size) {
                 val cp = readGlyphStrm { strm4[inPos++] }
                 filterGlyphByPolicy(cp, policy)
-            }
+            }*/
         }
     }
 

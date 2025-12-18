@@ -42,4 +42,9 @@ public object Unicode: UnicodeAware {
         return utfString
     }
 
+    public fun debugString(debug: String) {
+        debug.forEachIndexed { index, ch ->
+            debugCharacter(ch, index)
+        }
+    }
 }

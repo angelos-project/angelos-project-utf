@@ -68,7 +68,7 @@ public abstract class AbstractUnicodeAware {
         val octet = readOctet().toInt()
         return when {
             isFollowingOctet<Unit>(octet) -> (cp shl 6) or (octet and 0B0011_1111)
-            else -> return REPLACEMENT_CHARACTER
+            else -> REPLACEMENT_CHARACTER
         }
     }
 
@@ -273,6 +273,6 @@ public abstract class AbstractUnicodeAware {
 
         public val SURROGATE_RANGE: IntRange= SURROGATE_START..SURROGATE_STOP
         public val SURROGATE_LOW_RANGE: IntRange = MIN_LOW_SURROGATE..MAX_LOW_SURROGATE
-        public val SURROGATE_HIGH_RANGE: IntRange= SURROGATE_START..SURROGATE_STOP
+        public val SURROGATE_HIGH_RANGE: IntRange= MIN_HIGH_SURROGATE..MAX_HIGH_SURROGATE
     }
 }

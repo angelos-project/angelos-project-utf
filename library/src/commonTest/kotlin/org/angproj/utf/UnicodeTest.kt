@@ -75,4 +75,8 @@ class UnicodeTest {
         val bytes = Unicode.decode(TestInformationStub.chineseLipsum, Validator.basic, FilterPolicy.SECURITY)
         assertContentEquals(TestInformationStub.chineseLipsum.encodeToByteArray(), bytes)
     }
+
+    @Test fun testDebugString() {
+        Unicode.debugString("Test 😀 String 文字")
+    }
 }

@@ -77,6 +77,12 @@ public interface UnicodeAware {
         else -> -1
     }
 
+    public fun debugCharacter(debug: Char, index: Int): Unit = when {
+        isHighSurrogate<Unit>(debug) -> println("Index: $index, Char: '$debug', ${unicodePrint<Unit>(debug.code)} (High Surrogate)")
+        isLowSurrogate<Unit>(debug) -> println("Index: $index, Char: '$debug', ${unicodePrint<Unit>(debug.code)} (Low Surrogate)")
+        else -> println("Index: $index, Char: '$debug', ${unicodePrint<Unit>(debug.code)}")
+    }
+
     public fun loopUtf16(
         str: String,
         action: (it: CodePoint) -> Unit

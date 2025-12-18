@@ -40,17 +40,10 @@ public abstract class AbstractUnicodeAware {
     protected inline fun <reified R : Any> isSurrogate(char: Char): Boolean = isSurrogate<Unit>(char.code)
     protected inline fun <reified R : Any> isHighSurrogate(char: Char): Boolean = char.code in SURROGATE_HIGH_RANGE
     protected inline fun <reified R : Any> isLowSurrogate(char: Char): Boolean = char.code in SURROGATE_LOW_RANGE
-    /*protected inline fun <reified R : Any> isSurrogatePair(
-        high: Char, low: Char
-    ): Boolean = isHighSurrogate<Int>(high) && isLowSurrogate<Int>(low)*/
 
     protected inline fun <reified R : Any> surrogatesToCodePoint(
         high: Char, low: Char
     ): Int = (((high.code - Unicode.SURROGATE_MIN_HIGH.toInt()) shl 10) or (low.code - Unicode.SURROGATE_MIN_LOW.toInt())) + 0x10000
-
-    /*protected inline fun <reified R : Any> hasSurrogatePairAt(
-        seq: CharSequence, index: Int
-    ): Boolean = index in 0..seq.length - 2 && isSurrogatePair<Int>(seq[index], seq[index + 1])*/
 
     protected inline fun <reified R : Any> req(remaining: Int, count: Int, block: () -> R): R {
         check(remaining >= count) { "Buffer overflow, limit reached." } // Should be check (IllegalStateException)
@@ -176,18 +169,6 @@ public abstract class AbstractUnicodeAware {
             else -> 0
         }
     }
-
-    protected inline fun <reified R : Any> innerGlyphSizeWithPassThrough(
-        cp: Int
-    ): Int = unicodeOctetSize<Unit>(glyphWithPassThrough<Unit>(cp))
-
-    protected inline fun <reified R : Any> innerGlyphSizeWithEscape(
-        cp: Int, validator: Validator
-    ): Int = unicodeOctetSize<Unit>(glyphWithEscape<Unit>(cp, validator))
-
-    protected inline fun <reified R : Any> innerGlyphSizeWithSecurity(
-        cp: Int, validator: Validator
-    ): Int = unicodeOctetSize<Unit>(glyphWithSecurity<Unit>(cp, validator))
 
     protected inline fun <reified R : Any> glyphWithPassThrough(
         cp: Int,

@@ -47,25 +47,9 @@ public enum class Unicode(internal val cp: Int): Alphabet<Unicode> {
 
         public fun decode(data: String, policy: Policy): ByteArray {
             var byteSize = 0
-            /*when(policy.filter) {
-                Filter.PASSTHROUGH -> loopUtf16(data) { cp -> byteSize += glyphSizeWithPassThrough(cp) }
-                Filter.ESCAPE -> loopUtf16(data) { cp -> byteSize += glyphSizeWithEscape(cp, policy.validator) }
-                Filter.SECURITY -> loopUtf16(data) { cp -> byteSize += glyphSizeWithSecurity(cp, policy.validator) }
-            }*/
-
             loopUtf16(data) { cp -> byteSize += sizeGlyphByPolicy(cp, policy) }
-
             val utfString = ByteArray(byteSize)
             var byteIdx = 0
-            /*when(policy.filter) {
-                Filter.PASSTHROUGH -> loopUtf16(data) { cp ->
-                    writeGlyphWithPassThroughBlk(cp, byteSize - byteIdx) { utfString[byteIdx++] = it } }
-                Filter.ESCAPE -> loopUtf16(data) { cp ->
-                    writeGlyphWithEscapeBlk(cp, byteSize - byteIdx, policy.validator) { utfString[byteIdx++] = it } }
-                Filter.SECURITY -> loopUtf16(data) { cp ->
-                    writeGlyphWithSecurityBlk(cp, byteSize - byteIdx, policy.validator) { utfString[byteIdx++] = it } }
-            }*/
-
             loopUtf16(data) { cp ->
                 writeGlyphByPolicyBlk(cp, byteSize - byteIdx, policy) { utfString[byteIdx++] = it } }
             return utfString

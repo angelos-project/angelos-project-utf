@@ -94,7 +94,7 @@ class AbstractUnicodeAwareTest : AbstractUnicodeAware() {
         outPos = 0
         val strm2 = Unicode.decode(TestInformationStub.latinLipsumEmoji)
         val outStrm2 = ByteArray(strm2.size)
-        while (inPos < strm1.size) {
+        while (inPos < strm2.size) {
             val cp = octetReadStrm<Unit> { strm2[inPos++] }
             octetWriteStrm<Unit>(cp) { outStrm2[outPos++] = it }
         }
@@ -128,8 +128,8 @@ class AbstractUnicodeAwareTest : AbstractUnicodeAware() {
         val strm1 = Unicode.decode(TestInformationStub.latinLipsum)
         val outStrm1 = ByteArray(strm1.size)
         while (inPos < strm1.size) {
-            val cp = octetReadBlk<Unit>(strm1.lastIndex-inPos) { strm1[inPos++] }
-            octetWriteBlk<Unit>(cp, outStrm1.lastIndex-inPos) { outStrm1[outPos++] = it }
+            val cp = octetReadBlk<Unit>(strm1.size-inPos) { strm1[inPos++] }
+            octetWriteBlk<Unit>(cp, outStrm1.size-outPos) { outStrm1[outPos++] = it }
         }
         assertContentEquals(strm1, outStrm1)
 
@@ -138,8 +138,8 @@ class AbstractUnicodeAwareTest : AbstractUnicodeAware() {
         val strm2 = Unicode.decode(TestInformationStub.latinLipsumEmoji)
         val outStrm2 = ByteArray(strm2.size)
         while (inPos < strm2.size) {
-            val cp = octetReadBlk<Unit>(strm2.lastIndex-inPos) { strm2[inPos++] }
-            octetWriteBlk<Unit>(cp, outStrm2.lastIndex-inPos) { outStrm2[outPos++] = it }
+            val cp = octetReadBlk<Unit>(strm2.size-inPos) { strm2[inPos++] }
+            octetWriteBlk<Unit>(cp, outStrm2.size-outPos) { outStrm2[outPos++] = it }
         }
         assertContentEquals(strm2, outStrm2)
 
@@ -148,8 +148,8 @@ class AbstractUnicodeAwareTest : AbstractUnicodeAware() {
         val strm3 = Unicode.decode(TestInformationStub.greekLipsum)
         val outStrm3 = ByteArray(strm3.size)
         while (inPos < strm3.size) {
-            val cp = octetReadBlk<Unit>(strm3.lastIndex-inPos) { strm3[inPos++] }
-            octetWriteBlk<Unit>(cp, outStrm3.lastIndex-inPos) { outStrm3[outPos++] = it }
+            val cp = octetReadBlk<Unit>(strm3.size-inPos) { strm3[inPos++] }
+            octetWriteBlk<Unit>(cp, outStrm3.size-outPos) { outStrm3[outPos++] = it }
         }
         assertContentEquals(strm3, outStrm3)
 
@@ -158,8 +158,8 @@ class AbstractUnicodeAwareTest : AbstractUnicodeAware() {
         val strm4 = Unicode.decode(TestInformationStub.chineseLipsum)
         val outStrm4 = ByteArray(strm4.size)
         while (inPos < strm4.size) {
-            val cp = octetReadBlk<Unit>(strm4.lastIndex-inPos) { strm4[inPos++] }
-            octetWriteBlk<Unit>(cp, outStrm4.lastIndex-inPos) { outStrm4[outPos++] = it }
+            val cp = octetReadBlk<Unit>(strm4.size-inPos) { strm4[inPos++] }
+            octetWriteBlk<Unit>(cp, outStrm4.size-outPos) { outStrm4[outPos++] = it }
         }
         assertContentEquals(strm4, outStrm4)
     }

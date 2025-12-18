@@ -6,6 +6,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertContains
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertContentEquals
 
 class AbstractUnicodeAwareTest : AbstractUnicodeAware() {
 
@@ -87,6 +88,7 @@ class AbstractUnicodeAwareTest : AbstractUnicodeAware() {
             val cp = octetReadStrm<Unit> { strm1[inPos++] }
             octetWriteStrm<Unit>(cp) { outStrm1[outPos++] = it }
         }
+        assertContentEquals(strm1, outStrm1)
 
         inPos = 0
         outPos = 0
@@ -96,6 +98,7 @@ class AbstractUnicodeAwareTest : AbstractUnicodeAware() {
             val cp = octetReadStrm<Unit> { strm2[inPos++] }
             octetWriteStrm<Unit>(cp) { outStrm2[outPos++] = it }
         }
+        assertContentEquals(strm2, outStrm2)
 
         inPos = 0
         outPos = 0
@@ -105,6 +108,7 @@ class AbstractUnicodeAwareTest : AbstractUnicodeAware() {
             val cp = octetReadStrm<Unit> { strm3[inPos++] }
             octetWriteStrm<Unit>(cp) { outStrm3[outPos++] = it }
         }
+        assertContentEquals(strm3, outStrm3)
 
         inPos = 0
         outPos = 0
@@ -114,6 +118,7 @@ class AbstractUnicodeAwareTest : AbstractUnicodeAware() {
             val cp = octetReadStrm<Unit> { strm4[inPos++] }
             octetWriteStrm<Unit>(cp) { outStrm4[outPos++] = it }
         }
+        assertContentEquals(strm4, outStrm4)
     }
 
     @Test
@@ -126,6 +131,7 @@ class AbstractUnicodeAwareTest : AbstractUnicodeAware() {
             val cp = octetReadBlk<Unit>(strm1.lastIndex-inPos) { strm1[inPos++] }
             octetWriteBlk<Unit>(cp, outStrm1.lastIndex-inPos) { outStrm1[outPos++] = it }
         }
+        assertContentEquals(strm1, outStrm1)
 
         inPos = 0
         outPos = 0
@@ -135,6 +141,7 @@ class AbstractUnicodeAwareTest : AbstractUnicodeAware() {
             val cp = octetReadBlk<Unit>(strm2.lastIndex-inPos) { strm2[inPos++] }
             octetWriteBlk<Unit>(cp, outStrm2.lastIndex-inPos) { outStrm2[outPos++] = it }
         }
+        assertContentEquals(strm2, outStrm2)
 
         inPos = 0
         outPos = 0
@@ -144,6 +151,7 @@ class AbstractUnicodeAwareTest : AbstractUnicodeAware() {
             val cp = octetReadBlk<Unit>(strm3.lastIndex-inPos) { strm3[inPos++] }
             octetWriteBlk<Unit>(cp, outStrm3.lastIndex-inPos) { outStrm3[outPos++] = it }
         }
+        assertContentEquals(strm3, outStrm3)
 
         inPos = 0
         outPos = 0
@@ -153,6 +161,7 @@ class AbstractUnicodeAwareTest : AbstractUnicodeAware() {
             val cp = octetReadBlk<Unit>(strm4.lastIndex-inPos) { strm4[inPos++] }
             octetWriteBlk<Unit>(cp, outStrm4.lastIndex-inPos) { outStrm4[outPos++] = it }
         }
+        assertContentEquals(strm4, outStrm4)
     }
 
     @Test

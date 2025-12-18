@@ -17,11 +17,10 @@ package org.angproj.utf
 
 public object Unicode: UnicodeAware {
 
-    public fun decode(
-        data: String,
-        policy: Policy = Policy.passthrough
-    ): ByteArray {
-        var byteSize: Int = 0
+    public fun decode(data: String): ByteArray = decode(data, Policy.passthrough)
+
+    public fun decode(data: String, policy: Policy): ByteArray {
+        var byteSize = 0
         when(policy.filter) {
             Filter.PASSTHROUGH -> loopUtf16(data) { cp -> byteSize += glyphSizeWithPassThrough(cp) }
             Filter.ESCAPE -> loopUtf16(data) { cp -> byteSize += glyphSizeWithEscape(cp, policy.validator) }

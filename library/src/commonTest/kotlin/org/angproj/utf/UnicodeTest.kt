@@ -6,25 +6,25 @@ import kotlin.test.assertContentEquals
 class UnicodeTest {
     @Test
     fun testDecodePassthroughLatin() {
-        val bytes = Unicode.decode(TestInformationStub.latinLipsum, Policy.passthrough)
+        val bytes = Unicode.decode(TestInformationStub.latinLipsum)
         assertContentEquals(TestInformationStub.latinLipsum.encodeToByteArray(), bytes)
     }
 
     @Test
     fun testDecodePassthroughLatinEmoji() {
-        val bytes = Unicode.decode(TestInformationStub.latinLipsumEmoji, Policy.passthrough)
+        val bytes = Unicode.decode(TestInformationStub.latinLipsumEmoji)
         assertContentEquals(TestInformationStub.latinLipsumEmoji.encodeToByteArray(), bytes)
     }
 
     @Test
     fun testDecodePassthroughGreek() {
-        val bytes = Unicode.decode(TestInformationStub.greekLipsum, Policy.passthrough)
+        val bytes = Unicode.decode(TestInformationStub.greekLipsum)
         assertContentEquals(TestInformationStub.greekLipsum.encodeToByteArray(), bytes)
     }
 
     @Test
     fun testDecodePassthroughChinese() {
-        val bytes = Unicode.decode(TestInformationStub.chineseLipsum, Policy.passthrough)
+        val bytes = Unicode.decode(TestInformationStub.chineseLipsum)
         assertContentEquals(TestInformationStub.chineseLipsum.encodeToByteArray(), bytes)
     }
 

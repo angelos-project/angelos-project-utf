@@ -14,13 +14,36 @@
  */
 package org.angproj.utf.helper
 
-import org.angproj.utf.model.ScriptCode
-import org.angproj.utf.pla.Script
-import org.angproj.utf.pla.byAbbr
+import org.angproj.utf.FileDownloader
+import java.nio.file.Path
+import java.nio.file.Paths
+import kotlin.io.path.exists
 
-object ScriptCodeLoader : DataLoader2<ScriptCode>() {
+object ScriptCodeLoader {
 
-    private val parser = object : UnicodeDataParser {
+    fun resourceFolder(file: String = ""): Path = Paths.get("src/jvmMain/resources/", file).toAbsolutePath()
+
+    fun generateScriptEnum(): String {
+        if(!resourceFolder("iso15924.txt").exists()) {
+            FileDownloader.downloadUnicodeBlocksFile(resourceFolder())
+        }
+
+        val allData = ScriptCodeParser().allData
+        val sortedData = allData.sortedBy { it.script }
+        val sb = StringBuilder()
+        sb.appendLine("package org.angproj.utf.pla")
+        sb.appendLine()
+        sb.appendLine("public enum class Script(public val title: String, public val canonical: String, public val abbr: String) {")
+        sortedData.forEachIndexed { idx, data ->
+            val lineEnding = if (idx != allData.lastIndex) "," else ";"
+            sb.appendLine("    ${data.pva.uppercase()}(\"${data.name.canonical}\", \"${data.pva}\", \"${data.script}\")$lineEnding")
+        }
+        sb.appendLine("    public companion object")
+        sb.appendLine("}")
+        return sb.toString()
+    }
+
+    /*private val parser = object : UnicodeDataParser {
         fun parseLine(line: String): ScriptCode {
             val parts = line.split(';')
             val script = Script.byAbbr(parts[0])
@@ -57,5 +80,5 @@ object ScriptCodeLoader : DataLoader2<ScriptCode>() {
 
     val byVersion: Map<String, List<ScriptCode>> by lazy {
         allData.groupBy { it.version }
-    }
+    }*/
 }

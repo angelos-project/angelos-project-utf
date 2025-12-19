@@ -28,7 +28,7 @@ object MainKt {
     fun main(args: Array<String>) {
         //DerivedGeneralCategoryLoader.generateUnassignedCategories()
         //LanguageBuilder.generateLanguageEnumFile()
-        println(BlockRangeLoader.generateBlockRangeEnum())
+        println(ScriptCodeLoader.generateScriptEnum())
 
         SwingUtilities.invokeLater({
             val window = UtfInfoGenerator {

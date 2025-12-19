@@ -22,15 +22,11 @@ class ScriptTest {
         val parsing = ScriptCodeParser().allData
         val sortedData = parsing.sortedBy { it.script }
         sortedData.forEach { data ->
-            /*val block = Block.valueOf(data.searchName.constant)
+            val script = Script.valueOf(data.pva.uppercase())
 
-            assertEquals(block.title, data.searchName.canonical)
-            assertEquals(block.canonical, data.searchName.klazz)
-            assertEquals(block.abbr, data.searchName.klazz)
-            assertEquals(block.range.first, data.unicodeBounds.first)
-            assertEquals(block.range.last, data.unicodeBounds.second)*/
-            println(data)
-            println(data.name.constant)
+            //assertEquals(script.abbr, data.script)
+            //assertEquals(script.canonical, data.pva)
+            println(data.pva.uppercase())
         }
     }
 }

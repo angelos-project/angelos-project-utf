@@ -14,12 +14,16 @@
  */
 package org.angproj.utf.helper
 
+import org.angproj.utf.FileDownloader
 import org.angproj.utf.model.BlockRange
 import org.angproj.utf.model.SearchName
+import java.nio.file.Path
+import java.nio.file.Paths
+import kotlin.io.path.exists
 
-object BlockRangeLoader : DataLoader<BlockRange>() {
+object BlockRangeLoader /*: DataLoader<BlockRange>()*/ {
 
-    private val parser = object : UnicodeDataParser {
+    /*private val parser = object : UnicodeDataParser {
         fun parseLine(line: String): BlockRange {
             // 0000..007F; Basic Latin
             val parts = line.split(';')
@@ -37,9 +41,16 @@ object BlockRangeLoader : DataLoader<BlockRange>() {
 
     override val allData: List<BlockRange> by lazy {
         loadData("/Blocks.txt")
-    }
+    }*/
+
+    fun resourceFolder(file: String = ""): Path = Paths.get("src/jvmMain/resources/", file).toAbsolutePath()
 
     fun generateBlockRangeEnum(): String {
+        if(!resourceFolder("Blocks.txt").exists()) {
+            FileDownloader.downloadUnicodeBlocksFile(resourceFolder())
+        }
+
+        val allData = BlockRangeParser().allData
         val sortedData = allData.sortedBy { it.searchName.canonical }
         val sb = StringBuilder()
         sb.appendLine("package org.angproj.utf.model")
@@ -55,6 +66,6 @@ object BlockRangeLoader : DataLoader<BlockRange>() {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        allData.forEach { println(it) }
+        //allData.forEach { println(it) }
     }
 }

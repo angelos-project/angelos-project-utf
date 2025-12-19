@@ -18,6 +18,7 @@ kotlin {
     sourceSets {
         jvmMain.dependencies {
             api(project(":library"))
+            api(project(":shared"))
         }
         jvmTest.dependencies {
             implementation(libs.kotlin.test)

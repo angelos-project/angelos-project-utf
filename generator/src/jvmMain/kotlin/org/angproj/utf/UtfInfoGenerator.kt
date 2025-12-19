@@ -46,8 +46,8 @@ class UtfInfoGenerator(onPress: UtfInfoGenerator.() -> Unit = {
             }
             menu("View") {
                 item("Show Unicode Blocks") {
-                    val blocks = BlockRangeLoader.allData
-                    BlockViewerDialog(this@UtfInfoGenerator, blocks).isVisible = true
+                    //val blocks = BlockRangeLoader.allData
+                    //BlockViewerDialog(this@UtfInfoGenerator, blocks).isVisible = true
                 }
                 item("Show Unicode Scripts") {
                     val script = ScriptLoader.allScripts

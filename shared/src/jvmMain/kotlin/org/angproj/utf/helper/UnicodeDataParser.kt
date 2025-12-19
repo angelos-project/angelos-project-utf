@@ -16,11 +16,11 @@ package org.angproj.utf.helper
 
 import java.io.InputStream
 
-interface UnicodeDataParser {
-    fun resourceStream(resourcePath: String): InputStream = UnicodeDataParser::class.java.getResourceAsStream(resourcePath)
+public interface UnicodeDataParser {
+    public fun resourceStream(resourcePath: String): InputStream = UnicodeDataParser::class.java.getResourceAsStream(resourcePath)
             ?: throw IllegalArgumentException("Resource not found: $resourcePath")
 
-    fun <E>lineIterator(stream: InputStream, action: (String) -> E): List<E> {
+    public fun <E>lineIterator(stream: InputStream, action: (String) -> E): List<E> {
         val results = mutableListOf<E>()
         stream.bufferedReader().lineSequence().forEach { line ->
             val trimmed = line.trim()
@@ -30,7 +30,7 @@ interface UnicodeDataParser {
         return results
     }
 
-    fun <E>splitByThree(line: String, action: (Triple<String, String, String>) -> E): E {
+    public fun <E>splitByThree(line: String, action: (Triple<String, String, String>) -> E): E {
         val parts =  line.split(";")
         val otherParts = parts.get(1).split("#")
         val triple = Triple(
@@ -41,7 +41,7 @@ interface UnicodeDataParser {
         return action(triple)
     }
 
-    fun rangeBounds(rangePart: String): Pair<Int, Int> {
+    public fun rangeBounds(rangePart: String): Pair<Int, Int> {
         val rangeBounds = rangePart.split("..")
         val start = rangeBounds[0].toInt(16)
         val end = if (rangeBounds.size == 2) rangeBounds[1].toInt(16) else -1

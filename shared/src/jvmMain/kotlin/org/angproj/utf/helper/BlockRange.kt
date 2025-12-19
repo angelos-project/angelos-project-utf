@@ -14,7 +14,7 @@
  */
 package org.angproj.utf.helper
 
-data class BlockRange(
-    val unicodeBounds: Pair<Int, Int>,
-    val searchName: SearchName,
+public data class BlockRange(
+    public val unicodeBounds: Pair<Int, Int>,
+    public val searchName: SearchName,
 )

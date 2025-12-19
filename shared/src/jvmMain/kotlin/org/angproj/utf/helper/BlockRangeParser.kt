@@ -15,7 +15,7 @@
 package org.angproj.utf.helper
 
 
-class BlockRangeParser : DataLoader<BlockRange>() {
+public class BlockRangeParser : DataLoader<BlockRange>() {
 
     private val parser = object : UnicodeDataParser {
         fun parseLine(line: String): BlockRange {

@@ -14,23 +14,23 @@
  */
 package org.angproj.utf.helper
 
-data class SearchName(
+public data class SearchName(
     val canonical: String
 ) {
     val slug: String = slugify(canonical)
     val klazz: String = klazzify(canonical)
     val constant: String = constantify(canonical)
 
-    companion object {
-        fun slugify(name: String): String {
+    public companion object {
+        public fun slugify(name: String): String {
             return name.lowercase().replace(" ", "_").replace("-", "_")
         }
 
-        fun klazzify(name: String): String {
+        public fun klazzify(name: String): String {
             return name.replace(" ", "_").replace("-", "_")
         }
 
-        fun constantify(name: String): String {
+        public fun constantify(name: String): String {
             return name.uppercase().replace(" ", "_").replace("-", "_")
         }
     }

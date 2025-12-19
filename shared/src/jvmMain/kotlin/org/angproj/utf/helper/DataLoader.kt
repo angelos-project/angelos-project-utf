@@ -15,7 +15,7 @@
 package org.angproj.utf.helper
 
 
-abstract class DataLoader<E> {
-    abstract fun loadData(resourcePath: String): List<E>
-    abstract val allData: List<E>
+public abstract class DataLoader<E> {
+    public abstract fun loadData(resourcePath: String): List<E>
+    public abstract val allData: List<E>
 }

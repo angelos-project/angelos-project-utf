@@ -9,7 +9,7 @@ class BlockTest {
 
     @Test
     fun testBlockEnum() {
-        FileDownloader.downloadUnicodeBlocksFile()
+        //FileDownloader.downloadUnicodeBlocksFile()
 
         val parsing = BlockRangeParser().allData
         val sortedData = parsing.sortedBy { it.searchName.canonical }

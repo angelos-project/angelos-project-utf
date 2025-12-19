@@ -32,6 +32,8 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
-include(":library")
-include(":jazzer")
+include(":shared")
 include(":generator")
+include(":jazzer")
+include(":library")
+

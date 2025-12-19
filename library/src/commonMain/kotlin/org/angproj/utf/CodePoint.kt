@@ -27,11 +27,29 @@ public typealias CodePointPredicate = (CodePoint) -> Boolean
  * @param value The integer value representing the code point.
  */
 @JvmInline
-public value class CodePoint(public val value: Int): UnicodeAware {
+public value class CodePoint(public val value: Int) {
 
+    /**
+     * Byte size of octet sequence. Will incorrectly report the size for surrogates.
+     * */
+    public fun octetSize(): Int = withUnicode { octetSize(value) }
+
+    /**
+     * Validity of code point. Will incorrectly validate unassigned values.
+     * Code point U+FFFD REPLACEMENT CHARACTER always validates false.
+     * */
+    public fun isValid(): Boolean = withUnicode { isValid(value) }
+
+    /**
+     * Null code point or not.
+     * */
     public fun isNull(): Boolean = this == nullCodePoint
 
     public companion object {
+
+        /**
+         * Placeholder for a null code point object.
+         * */
         public val nullCodePoint: CodePoint = CodePoint(Int.MIN_VALUE)
     }
 }
@@ -49,6 +67,3 @@ public fun Int.toCodePoint(): CodePoint = CodePoint(this)
  * @return The code point corresponding to the given character.
  */
 public fun Char.toCodePoint(): CodePoint = CodePoint(this.code)
-
-
-public fun CodePoint.octets(): Int = octetSize(value)

@@ -149,4 +149,12 @@ public enum class Ascii(internal val cp: Int) : Alphabet<Ascii> {
     override fun toInt(): Int = cp
 
     override fun toCodePoint(): CodePoint = cp.toCodePoint()
+
+    public companion object {
+        private val ctrl = 0x00..0x1F
+        private val printable = 0x20..0x7E
+
+        public fun isCtrl(cp: Int): Boolean = cp in ctrl || cp == 0x7F
+        public fun isPrintable(cp: Int): Boolean = cp in printable
+    }
 }

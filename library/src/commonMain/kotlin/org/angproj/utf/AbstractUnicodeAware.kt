@@ -206,9 +206,6 @@ public abstract class AbstractUnicodeAware {
         Filter.SECURITY -> unicodeOctetSize<Unit>(glyphWithSecurity<Unit>(cp, policy.validator))
     }
 
-    protected inline fun <reified R : Any> isGlyphAsciiCtrl(cp: Int): Boolean = cp in 0x00..0x1F || cp == 0x7F
-    protected inline fun <reified R : Any> isGlyphAsciiPrintable(cp: Int): Boolean = cp in 0x20..0x7e
-
     /**
      * 0..15 -> [0-9a-f]
      * Radix agnostic

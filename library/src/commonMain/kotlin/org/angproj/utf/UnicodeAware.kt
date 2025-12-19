@@ -47,16 +47,9 @@ public interface UnicodeAware {
         }
     }
 
-    public fun isValid(value: Int): Boolean = isUtf8<Unit>(value)
+    public fun isValid(value: Int): Boolean = escapeNonUtf8<Unit>(value) != Unicode.UTF_REPLACEMENT.toInt()
 
-    public fun octetSize(value: Int): Int = when (value) {
-        in AbstractUnicodeAware.SURROGATE_RANGE -> -1
-        in AbstractUnicodeAware.RANGE_SIZE_1 -> 1
-        in AbstractUnicodeAware.RANGE_SIZE_2 -> 2
-        in AbstractUnicodeAware.RANGE_SIZE_3 -> 3
-        in AbstractUnicodeAware.RANGE_SIZE_4 -> 4
-        else -> -1
-    }
+    public fun octetSize(value: Int): Int = unicodeOctetSize<Unit>(value)
 
     public fun debugCharacter(debug: Char, index: Int): Unit = when {
         isHighSurrogate<Unit>(debug) -> println("Index: $index, Char: '$debug', ${unicodePrint<Unit>(debug.code)} (High Surrogate)")

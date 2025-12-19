@@ -11,7 +11,7 @@
  *
  * Contributors:
  *      Kristoffer Paulsson - initial implementation
- */    
+ */
 package org.angproj.utf.pla
 
 public enum class Block(public val title: String, public val canonical: String, public val abbr: String, public val range: IntRange) {

@@ -52,7 +52,7 @@ Elba;226;Elbasan;elbasan;Elbasan;7.0;2014-11-15
 Elym;128;Elymaic;élymaïque;Elymaic;12.0;2018-08-26
 Ethi;430;Ethiopic (Geʻez);éthiopien (geʻez, guèze);Ethiopic;3.0;2004-10-25
 Gara;164;Garay;garay;Garay;16.0;2023-09-12
-Geok;241;Khutsuri (Asomtavruli and Nuskhuri);khoutsouri (assomtavrouli et nouskhouri);Georgian;1.1;2012-10-16
+Geok;241;Khutsuri (Asomtavruli and Nuskhuri);khoutsouri (assomtavrouli et nouskhouri);Khutsuri;1.1;2012-10-16
 Geor;240;Georgian (Mkhedruli and Mtavruli);géorgien (mkhédrouli et mtavrouli);Georgian;1.1;2016-12-05
 Glag;225;Glagolitic;glagolitique;Glagolitic;4.1;2006-06-21
 Gong;312;Gunjala Gondi;gunjala gondî;Gunjala_Gondi;11.0;2016-12-05

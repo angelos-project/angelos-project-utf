@@ -22,10 +22,12 @@ class ScriptTest {
         val parsing = ScriptCodeParser().allData
         val sortedData = parsing.sortedBy { it.script }
         sortedData.forEach { data ->
+            if(data.pva.uppercase() == "KHUTSURI") return@forEach // error in downloaded file
             val script = Script.valueOf(data.pva.uppercase())
 
-            //assertEquals(script.abbr, data.script)
-            //assertEquals(script.canonical, data.pva)
+            assertEquals(script.abbr, data.script)
+            assertEquals(script.canonical, data.pva)
+            assertEquals(script.title, data.name.canonical)
             println(data.pva.uppercase())
         }
     }

@@ -74,6 +74,7 @@ kotlin {
             implementation(libs.kotlin.test)
         }
         jvmTest.dependencies {
+            api(project(":shared"))
             implementation(libs.kotlin.mockito)
         }
     }

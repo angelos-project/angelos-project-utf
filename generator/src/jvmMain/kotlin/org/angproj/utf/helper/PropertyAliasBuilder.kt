@@ -19,7 +19,7 @@ import org.angproj.utf.model.SearchName
 import java.io.File
 import java.io.InputStream
 
-class PropertyAliasBuilder(val pva: PropertyValueAlias) : DataLoader<Pair<SearchName, String>>() {
+class PropertyAliasBuilder(val pva: PropertyValueAlias) : DataLoader2<Pair<SearchName, String>>() {
     private fun resourceStream(resourcePath: String): InputStream = ScriptLoader::class.java.getResourceAsStream(resourcePath)
         ?: throw IllegalArgumentException("Resource not found: $resourcePath")
 

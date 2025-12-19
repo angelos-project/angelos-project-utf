@@ -18,10 +18,9 @@ import org.angproj.utf.fileHeader
 import java.io.PrintWriter
 import java.nio.file.Files
 import java.nio.file.Paths
-import kotlin.io.path.Path
 
 
-object DerivedGeneralCategoryLoader : DataLoader<Triple<String, String, String>>() {
+object DerivedGeneralCategoryLoader : DataLoader2<Triple<String, String, String>>() {
 
     private val parser = object : UnicodeDataParser {
         fun parseLine(line: String): Triple<String, String, String> {

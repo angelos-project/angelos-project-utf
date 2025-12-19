@@ -18,7 +18,7 @@ import org.angproj.utf.model.ScriptCode
 import org.angproj.utf.pla.Script
 import org.angproj.utf.pla.byAbbr
 
-object ScriptCodeLoader : DataLoader<ScriptCode>() {
+object ScriptCodeLoader : DataLoader2<ScriptCode>() {
 
     private val parser = object : UnicodeDataParser {
         fun parseLine(line: String): ScriptCode {

@@ -20,7 +20,7 @@ import java.io.File
 import java.io.InputStream
 import java.io.PrintWriter
 
-object PropertyBuilder : DataLoader<Pair<SearchName, String>>() {
+object PropertyBuilder : DataLoader2<Pair<SearchName, String>>() {
     private fun resourceStream(resourcePath: String): InputStream = ScriptLoader::class.java.getResourceAsStream(resourcePath)
         ?: throw IllegalArgumentException("Resource not found: $resourcePath")
 

@@ -2,14 +2,21 @@ package org.angproj.utf.pla
 
 import org.angproj.utf.FileDownloader
 import org.angproj.utf.helper.BlockRangeParser
+import java.nio.file.Path
+import java.nio.file.Paths
+import kotlin.io.path.exists
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class BlockTest {
 
+    fun resourceFolder(file: String = ""): Path = Paths.get("src/jvmTest/resources/", file).toAbsolutePath()
+
     @Test
     fun testBlockEnum() {
-        //FileDownloader.downloadUnicodeBlocksFile()
+        if(!resourceFolder("Blocks.txt").exists()) {
+            FileDownloader.downloadUnicodeBlocksFile(resourceFolder())
+        }
 
         val parsing = BlockRangeParser().allData
         val sortedData = parsing.sortedBy { it.searchName.canonical }

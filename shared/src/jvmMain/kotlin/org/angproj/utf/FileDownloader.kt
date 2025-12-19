@@ -29,13 +29,10 @@ object FileDownloader {
 
     val version = UnicodeVersion.VERSION_17.version
 
-    fun resourceFolder(): Path = Paths.get("src/jvmTest/resources/").toAbsolutePath()
-
-    fun downloadUnicodeBlocksFile() {
+    fun downloadUnicodeBlocksFile(resourcePath: Path) {
         val fileUrl = "https://www.unicode.org/Public/${version}/ucd/Blocks.txt" // args[0]
-        val resourcesPath = resourceFolder()
 
-        downloadFile(fileUrl, resourcesPath.toString())
+        downloadFile(fileUrl, resourcePath.toString())
     }
 
     @Throws(IOException::class)

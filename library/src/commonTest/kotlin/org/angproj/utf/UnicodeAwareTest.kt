@@ -2,8 +2,30 @@ package org.angproj.utf
 
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
+import kotlin.test.assertEquals
 
 class UnicodeAwareTest : UnicodeAware {
+
+    @Test
+    fun testGlyphJumping() {
+        listOf(
+            Unicode.decode(TestInformationStub.latinLipsum),
+            Unicode.decode(TestInformationStub.latinLipsumEmoji),
+            Unicode.decode(TestInformationStub.greekLipsum),
+            Unicode.decode(TestInformationStub.chineseLipsum)
+        ).forEach { strm ->
+            var pos = 0
+
+            while(pos < strm.size) {
+                if(isGlyphStart(strm[pos])) {
+                    pos += hasGlyphSize(strm[pos])
+                } else {
+                    break
+                }
+            }
+            assertEquals(pos, strm.size)
+        }
+    }
 
     @Test
     fun testFilterGlyphPolicy() {

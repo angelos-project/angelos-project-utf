@@ -39,7 +39,7 @@ object FileDownloader {
     }
 
     @Throws(IOException::class)
-    fun downloadFile(fileUrl: String, saveDir: String?): String {
+    fun downloadFile(fileUrl: String, saveDir: String): String {
         val url = URL(fileUrl)
         val httpConn = url.openConnection() as HttpURLConnection
         val responseCode = httpConn.getResponseCode()

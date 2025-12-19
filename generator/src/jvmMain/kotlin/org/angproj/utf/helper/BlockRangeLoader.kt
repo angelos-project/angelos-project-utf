@@ -15,33 +15,11 @@
 package org.angproj.utf.helper
 
 import org.angproj.utf.FileDownloader
-import org.angproj.utf.model.BlockRange
-import org.angproj.utf.model.SearchName
 import java.nio.file.Path
 import java.nio.file.Paths
 import kotlin.io.path.exists
 
-object BlockRangeLoader /*: DataLoader<BlockRange>()*/ {
-
-    /*private val parser = object : UnicodeDataParser {
-        fun parseLine(line: String): BlockRange {
-            // 0000..007F; Basic Latin
-            val parts = line.split(';')
-            return BlockRange(rangeBounds(parts.get(0)), SearchName(parts.get(1).trim()))
-        }
-    }
-
-    override fun loadData(resourcePath: String): List<BlockRange> {
-        with(parser) {
-            return lineIterator(resourceStream(resourcePath)) { line ->
-                parseLine(line)
-            }
-        }
-    }
-
-    override val allData: List<BlockRange> by lazy {
-        loadData("/Blocks.txt")
-    }*/
+object BlockRangeLoader {
 
     fun resourceFolder(file: String = ""): Path = Paths.get("src/jvmMain/resources/", file).toAbsolutePath()
 
@@ -53,9 +31,9 @@ object BlockRangeLoader /*: DataLoader<BlockRange>()*/ {
         val allData = BlockRangeParser().allData
         val sortedData = allData.sortedBy { it.searchName.canonical }
         val sb = StringBuilder()
-        sb.appendLine("package org.angproj.utf.model")
+        sb.appendLine("package org.angproj.utf.pla")
         sb.appendLine()
-        sb.appendLine("enum class BlockRange(val unicodeBounds: Pair<Int, Int>) {")
+        sb.appendLine("enum class Block(public val title: String, public val canonical: String, public val abbr: String, public val range: IntRange) {")
         sortedData.forEachIndexed { idx, data ->
             val lineEnding = if (idx != allData.lastIndex) "," else ";"
             sb.appendLine("    ${data.searchName.constant}(\"${data.searchName.canonical}\", \"${data.searchName.klazz}\", \"${data.searchName.klazz}\", 0x${data.unicodeBounds.first.toString(16).uppercase()}..0x${data.unicodeBounds.second.toString(16).uppercase()})$lineEnding")

@@ -25,7 +25,7 @@ public class ScriptCodeParser : DataLoader<ScriptCode>() {
             return ScriptCode(
                 script = script,
                 number = parts[1].toInt(),
-                name = SearchName(parts[2]), // Skip french name parts[3]
+                name = SearchName(parts[2].split(',')[0].split('(')[0].trim().replace("’", "")), // Skip french name parts[3]
                 pva = parts[4],
                 version = parts[5],
                 date = parts[6]

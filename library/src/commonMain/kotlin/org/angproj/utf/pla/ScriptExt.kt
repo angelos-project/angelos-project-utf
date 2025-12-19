@@ -14,4 +14,4 @@
  */    
 package org.angproj.utf.pla
 
-public fun Script.Companion.byAbbr(abbr: String): Script = Script.entries.find { it.abbr == abbr } ?: Script.UNKNOWN
+public fun Script.Companion.byAbbr(abbr: String): Script = Script.entries.find { it.abbr == abbr } ?: Script.CODE_FOR_UNCODED_SCRIPT

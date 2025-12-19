@@ -33,10 +33,10 @@ object ScriptCodeLoader {
         val sb = StringBuilder()
         sb.appendLine("package org.angproj.utf.pla")
         sb.appendLine()
-        sb.appendLine("public enum class Script(public val title: String, public val canonical: String, public val abbr: String) {")
+        sb.appendLine("public enum class Script(public val canonical: String, public val abbr: String) {")
         sortedData.forEachIndexed { idx, data ->
             val lineEnding = if (idx != allData.lastIndex) "," else ";"
-            sb.appendLine("    ${data.pva.uppercase()}(\"${data.name.canonical}\", \"${data.pva}\", \"${data.script}\")$lineEnding")
+            sb.appendLine("    ${data.name.constant}(\"${data.pva}\", \"${data.script}\")$lineEnding")
         }
         sb.appendLine("    public companion object")
         sb.appendLine("}")

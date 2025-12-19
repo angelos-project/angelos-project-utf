@@ -41,6 +41,12 @@ public object FileDownloader {
         downloadFile(fileUrl, resourcePath.toString())
     }
 
+    public fun downloadUnicodeIso6393File(resourcePath: Path) {
+        val fileUrl = "https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab"
+
+        downloadFile(fileUrl, resourcePath.toString())
+    }
+
     @Throws(IOException::class)
     public fun downloadFile(fileUrl: String, saveDir: String): String {
         val url = URL(fileUrl)

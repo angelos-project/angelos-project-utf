@@ -16,7 +16,7 @@ package org.angproj.utf.helper
 
 object LanguageBuilder {
 
-    /*fun languageForEach(action: (Language) -> Unit) {
+    fun languageForEach(action: (Language) -> Unit) {
         Language.entries.forEach { action(it) }
     }
 
@@ -26,5 +26,5 @@ object LanguageBuilder {
             //println("${it.name}(\"${it.lang.name}\", \"${it.lang.long}\"),")
 
         }
-    }*/
+    }
 }

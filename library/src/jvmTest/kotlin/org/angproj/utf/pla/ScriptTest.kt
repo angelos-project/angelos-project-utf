@@ -30,6 +30,7 @@ class ScriptTest {
             assertEquals(block.range.first, data.unicodeBounds.first)
             assertEquals(block.range.last, data.unicodeBounds.second)*/
             println(data)
+            println(data.name.constant)
         }
     }
 }

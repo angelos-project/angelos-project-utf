@@ -21,11 +21,12 @@ public class ScriptCodeParser : DataLoader<ScriptCode>() {
         fun parseLine(line: String): ScriptCode {
             val parts = line.split(';')
             val script = parts[0]
-            //if(script.canonical != parts[4]) { println("Unknown script code: ${parts} - ${script}") }
+            if(parts[4].isEmpty() || script.isEmpty()) { return ScriptCode("", 0, SearchName(""), "", "", "") }
             return ScriptCode(
                 script = script,
                 number = parts[1].toInt(),
-                name = parts[2], // Skip french name parts[3]
+                name = SearchName(parts[2]), // Skip french name parts[3]
+                pva = parts[4],
                 version = parts[5],
                 date = parts[6]
             )
@@ -41,6 +42,6 @@ public class ScriptCodeParser : DataLoader<ScriptCode>() {
     }
 
     override val allData : List<ScriptCode> by lazy {
-        loadData("/iso15924.txt")
+        loadData("/iso15924.txt").filter { it.script.isNotBlank() }
     }
 }

@@ -18,7 +18,8 @@ package org.angproj.utf.helper
 public data class ScriptCode(
     val script: String,
     val number: Int,
-    val name: String,
+    val name: SearchName,
+    val pva: String,
     val version: String,
     val date: String
 )

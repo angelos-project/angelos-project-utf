@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2024 by Kristoffer Paulsson <kristoffer.paulsson@talenten.se>.
+ * Copyright (c) 2024-2025 by Kristoffer Paulsson <kristoffer.paulsson@talenten.se>.
  *
  * This software is available under the terms of the MIT license. Parts are licensed
  * under different terms if stated. The legal terms are attached to the LICENSE file
@@ -151,10 +151,10 @@ public enum class Ascii(internal val cp: Int) : Alphabet<Ascii> {
     override fun toCodePoint(): CodePoint = cp.toCodePoint()
 
     public companion object {
-        private val ctrl = 0x00..0x1F
-        private val printable = 0x20..0x7E
+        private val ctrl = CTRL_NUL.cp..CTRL_US.cp //0x00..0x1F
+        private val printable = PRNT_SPACE.cp..PRNT_TILDE.cp // 0x20..0x7E
 
-        public fun isCtrl(cp: Int): Boolean = cp in ctrl || cp == 0x7F
+        public fun isCtrl(cp: Int): Boolean = cp in ctrl || cp == CTRL_DEL.cp
         public fun isPrintable(cp: Int): Boolean = cp in printable
     }
 }

@@ -125,7 +125,3 @@ public object UnicodeAwareContext : UnicodeAware
 
 public inline fun <reified T> withUnicode(block: UnicodeAwareContext.() -> T): T = UnicodeAwareContext.block()
 
-public inline fun <reified T> withUnicode(
-    array: ByteArray, block: UnicodeAwareContext.(array: ByteArray) -> T
-): T = UnicodeAwareContext.block(array)
-

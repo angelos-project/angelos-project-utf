@@ -25,8 +25,14 @@ class CodePointTest {
     }
 
     @Test
-    fun testOctets() {
+    fun testOctetSize() {
         val cp = 0x1F600.toCodePoint() // 😀
         assertTrue { cp.octetSize() == 4 }
+    }
+
+    @Test
+    fun testIsValid() {
+        val cp = 0x1F600.toCodePoint() // 😀
+        assertTrue { cp.isValid() }
     }
 }

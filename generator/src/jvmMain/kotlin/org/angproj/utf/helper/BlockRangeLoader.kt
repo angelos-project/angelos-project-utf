@@ -33,11 +33,12 @@ object BlockRangeLoader {
         val sb = StringBuilder()
         sb.appendLine("package org.angproj.utf.pla")
         sb.appendLine()
-        sb.appendLine("enum class Block(public val title: String, public val canonical: String, public val abbr: String, public val range: IntRange) {")
+        sb.appendLine("public enum class Block(public val title: String, public val canonical: String, public val abbr: String, public val range: IntRange) {")
         sortedData.forEachIndexed { idx, data ->
             val lineEnding = if (idx != allData.lastIndex) "," else ";"
             sb.appendLine("    ${data.searchName.constant}(\"${data.searchName.canonical}\", \"${data.searchName.klazz}\", \"${data.searchName.klazz}\", 0x${data.unicodeBounds.first.toString(16).uppercase()}..0x${data.unicodeBounds.second.toString(16).uppercase()})$lineEnding")
         }
+        sb.appendLine("    public companion object")
         sb.appendLine("}")
         return sb.toString()
     }

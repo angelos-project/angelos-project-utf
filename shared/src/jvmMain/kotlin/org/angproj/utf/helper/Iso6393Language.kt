@@ -22,5 +22,5 @@ public data class Iso6393Language(
     public val scope: String,
     public val type: String,
     public val refName: String,
-    public val comment: String
+    //public val comment: String
 )

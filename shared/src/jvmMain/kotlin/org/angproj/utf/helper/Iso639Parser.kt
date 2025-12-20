@@ -28,7 +28,7 @@ public class Iso639Parser : DataLoader<Iso6393Language>() {
                 parts[4],  // Scope
                 parts[5],  // Language_Type
                 parts[6],  // Ref_Name
-                parts[7] // Comment
+                //parts[7] // Comment
             )
         }
     }

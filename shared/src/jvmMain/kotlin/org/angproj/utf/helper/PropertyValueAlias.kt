@@ -14,8 +14,7 @@
  */    
 package org.angproj.utf.helper
 
-enum class PropertyValueAlias(val canonical: String, val alias: String) {
-    //("", ""),
+public enum class PropertyValueAlias(public val canonical: String, public val alias: String) {
     ASCII_HEX_DIGIT("ASCII_Hex_Digit", "AHex"),
     AGE("Age", "age"),
     ALPHABETIC("Alphabetic", "Alpha"),

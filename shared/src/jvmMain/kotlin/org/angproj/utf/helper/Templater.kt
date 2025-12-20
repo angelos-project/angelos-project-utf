@@ -18,7 +18,7 @@ import java.lang.System
 import java.io.PrintWriter
 import java.time.Year
 
-fun copyrightNotice(pw: PrintWriter): String =  """/**
+public fun copyrightNotice(pw: PrintWriter): String =  """/**
  * Copyright (c) 2024-${currentYear()} by Kristoffer Paulsson <kristoffer.paulsson@talenten.se>.
  *
  * This software is available under the terms of the MIT license. Parts are licensed
@@ -34,11 +34,11 @@ fun copyrightNotice(pw: PrintWriter): String =  """/**
  */    
 """.trimIndent()
 
-fun currentYear(): Int = System.getProperty("year")?.toIntOrNull() ?: Year.now().value
+public fun currentYear(): Int = System.getProperty("year")?.toIntOrNull() ?: Year.now().value
 
-fun packageName(pkgName: String): String = "package org.angproj.utf.$pkgName"
+public fun packageName(pkgName: String): String = "package org.angproj.utf.$pkgName"
 
-fun fileHeader(pw: PrintWriter, pkgName: String) {
+public fun fileHeader(pw: PrintWriter, pkgName: String) {
     pw.println(copyrightNotice(pw))
     pw.println(packageName(pkgName))
     pw.println()

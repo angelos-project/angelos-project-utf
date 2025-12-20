@@ -14,19 +14,23 @@
  */
 package org.angproj.utf.helper
 
+import org.angproj.utf.FileDownloader
 import java.io.File
 import java.io.InputStream
 import java.io.PrintWriter
+import java.nio.file.Path
+import java.nio.file.Paths
+import kotlin.io.path.exists
 
-private object PLAParser : DataLoader<Pair<SearchName, String>>() {
-    private fun resourceStream(resourcePath: String): InputStream = PLAParser::class.java.getResourceAsStream(resourcePath)
+private object PLAParserKt : DataLoader<Pair<SearchName, String>>() {
+    private fun resourceStream(resourcePath: String): InputStream = PLAParserKt::class.java.getResourceAsStream(resourcePath)
         ?: throw IllegalArgumentException("Resource not found: $resourcePath")
 
     private fun <E>lineIterator(stream: InputStream, action: (String) -> E): List<E> {
         val results = mutableListOf<E>()
         stream.bufferedReader().lineSequence().forEach { line ->
             val trimmed = line.trim()
-            if (!(trimmed.startsWith("#") && trimmed.endsWith(")"))) return@forEach
+            if (!(trimmed.startsWith("#") && trimmed.endsWith(")")) || trimmed.isBlank()) return@forEach
             results.add(action(trimmed))
         }
         return results
@@ -46,9 +50,17 @@ private object PLAParser : DataLoader<Pair<SearchName, String>>() {
         loadData("/PropertyValueAliases.txt")
     }
 
+    fun resourceFolder(file: String = ""): Path = Paths.get("src/jvmMain/resources/", file).toAbsolutePath()
+
+
     fun printPropertyValueAliasEnum(pw: PrintWriter) {
-        pw.println("enum class PropertyValueAlias(val canonical: String, val alias: String) {")
+        if(!resourceFolder("PropertyValueAliases.txt").exists()) {
+            FileDownloader.downloadUnicodePLAFile(resourceFolder())
+        }
+
+        pw.println("public enum class PropertyValueAlias(public val canonical: String, public val alias: String) {")
         allData.forEachIndexed { idx, data ->
+            if(data.first.canonical.isBlank()) return@forEachIndexed
             if(idx != allData.lastIndex) {
                 pw.println("    ${data.first.constant}(\"${data.first.canonical}\", \"${data.second}\"),")
             } else {
@@ -60,7 +72,9 @@ private object PLAParser : DataLoader<Pair<SearchName, String>>() {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        File("generator/src/jvmMain/kotlin/org/angproj/utf/helper/PropertyValueAlias.kt").printWriter().use { out ->
+        val saveFile = "src/jvmMain/kotlin/org/angproj/utf/helper/PropertyValueAlias.kt"
+        File(saveFile).createNewFile()
+        File(saveFile).printWriter().use { out ->
             fileHeader(out, "helper")
             printPropertyValueAliasEnum(out)
         }

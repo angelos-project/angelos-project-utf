@@ -15,7 +15,7 @@ class PLATest {
     @Test
     fun testGeneralCategory() {
         if(!resourceFolder("PropertyValueAliases.txt").exists()) {
-            FileDownloader.downloadUnicodeBlocksFile(resourceFolder())
+            FileDownloader.downloadUnicodePLAFile(resourceFolder())
         }
 
         /*val parsing = BlockRangeParser().allData

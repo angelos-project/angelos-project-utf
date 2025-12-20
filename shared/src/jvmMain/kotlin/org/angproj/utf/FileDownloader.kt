@@ -47,6 +47,12 @@ public object FileDownloader {
         downloadFile(fileUrl, resourcePath.toString())
     }
 
+    public fun downloadUnicodePLAFile(resourcePath: Path) {
+        val fileUrl = "https://www.unicode.org/Public/${version}/ucd/PropertyValueAliases.txt"
+
+        downloadFile(fileUrl, resourcePath.toString())
+    }
+
     @Throws(IOException::class)
     public fun downloadFile(fileUrl: String, saveDir: String): String {
         val url = URL(fileUrl)

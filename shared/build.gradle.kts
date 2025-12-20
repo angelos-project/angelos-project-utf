@@ -13,7 +13,7 @@ kotlin {
 
     sourceSets {
         jvmMain.dependencies {
-            implementation("com.ibm.icu.text:normalizer:1.3.1")
+            implementation(libs.kotlin.normalizer)
         }
         jvmTest.dependencies {
             implementation(libs.kotlin.test)

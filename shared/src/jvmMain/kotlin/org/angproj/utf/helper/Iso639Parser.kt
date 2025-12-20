@@ -42,7 +42,7 @@ public class Iso639Parser : DataLoader<Iso6393Language>() {
     }
 
     override val allData: List<Iso6393Language> by lazy {
-        loadData("/iso-639-3.ta")
+        loadData("/iso-639-3.tab")
     }
 }
 

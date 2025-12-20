@@ -60,7 +60,7 @@ private object PLAParserKt : DataLoader<Pair<SearchName, String>>() {
 
         pw.println("public enum class PropertyValueAlias(public val canonical: String, public val alias: String) {")
         allData.forEachIndexed { idx, data ->
-            if(data.first.canonical.isBlank()) return@forEachIndexed
+            if(data.first.constant.isBlank()) return@forEachIndexed
             if(idx != allData.lastIndex) {
                 pw.println("    ${data.first.constant}(\"${data.first.canonical}\", \"${data.second}\"),")
             } else {

@@ -28,15 +28,24 @@ object LanguageLoader {
             FileDownloader.downloadUnicodeIso6393File(resourceFolder())
         }
 
+        val duplicates = mutableMapOf<String, Int>()
         val allData = Iso639Parser().allData
-        val sortedData = allData.sortedBy { it.refName.constant }
+        val sortedData = allData.sortedBy { it.id }
         val sb = StringBuilder()
         sb.appendLine("package org.angproj.utf.pla")
         sb.appendLine()
         sb.appendLine("public enum class FullIso639(public val lang: String, public val code: String) {")
         sortedData.forEachIndexed { idx, data ->
+            duplicates[data.refName.constant] = (duplicates[data.refName.constant] ?: 0) + 1
+
+            val constant = if(duplicates[data.refName.constant]!! > 1) {
+                "${data.refName.constant}_${duplicates[data.refName.constant]}"
+            } else {
+                data.refName.constant
+            }
+
             val lineEnding = if (idx != allData.lastIndex) "," else ";"
-            sb.appendLine("    ${data.refName.constant}(\"${data.refName.canonical}\", \"${data.id}\")$lineEnding")
+            sb.appendLine("    ${constant}(\"${data.refName.canonical}\", \"${data.id}\")$lineEnding")
         }
         sb.appendLine("    public companion object")
         sb.appendLine("}")

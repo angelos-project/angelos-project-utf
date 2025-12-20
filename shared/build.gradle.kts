@@ -13,7 +13,7 @@ kotlin {
 
     sourceSets {
         jvmMain.dependencies {
-            implementation(libs.kotlin.normalizer)
+            //implementation(libs.kotlin.normalizer)
         }
         jvmTest.dependencies {
             implementation(libs.kotlin.test)

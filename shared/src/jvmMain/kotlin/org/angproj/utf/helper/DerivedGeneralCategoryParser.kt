@@ -39,7 +39,8 @@ public object DerivedGeneralCategoryParser : DataLoader<Triple<String, String, S
     }
 
     override val allData: List<Triple<String, String, String>> by lazy {
-        loadData("/DerivedGeneralCategory.txt")
+        val path = "/DerivedGeneralCategory.txt"
+        loadData(path)
     }
 
     public data class UnassignedCategory(

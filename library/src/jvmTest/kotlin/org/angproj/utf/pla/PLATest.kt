@@ -1,11 +1,13 @@
 package org.angproj.utf.pla
 
 import org.angproj.utf.FileDownloader
-import org.angproj.utf.helper.DerivedGeneralCategoryParser
+import org.angproj.utf.helper.PropertyAliasParser
 import java.nio.file.Path
 import java.nio.file.Paths
 import kotlin.io.path.exists
 import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class PLATest {
 
@@ -17,18 +19,27 @@ class PLATest {
             FileDownloader.downloadUnicodePLAFile(resourceFolder())
         }
 
-        DerivedGeneralCategoryParser.generateUnassignedCategories()
-
-        /*val parsing = BlockRangeParser().allData
-        val sortedData = parsing.sortedBy { it.searchName.canonical }
+        val parsing = PropertyAliasParser.parseGeneralCategory().allData
+        val sortedData = parsing.sortedBy { it.first.constant }
         sortedData.forEach { data ->
-            val block = Block.valueOf(data.searchName.constant)
+            val gc = GeneralCategory.entries.first { it.canonical == data.first.canonical }
 
-            assertEquals(block.title, data.searchName.canonical)
-            assertEquals(block.canonical, data.searchName.klazz)
-            assertEquals(block.abbr, data.searchName.klazz)
-            assertEquals(block.range.first, data.unicodeBounds.first)
-            assertEquals(block.range.last, data.unicodeBounds.second)
-        }*/
+            assertEquals(gc.canonical, data.first.canonical)
+            assertEquals(gc.abbr, data.second)
+        }
+
+        sortedData.forEach { data ->
+            val gc = GeneralCategory.entries.first { it.canonical == data.first.canonical }
+            when(gc.abbr[0]) {
+                'L' -> assertTrue{ gc.isLetter() }
+                'M' -> assertTrue{ gc.isMark() }
+                'N' -> assertTrue{ gc.isNumber() }
+                'P' -> assertTrue{ gc.isPunctuation() }
+                'S' -> assertTrue{ gc.isSymbol() }
+                'Z' -> assertTrue{ gc.isSeparator() }
+                'C' -> assertTrue{ gc.isOther() }
+                else -> throw IllegalArgumentException("Unknown general category abbreviation: ${gc.abbr}")
+            }
+        }
     }
 }

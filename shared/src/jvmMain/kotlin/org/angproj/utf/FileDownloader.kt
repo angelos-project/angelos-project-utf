@@ -53,6 +53,12 @@ public object FileDownloader {
         downloadFile(fileUrl, resourcePath.toString())
     }
 
+    public fun downloadUnicodeDerivedGeneralCategoryFile(resourcePath: Path) {
+        val fileUrl = "https://www.unicode.org/Public/${version}/ucd/extracted/DerivedGeneralCategory.txt"
+
+        downloadFile(fileUrl, resourcePath.toString())
+    }
+
     @Throws(IOException::class)
     public fun downloadFile(fileUrl: String, saveDir: String): String {
         val url = URL(fileUrl)

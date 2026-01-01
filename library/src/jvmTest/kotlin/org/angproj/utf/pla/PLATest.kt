@@ -1,12 +1,11 @@
 package org.angproj.utf.pla
 
 import org.angproj.utf.FileDownloader
-import org.angproj.utf.helper.BlockRangeParser
+import org.angproj.utf.helper.DerivedGeneralCategoryParser
 import java.nio.file.Path
 import java.nio.file.Paths
 import kotlin.io.path.exists
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class PLATest {
 
@@ -17,6 +16,8 @@ class PLATest {
         if(!resourceFolder("PropertyValueAliases.txt").exists()) {
             FileDownloader.downloadUnicodePLAFile(resourceFolder())
         }
+
+        DerivedGeneralCategoryParser.generateUnassignedCategories()
 
         /*val parsing = BlockRangeParser().allData
         val sortedData = parsing.sortedBy { it.searchName.canonical }

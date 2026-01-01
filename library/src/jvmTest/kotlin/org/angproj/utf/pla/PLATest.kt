@@ -7,6 +7,7 @@ import java.nio.file.Paths
 import kotlin.io.path.exists
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class PLATest {
@@ -40,6 +41,23 @@ class PLATest {
                 'C' -> assertTrue{ gc.isOther() }
                 else -> throw IllegalArgumentException("Unknown general category abbreviation: ${gc.abbr}")
             }
+
+            when(gc.abbr[0]) {
+                'L' -> assertFalse{ gc.isOther() }
+                'M' -> assertFalse{ gc.isLetter() }
+                'N' -> assertFalse{ gc.isMark() }
+                'P' -> assertFalse{ gc.isNumber() }
+                'S' -> assertFalse{ gc.isPunctuation() }
+                'Z' -> assertFalse{ gc.isSymbol() }
+                'C' -> assertFalse{ gc.isSeparator() }
+                else -> throw IllegalArgumentException("Unknown general category abbreviation: ${gc.abbr}")
+            }
+        }
+
+        sortedData.forEach { data ->
+            val gc = GeneralCategory.entries.first { it.canonical == data.first.canonical }
+            val fromValue = GeneralCategory.byAbbr(data.second)
+            assertEquals(gc, fromValue)
         }
     }
 }

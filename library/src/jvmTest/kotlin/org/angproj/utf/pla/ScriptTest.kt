@@ -26,6 +26,7 @@ class ScriptTest {
 
             assertEquals(script.abbr, data.script)
             assertEquals(script.canonical, data.pva)
+            assertEquals(script, Script.byAbbr(data.script))
         }
     }
 }

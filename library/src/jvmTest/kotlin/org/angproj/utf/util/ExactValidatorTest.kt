@@ -1,13 +1,17 @@
 package org.angproj.utf.util
 
+import org.angproj.utf.AbstractUnicodeAware
 import org.angproj.utf.FileDownloader
+import org.angproj.utf.Unicode
+import org.angproj.utf.helper.DerivedGeneralCategoryParser
 
 import java.nio.file.Path
 import java.nio.file.Paths
 import kotlin.io.path.exists
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
-class ExactValidatorTest {
+class ExactValidatorTest : AbstractUnicodeAware() {
 
     fun resourceFolder(file: String = ""): Path = Paths.get("src/jvmTest/resources/", file).toAbsolutePath()
 
@@ -17,13 +21,11 @@ class ExactValidatorTest {
             FileDownloader.downloadUnicodeDerivedGeneralCategoryFile(resourceFolder())
         }
 
-        /*val parsing = PropertyAliasParser.parseGeneralCategory().allData
-        val sortedData = parsing.sortedBy { it.first.constant }
-        sortedData.forEach { data ->
-            val gc = GeneralCategory.entries.first { it.canonical == data.first.canonical }
-
-            assertEquals(gc.canonical, data.first.canonical)
-            assertEquals(gc.abbr, data.second)
-        }*/
+        val parsing = DerivedGeneralCategoryParser.getUnassignedCategories()
+        val validator = ExactValidator()
+        (Unicode.UTF_FIRST.cp..Unicode.UTF_LAST.cp).forEach { codePoint ->
+            if(isUtf8<Unit>(codePoint))
+                assertEquals(validator.isValid(codePoint), !parsing.isUnassigned(codePoint))
+        }
     }
 }

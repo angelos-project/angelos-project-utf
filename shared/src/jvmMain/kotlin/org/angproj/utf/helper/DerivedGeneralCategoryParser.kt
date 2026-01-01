@@ -43,12 +43,7 @@ public object DerivedGeneralCategoryParser : DataLoader<Triple<String, String, S
         loadData(path)
     }
 
-    public data class UnassignedCategory(
-        val values: MutableSet<Int> = mutableSetOf(),
-        val ranges: MutableSet<IntRange> = mutableSetOf()
-    )
-
-    public fun generateUnassignedCategories() {
+    public fun getUnassignedCategories(): UnassignedCategory {
         val unassigned = UnassignedCategory()
         allData.forEach {
             if (it.second != "Cn") return@forEach
@@ -66,6 +61,39 @@ public object DerivedGeneralCategoryParser : DataLoader<Triple<String, String, S
                 }
             }
         }
+        return unassigned
+    }
+
+    public data class UnassignedCategory(
+        val values: MutableSet<Int> = mutableSetOf(),
+        val ranges: MutableSet<IntRange> = mutableSetOf()
+    ) {
+        public fun isUnassigned(cp: Int): Boolean {
+            for (range in ranges) {
+                if (cp in range) return true
+            }
+            return values.contains(cp)
+        }
+    }
+
+    public fun generateUnassignedCategories() {
+        val unassigned = getUnassignedCategories()
+        /*allData.forEach {
+            if (it.second != "Cn") return@forEach
+            val rangeBounds = it.first.split("..")
+            val start = rangeBounds[0].toInt(16)
+            val end = if (rangeBounds.size == 2) rangeBounds[1].toInt(16) else -1
+
+            if (end - start >= 128 && end != -1) {
+                unassigned.ranges += (start..end)
+            } else if (end == -1) {
+                unassigned.values += start
+            } else {
+                for (value in start..end) {
+                    unassigned.values += value
+                }
+            }
+        }*/
 
         val klazzFile = "library/src/commonMain/kotlin/org/angproj/utf/util/ExactValidator.kt"
         println(Files.createDirectories(Paths.get(klazzFile)))

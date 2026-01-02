@@ -33,5 +33,9 @@ data class SearchName(
         fun constantify(name: String): String {
             return name.uppercase().replace(" ", "_").replace("-", "_")
         }
+
+        fun camelCaseSplitAndUnderscore(name: String): String {
+            return name.replace(Regex("([a-z])([A-Z])"), "$1_$2").replace(Regex("([A-Z])([A-Z])"), "$1_$2").uppercase()
+        }
     }
 }

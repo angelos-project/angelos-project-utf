@@ -16,6 +16,7 @@ package org.angproj.utf
 
 import org.angproj.utf.helper.LanguageLoader
 import org.angproj.utf.helper.ScriptCodeLoader
+import org.angproj.utf.ui.SwingUI
 import org.angproj.utf.ui.button
 import javax.swing.JOptionPane
 import javax.swing.SwingUtilities
@@ -25,7 +26,8 @@ object MainKt {
     fun main(args: Array<String>) {
         //DerivedGeneralCategoryLoader.generateUnassignedCategories()
         //LanguageBuilder.generateLanguageEnumFile()
-        println(LanguageLoader.generateFullIso639Enum())
+        //println(LanguageLoader.generateFullIso639Enum())
+        SwingUI.generateCode()
 
         SwingUtilities.invokeLater({
             val window = UtfInfoGenerator {

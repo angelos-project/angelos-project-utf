@@ -18,9 +18,12 @@ import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
 import javax.swing.*
 
+
 object TestAppKt {
-    @JvmStatic
-    fun main(args: Array<String>) {
+    private lateinit var frame: JFrame
+    private lateinit var currentPanel: JPanel
+
+    fun main() {
         SwingUtilities.invokeLater(object : Runnable {
             override fun run() {
                 try {
@@ -30,14 +33,14 @@ object TestAppKt {
                     e.printStackTrace()
                 }
 
-                val frame = JFrame("Application Framework")
+                frame = JFrame("Application Framework")
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
                 frame.setSize(800, 600)
 
                 val menuBar = JMenuBar()
                 frame.setJMenuBar(menuBar)
 
-                // Initial menu example: File menu with Exit
+                // File menu with Exit
                 val fileMenu = JMenu("File")
                 val exitItem = JMenuItem("Exit")
                 exitItem.addActionListener(object : ActionListener {
@@ -48,11 +51,35 @@ object TestAppKt {
                 fileMenu.add(exitItem)
                 menuBar.add(fileMenu)
 
-                // Add more menus here as examples grow, e.g.:
-                // JMenu exampleMenu = new JMenu("Example");
-                // menuBar.add(exampleMenu);
+                // Examples menu
+                val examplesMenu = JMenu("Examples")
+                menuBar.add(examplesMenu)
+
+                // JButton Example menu item
+                val jButtonItem = JMenuItem("JButton Example")
+                jButtonItem.addActionListener(object : ActionListener {
+                    override fun actionPerformed(e: ActionEvent) {
+                        switchPanel(JButtonExample())
+                    }
+                })
+                examplesMenu.add(jButtonItem)
+
+                // Add more example menu items here as framework grows
+
+                // Initial empty panel or welcome
+                currentPanel = JPanel()
+                frame.setContentPane(currentPanel)
+
                 frame.setVisible(true)
             }
         })
+    }
+
+    private fun switchPanel(newPanel: JPanel) {
+        frame.getContentPane().remove(currentPanel)
+        currentPanel = newPanel
+        frame.getContentPane().add(currentPanel)
+        frame.revalidate()
+        frame.repaint()
     }
 }

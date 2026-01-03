@@ -118,6 +118,15 @@ object TestAppKt {
             })
             examplesMenu.add(jFileChooserExample)
 
+            // JFormattedTextField Example menu item
+            val jFormattedTextFieldExample = JMenuItem("JFormattedTextField Example")
+            jFormattedTextFieldExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JFormattedTextFieldExample())
+                }
+            })
+            examplesMenu.add(jFormattedTextFieldExample)
+
             // Add more example menu items here as framework grows
 
             // Initial empty panel or welcome

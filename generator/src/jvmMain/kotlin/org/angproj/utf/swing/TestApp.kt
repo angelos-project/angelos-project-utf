@@ -80,7 +80,16 @@ object TestAppKt {
                     switchPanel(JCheckBoxMenuItemExample())
                 }
             })
-            examplesMenu.add(jCheckBoxItem)
+            examplesMenu.add(jCheckBoxMenuItemExample)
+
+
+            val jColorChooserExample = JMenuItem("JColorChooser Example")
+            jColorChooserExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JCheckBoxExample())
+                }
+            })
+            examplesMenu.add(jColorChooserExample)
 
             // Add more example menu items here as framework grows
 

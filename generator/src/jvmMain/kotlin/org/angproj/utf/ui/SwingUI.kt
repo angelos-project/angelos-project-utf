@@ -23,8 +23,8 @@ enum class SwingUI(val component: String) {
     GUI_CHECK_BOX_MENU_ITEM("JCheckBoxMenuItem"),
     GUI_COLOR_CHOOSER("JColorChooser"),
     GUI_COMBO_BOX("JComboBox"),
-    GUI_COMPONENT("JComponent"),
-    GUI_DESKTOP_PANE("JDesktopPane"),
+    GUI_COMPONENT("JComponent"), // --
+    GUI_DESKTOP_PANE("JDesktopPane"), // --
     GUI_DIALOG("JDialog"),
     GUI_EDITOR_PANE("JEditorPane"),
     GUI_FILE_CHOOSER("JFileChooser"),

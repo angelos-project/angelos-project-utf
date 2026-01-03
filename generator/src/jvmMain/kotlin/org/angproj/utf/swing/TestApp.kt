@@ -100,6 +100,15 @@ object TestAppKt {
             })
             examplesMenu.add(jComboBoxExample)
 
+            // JDialog Example menu item
+            val jDialogExample = JMenuItem("JDialog Example")
+            jDialogExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JDialogExample(frame))
+                }
+            })
+            examplesMenu.add(jDialogExample)
+
             // Add more example menu items here as framework grows
 
             // Initial empty panel or welcome

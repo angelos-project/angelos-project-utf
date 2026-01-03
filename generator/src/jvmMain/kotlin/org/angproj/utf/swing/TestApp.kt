@@ -100,6 +100,15 @@ object TestAppKt {
             })
             examplesMenu.add(jComboBoxExample)
 
+            // JDesktopPane Example menu item
+            val jDesktopPaneExample = JMenuItem("JDesktopPane Example")
+            jDesktopPaneExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JDesktopPaneExample(frame))
+                }
+            })
+            examplesMenu.add(jDesktopPaneExample)
+
             // JDialog Example menu item
             val jDialogExample = JMenuItem("JDialog Example")
             jDialogExample.addActionListener(object : ActionListener {

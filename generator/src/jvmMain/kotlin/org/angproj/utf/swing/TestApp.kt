@@ -82,7 +82,7 @@ object TestAppKt {
             })
             examplesMenu.add(jCheckBoxMenuItemExample)
 
-
+            // JColorChooser Example menu item
             val jColorChooserExample = JMenuItem("JColorChooser Example")
             jColorChooserExample.addActionListener(object : ActionListener {
                 override fun actionPerformed(e: ActionEvent?) {
@@ -90,6 +90,15 @@ object TestAppKt {
                 }
             })
             examplesMenu.add(jColorChooserExample)
+
+            // JComboBox Example menu item
+            val jComboBoxExample = JMenuItem("JComboBox Example")
+            jComboBoxExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JComboBoxExample())
+                }
+            })
+            examplesMenu.add(jComboBoxExample)
 
             // Add more example menu items here as framework grows
 

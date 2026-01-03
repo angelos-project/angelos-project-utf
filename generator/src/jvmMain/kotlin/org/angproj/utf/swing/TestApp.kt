@@ -154,6 +154,15 @@ object TestAppKt {
             })
             examplesMenu.add(jInternalFrameExample)
 
+            // JLabel Example menu item
+            val jLabelExample = JMenuItem("JLabel Example")
+            jLabelExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JLabelExample())
+                }
+            })
+            examplesMenu.add(jLabelExample)
+
             // Add more example menu items here as framework grows
 
             // Initial empty panel or welcome

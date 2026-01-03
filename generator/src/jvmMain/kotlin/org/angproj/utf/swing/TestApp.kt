@@ -109,6 +109,15 @@ object TestAppKt {
             })
             examplesMenu.add(jDialogExample)
 
+            // JFileChooser Example menu item
+            val jFileChooserExample = JMenuItem("JFileChooser Example")
+            jFileChooserExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JFileChooserExample(frame))
+                }
+            })
+            examplesMenu.add(jFileChooserExample)
+
             // Add more example menu items here as framework grows
 
             // Initial empty panel or welcome

@@ -73,6 +73,15 @@ object TestAppKt {
             })
             examplesMenu.add(jCheckBoxItem)
 
+            // JCheckBox Example menu item
+            val jCheckBoxMenuItemExample = JMenuItem("JCheckBoxMenuItem Example")
+            jCheckBoxMenuItemExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JCheckBoxMenuItemExample())
+                }
+            })
+            examplesMenu.add(jCheckBoxItem)
+
             // Add more example menu items here as framework grows
 
             // Initial empty panel or welcome

@@ -23,14 +23,11 @@ import javax.swing.colorchooser.AbstractColorChooserPanel
 import javax.swing.event.ChangeEvent
 import javax.swing.event.ChangeListener
 
+
 internal class JColorChooserExample : JPanel() {
     init {
         setLayout(GridLayout(0, 1, 10, 10)) // Vertical layout for examples
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20))
-
-        // To make the panel scrollable since JColorChooser is large
-        val scrollPane = JScrollPane(this)
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS)
 
         // Note: JColorChooser can be embedded directly.
 

@@ -86,7 +86,7 @@ object TestAppKt {
             val jColorChooserExample = JMenuItem("JColorChooser Example")
             jColorChooserExample.addActionListener(object : ActionListener {
                 override fun actionPerformed(e: ActionEvent?) {
-                    switchPanel(JCheckBoxExample())
+                    switchPanel(JColorChooserExample())
                 }
             })
             examplesMenu.add(jColorChooserExample)
@@ -102,9 +102,11 @@ object TestAppKt {
     }
 
     private fun switchPanel(newPanel: JPanel) {
-        frame.getContentPane().remove(currentPanel)
-        currentPanel = newPanel
-        frame.getContentPane().add(currentPanel)
+        //frame.getContentPane().remove(currentContent)
+        val scrollPane = JScrollPane(newPanel)
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED)
+        val currentContent = scrollPane
+        frame.setContentPane(currentContent)
         frame.revalidate()
         frame.repaint()
     }

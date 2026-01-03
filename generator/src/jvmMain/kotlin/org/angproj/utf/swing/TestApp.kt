@@ -23,56 +23,55 @@ object TestAppKt {
     private lateinit var frame: JFrame
     private lateinit var currentPanel: JPanel
 
-    fun main() {
-        SwingUtilities.invokeLater(object : Runnable {
-            override fun run() {
-                try {
-                    // Set Java cross-platform Look and Feel (Metal)
-                    UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName())
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-
-                frame = JFrame("Application Framework")
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
-                frame.setSize(800, 600)
-
-                val menuBar = JMenuBar()
-                frame.setJMenuBar(menuBar)
-
-                // File menu with Exit
-                val fileMenu = JMenu("File")
-                val exitItem = JMenuItem("Exit")
-                exitItem.addActionListener(object : ActionListener {
-                    override fun actionPerformed(e: ActionEvent?) {
-                        System.exit(0)
-                    }
-                })
-                fileMenu.add(exitItem)
-                menuBar.add(fileMenu)
-
-                // Examples menu
-                val examplesMenu = JMenu("Examples")
-                menuBar.add(examplesMenu)
-
-                // JButton Example menu item
-                val jButtonItem = JMenuItem("JButton Example")
-                jButtonItem.addActionListener(object : ActionListener {
-                    override fun actionPerformed(e: ActionEvent) {
-                        switchPanel(JButtonExample())
-                    }
-                })
-                examplesMenu.add(jButtonItem)
-
-                // Add more example menu items here as framework grows
-
-                // Initial empty panel or welcome
-                currentPanel = JPanel()
-                frame.setContentPane(currentPanel)
-
-                frame.setVisible(true)
+    @JvmStatic
+    fun main(args: Array<String>) {
+        SwingUtilities.invokeLater {
+            try {
+                // Set Java cross-platform Look and Feel (Metal)
+                UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName())
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
-        })
+
+            frame = JFrame("Application Framework")
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
+            frame.setSize(800, 600)
+
+            val menuBar = JMenuBar()
+            frame.setJMenuBar(menuBar)
+
+            // File menu with Exit
+            val fileMenu = JMenu("File")
+            val exitItem = JMenuItem("Exit")
+            exitItem.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    System.exit(0)
+                }
+            })
+            fileMenu.add(exitItem)
+            menuBar.add(fileMenu)
+
+            // Examples menu
+            val examplesMenu = JMenu("Examples")
+            menuBar.add(examplesMenu)
+
+            // JButton Example menu item
+            val jButtonItem = JMenuItem("JButton Example")
+            jButtonItem.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent) {
+                    switchPanel(JButtonExample())
+                }
+            })
+            examplesMenu.add(jButtonItem)
+
+            // Add more example menu items here as framework grows
+
+            // Initial empty panel or welcome
+            currentPanel = JPanel()
+            frame.setContentPane(currentPanel)
+
+            frame.setVisible(true)
+        }
     }
 
     private fun switchPanel(newPanel: JPanel) {

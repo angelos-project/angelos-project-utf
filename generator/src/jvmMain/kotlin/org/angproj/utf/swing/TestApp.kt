@@ -145,6 +145,15 @@ object TestAppKt {
             })
             examplesMenu.add(jFormattedTextFieldExample)
 
+            // JInternalFrame Example menu item
+            val jInternalFrameExample = JMenuItem("JInternalFrame Example")
+            jInternalFrameExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JInternalFrameExample())
+                }
+            })
+            examplesMenu.add(jInternalFrameExample)
+
             // Add more example menu items here as framework grows
 
             // Initial empty panel or welcome

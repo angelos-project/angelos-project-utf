@@ -26,11 +26,11 @@ enum class SwingUI(val component: String) {
     GUI_COMPONENT("JComponent"), // --
     GUI_DESKTOP_PANE("JDesktopPane"),
     GUI_DIALOG("JDialog"),
-    GUI_EDITOR_PANE("JEditorPane"), // --
+    GUI_EDITOR_PANE("JEditorPane"),
     GUI_FILE_CHOOSER("JFileChooser"),
     GUI_FORMATTED_TEXT_FIELD("JFormattedTextField"),
     GUI_FRAME("JFrame"), // --
-    GUI_INTERNAL_FRAME("JInternalFrame"), // --
+    GUI_INTERNAL_FRAME("JInternalFrame"),
     GUI_LABEL("JLabel"),
     GUI_LAYER("JLayer"),
     GUI_LAYERED_PANE("JLayeredPane"),

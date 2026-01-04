@@ -50,13 +50,14 @@ internal class JMenuBarExample : JPanel() {
         bar3.add(createDemoMenu())
         add(bar3)
 
+        // ?
         // Example 4: JMenuBar with help menu
         add(JLabel("4. JMenuBar with help menu:"))
         val bar4 = JMenuBar()
         bar4.add(createDemoMenu())
         val helpMenu = JMenu("Help")
         helpMenu.add(JMenuItem("About"))
-        bar4.setHelpMenu(helpMenu)
+        //bar4.setHelpMenu(helpMenu)
         add(bar4)
 
         // Example 5: Disabled JMenuBar

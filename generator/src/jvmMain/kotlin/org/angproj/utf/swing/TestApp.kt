@@ -262,6 +262,15 @@ object TestAppKt {
             })
             examplesMenu.add(jRadioButtonMenuItemExample)
 
+            // JRootPane Example menu item
+            val jRootPaneExample = JMenuItem("JRootPane Example")
+            jRootPaneExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JRootPaneExample())
+                }
+            })
+            examplesMenu.add(jRootPaneExample)
+
             // Add more example menu items here as framework grows
 
             // Initial empty panel or welcome

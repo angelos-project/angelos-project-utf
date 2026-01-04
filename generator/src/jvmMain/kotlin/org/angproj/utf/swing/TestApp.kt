@@ -208,6 +208,15 @@ object TestAppKt {
             })
             examplesMenu.add(jMenuBarExample)
 
+            // JOptionPane Example menu item
+            val jOptionPaneExample = JMenuItem("JOptionPane Example")
+            jOptionPaneExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JOptionPaneExample(frame))
+                }
+            })
+            examplesMenu.add(jOptionPaneExample)
+
             // Add more example menu items here as framework grows
 
             // Initial empty panel or welcome

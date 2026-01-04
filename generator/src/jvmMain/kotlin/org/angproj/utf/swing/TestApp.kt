@@ -163,6 +163,15 @@ object TestAppKt {
             })
             examplesMenu.add(jLabelExample)
 
+            // JLayer Example menu item
+            val jLayerExample = JMenuItem("JLayer Example")
+            jLayerExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JLayerExample())
+                }
+            })
+            examplesMenu.add(jLayerExample)
+
             // Add more example menu items here as framework grows
 
             // Initial empty panel or welcome

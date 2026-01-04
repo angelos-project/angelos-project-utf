@@ -226,6 +226,15 @@ object TestAppKt {
             })
             examplesMenu.add(jPasswordFieldExample)
 
+            // JPopupMenu Example menu item
+            val jPopupMenuExample = JMenuItem("JPopupMenu Example")
+            jPopupMenuExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JPopupMenuExample())
+                }
+            })
+            examplesMenu.add(jPopupMenuExample)
+
             // Add more example menu items here as framework grows
 
             // Initial empty panel or welcome

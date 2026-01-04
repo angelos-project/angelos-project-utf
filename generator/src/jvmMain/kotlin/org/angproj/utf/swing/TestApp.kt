@@ -289,6 +289,15 @@ object TestAppKt {
             })
             examplesMenu.add(jScrollPaneExample)
 
+            // JSeparator Example menu item
+            val jSeparatorExample = JMenuItem("JSeparator Example")
+            jSeparatorExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JSeparatorExample())
+                }
+            })
+            examplesMenu.add(jSeparatorExample)
+
             // Add more example menu items here as framework grows
 
             // Initial empty panel or welcome

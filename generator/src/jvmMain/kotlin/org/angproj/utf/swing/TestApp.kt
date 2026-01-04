@@ -244,6 +244,15 @@ object TestAppKt {
             })
             examplesMenu.add(jProgressBarExample)
 
+            // JRadioButton Example menu item
+            val jRadioButtonExample = JMenuItem("JRadioButton Example")
+            jRadioButtonExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JRadioButtonExample())
+                }
+            })
+            examplesMenu.add(jRadioButtonExample)
+
             // Add more example menu items here as framework grows
 
             // Initial empty panel or welcome

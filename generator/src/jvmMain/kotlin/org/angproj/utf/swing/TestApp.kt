@@ -271,6 +271,24 @@ object TestAppKt {
             })
             examplesMenu.add(jRootPaneExample)
 
+            // JScrollBar Example menu item
+            val jScrollBarExample = JMenuItem("JScrollBar Example")
+            jScrollBarExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JScrollBarExample())
+                }
+            })
+            examplesMenu.add(jScrollBarExample)
+
+            /*// JScrollPane Example menu item
+            val jScrollPaneExample = JMenuItem("JScrollPane Example")
+            jScrollPaneExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JScrollPaneExample())
+                }
+            })
+            examplesMenu.add(jScrollPaneExample)*/
+
             // Add more example menu items here as framework grows
 
             // Initial empty panel or welcome

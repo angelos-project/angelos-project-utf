@@ -235,6 +235,15 @@ object TestAppKt {
             })
             examplesMenu.add(jPopupMenuExample)
 
+            // JProgressBar Example menu item
+            val jProgressBarExample = JMenuItem("JProgressBar Example")
+            jProgressBarExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JProgressBarExample())
+                }
+            })
+            examplesMenu.add(jProgressBarExample)
+
             // Add more example menu items here as framework grows
 
             // Initial empty panel or welcome

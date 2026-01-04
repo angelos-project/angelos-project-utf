@@ -1,3 +1,17 @@
+/**
+ * Copyright (c) 2026 by Kristoffer Paulsson <kristoffer.paulsson@talenten.se>.
+ *
+ * This software is available under the terms of the MIT license. Parts are licensed
+ * under different terms if stated. The legal terms are attached to the LICENSE file
+ * and are made available on:
+ *
+ *      https://opensource.org/licenses/MIT
+ *
+ * SPDX-License-Identifier: MIT
+ *
+ * Contributors:
+ *      Kristoffer Paulsson - initial implementation
+ */
 package org.angproj.utf.swing
 
 import java.awt.Color
@@ -16,7 +30,7 @@ internal class JPopupMenuExample : JPanel() {
         val button1 = JButton("Show Default Popup")
         button1.addActionListener(ActionListener { e: ActionEvent? ->
             val popup = JPopupMenu()
-            popup.setVisible(true)
+            popup.show(button1, button1.width, button1.height)
         })
         add(button1)
 
@@ -27,7 +41,7 @@ internal class JPopupMenuExample : JPanel() {
             val popup = JPopupMenu()
             popup.add(JMenuItem("Item 1"))
             popup.add(JMenuItem("Item 2"))
-            popup.setVisible(true)
+            popup.show(button2, button2.width, button2.height)
         })
         add(button2)
 
@@ -39,7 +53,7 @@ internal class JPopupMenuExample : JPanel() {
             val submenu = JMenu("Submenu")
             submenu.add(JMenuItem("Sub Item 1"))
             popup.add(submenu)
-            popup.setVisible(true)
+            popup.show(button3, button3.width, button3.height)
         })
         add(button3)
 
@@ -51,7 +65,7 @@ internal class JPopupMenuExample : JPanel() {
             popup.add(JMenuItem("Item 1"))
             popup.addSeparator()
             popup.add(JMenuItem("Item 2"))
-            popup.setVisible(true)
+            popup.show(button4, button4.width, button4.height)
         })
         add(button4)
 
@@ -61,7 +75,7 @@ internal class JPopupMenuExample : JPanel() {
         button5.addActionListener(ActionListener { e: ActionEvent? ->
             val popup = JPopupMenu()
             popup.add(JCheckBoxMenuItem("Check Me"))
-            popup.setVisible(true)
+            popup.show(button5, button5.width, button5.height)
         })
         add(button5)
 
@@ -71,7 +85,7 @@ internal class JPopupMenuExample : JPanel() {
         button6.addActionListener(ActionListener { e: ActionEvent? ->
             val popup = JPopupMenu()
             popup.add(JRadioButtonMenuItem("Select Me"))
-            popup.setVisible(true)
+            popup.show(button6, button6.width, button6.height)
         })
         add(button6)
 
@@ -82,7 +96,7 @@ internal class JPopupMenuExample : JPanel() {
             val popup = JPopupMenu()
             popup.setToolTipText("This is a tooltip!")
             popup.add(JMenuItem("Item 1"))
-            popup.setVisible(true)
+            popup.show(button7, button7.width, button7.height)
         })
         add(button7)
 
@@ -93,7 +107,7 @@ internal class JPopupMenuExample : JPanel() {
             val popup = JPopupMenu()
             popup.setBorder(BorderFactory.createLineBorder(Color.RED, 2))
             popup.add(JMenuItem("Item 1"))
-            popup.setVisible(true)
+            popup.show(button8, button8.width, button8.height)
         })
         add(button8)
 
@@ -104,7 +118,7 @@ internal class JPopupMenuExample : JPanel() {
             val popup = JPopupMenu()
             popup.setLightWeightPopupEnabled(true) // Default
             popup.add(JMenuItem("Item 1"))
-            popup.setVisible(true)
+            popup.show(button9, button9.width, button9.height)
         })
         add(button9)
 
@@ -115,7 +129,7 @@ internal class JPopupMenuExample : JPanel() {
             val popup = JPopupMenu()
             popup.setLightWeightPopupEnabled(false)
             popup.add(JMenuItem("Item 1"))
-            popup.setVisible(true)
+            popup.show(button10, button10.width, button10.height)
         })
         add(button10)
 
@@ -125,7 +139,7 @@ internal class JPopupMenuExample : JPanel() {
         button11.addActionListener(ActionListener { e: ActionEvent? ->
             val popup = JPopupMenu("Popup Label")
             popup.add(JMenuItem("Item 1"))
-            popup.setVisible(true)
+            popup.show(button11, button11.width, button11.height)
         })
         add(button11)
 

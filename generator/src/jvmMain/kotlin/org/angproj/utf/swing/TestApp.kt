@@ -190,6 +190,15 @@ object TestAppKt {
             })
             examplesMenu.add(jListExample)
 
+            // JMenu Example menu item
+            val jMenuExample = JMenuItem("JMenu Example")
+            jMenuExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JMenuExample())
+                }
+            })
+            examplesMenu.add(jMenuExample)
+
             // Add more example menu items here as framework grows
 
             // Initial empty panel or welcome

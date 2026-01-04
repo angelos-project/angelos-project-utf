@@ -39,7 +39,7 @@ enum class SwingUI(val component: String) {
     GUI_MENU_BAR("JMenuBar"),
     GUI_MENU_ITEM("JMenuItem"), // --
     GUI_OPTION_PANE("JOptionPane"),
-    GUI_PANEL("JPanel"),
+    GUI_PANEL("JPanel"), // --
     GUI_PASSWORD_FIELD("JPasswordField"),
     GUI_POPUP_MENU("JPopupMenu"),
     GUI_PROGRESS_BAR("JProgressBar"),

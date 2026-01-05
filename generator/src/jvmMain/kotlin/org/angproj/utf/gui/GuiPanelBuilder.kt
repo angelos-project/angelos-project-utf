@@ -31,7 +31,9 @@ import javax.swing.JPasswordField
 import javax.swing.JProgressBar
 import javax.swing.JRadioButton
 import javax.swing.JSeparator
+import javax.swing.JSlider
 import javax.swing.border.Border
+import javax.swing.event.ChangeEvent
 
 @SwingGui
 class GuiPanelBuilder(private val panel: JPanel = JPanel()) : Component {
@@ -90,6 +92,12 @@ class GuiPanelBuilder(private val panel: JPanel = JPanel()) : Component {
         val groupBuilder = GuiRadioButtonGroupBuilder(panel)
         groupBuilder.init()
         groupBuilder.build()
+    }
+
+    fun slider(orientation: Orientation = Orientation.HORIZONTAL, onChange: (ChangeEvent) -> Unit = {}) {
+        val slider = JSlider(orientation.value)
+        slider.addChangeListener { onChange(it) }
+        panel.add(slider)
     }
 
     fun separator() { panel.add(JSeparator()) }

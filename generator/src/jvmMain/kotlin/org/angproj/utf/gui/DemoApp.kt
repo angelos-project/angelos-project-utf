@@ -72,6 +72,9 @@ object DemoAppKt {
                                 println("Selected: ${(it.source as javax.swing.JRadioButton).text}")
                             }
                         }
+                        slider {
+                            println("Slider value changed: ${(it.source as javax.swing.JSlider).value}")
+                        }
                     }
                     onClose(JFrame.EXIT_ON_CLOSE)
                 }.build()

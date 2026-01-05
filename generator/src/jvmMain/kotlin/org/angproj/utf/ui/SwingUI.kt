@@ -48,7 +48,7 @@ enum class SwingUI(val component: String) {
     GUI_ROOT_PANE("JRootPane"),
     GUI_SCROLL_BAR("JScrollBar"),
     GUI_SCROLL_PANE("JScrollPane"),
-    GUI_SEPARATOR("JSeparator"),
+    GUI_SEPARATOR("JSeparator"), // w
     GUI_SLIDER("JSlider"),
     GUI_SPINNER("JSpinner"),
     GUI_SPLIT_PANE("JSplitPane"),

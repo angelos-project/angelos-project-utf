@@ -298,6 +298,15 @@ object TestAppKt {
             })
             examplesMenu.add(jSeparatorExample)
 
+            // JSlider Example menu item
+            val jSliderExample = JMenuItem("JSlider Example")
+            jSliderExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JSliderExample())
+                }
+            })
+            examplesMenu.add(jSliderExample)
+
             // Add more example menu items here as framework grows
 
             // Initial empty panel or welcome

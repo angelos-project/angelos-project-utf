@@ -22,12 +22,18 @@ import javax.swing.KeyStroke
 @SwingGui
 class GuiMenuBuilder(private val text: String) {
     private val menu = JMenu(text)
+
     fun item(text: String, accel: KeyStroke? = null, action: (ActionEvent?) -> Unit = {}) {
         val mi = JMenuItem(text)
         accel?.let { mi.accelerator = it }
         mi.addActionListener { action(it) }
         menu.add(mi)
     }
+
+    fun separator() {
+        menu.addSeparator()
+    }
+
     fun submenu(text: String, init: GuiMenuBuilder.() -> Unit) {
         val sub = GuiMenuBuilder(text)
         sub.init()

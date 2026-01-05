@@ -15,13 +15,12 @@
 package org.angproj.utf.gui
 
 import javax.swing.JFrame
-import javax.swing.JMenuBar
+import javax.swing.JPanel
 import javax.swing.SwingUtilities
 import javax.swing.UIManager
 
 object DemoAppKt {
     private lateinit var frame: JFrame
-    private lateinit var menuBar: JMenuBar
 
     @JvmStatic
     fun main(args: Array<String>) {
@@ -36,24 +35,39 @@ object DemoAppKt {
             gui {
                 frame = frame {
                     title = "Swing Component Examples"
-                }.build()
-            }
-
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
-            frame.setSize(800, 600)
-
-             gui {
-                menuBar = menuBar {
-                    menu("File") {
-                        item("Test") {
-                            println("Test menu item clicked")
+                    menuBar {
+                        menu("File") {
+                            item("Test") {
+                                println("Test menu item clicked")
+                            }
+                            separator()
+                            item ("Exit") {
+                                frame.dispose()
+                            }
                         }
                     }
+                    content {
+                        label("Hello, World!")
+                        label("This is a demo application using the GUI DSL.")
+                        label {
+                            text = "This label has custom font and color."
+                            font = font.deriveFont(16f)
+                            foreground = java.awt.Color.BLUE
+                        }
+                    }
+                    onClose(JFrame.EXIT_ON_CLOSE)
                 }.build()
             }
 
-            frame.setJMenuBar(menuBar)
+            frame.setSize(800, 600)
+
             frame.setVisible(true)
         }
+    }
+
+    private fun switchPanel(newPanel: JPanel) {
+        frame.contentPane = newPanel
+        frame.revalidate()
+        frame.repaint()
     }
 }

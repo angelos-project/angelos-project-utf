@@ -361,6 +361,15 @@ object TestAppKt {
             })
             examplesMenu.add(jTextFieldExample)
 
+            // JTextPane Example menu item
+            val jTextPaneExample = JMenuItem("JTextPane Example")
+            jTextPaneExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JTextPaneExample())
+                }
+            })
+            examplesMenu.add(jTextPaneExample)
+
             // Add more example menu items here as framework grows
 
             // Initial empty panel or welcome

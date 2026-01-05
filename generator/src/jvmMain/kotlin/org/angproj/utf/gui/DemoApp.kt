@@ -14,5 +14,46 @@
  */
 package org.angproj.utf.gui
 
-class DemoApp {
+import javax.swing.JFrame
+import javax.swing.JMenuBar
+import javax.swing.SwingUtilities
+import javax.swing.UIManager
+
+object DemoAppKt {
+    private lateinit var frame: JFrame
+    private lateinit var menuBar: JMenuBar
+
+    @JvmStatic
+    fun main(args: Array<String>) {
+        SwingUtilities.invokeLater {
+            try {
+                // Set Java cross-platform Look and Feel (Metal)
+                UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName())
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+            gui {
+                frame = frame {
+                    title = "Swing Component Examples"
+                }.build()
+            }
+
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
+            frame.setSize(800, 600)
+
+             gui {
+                menuBar = menuBar {
+                    menu("File") {
+                        item("Test") {
+                            println("Test menu item clicked")
+                        }
+                    }
+                }.build()
+            }
+
+            frame.setJMenuBar(menuBar)
+            frame.setVisible(true)
+        }
+    }
 }

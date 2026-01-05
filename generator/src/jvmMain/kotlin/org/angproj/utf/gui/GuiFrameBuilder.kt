@@ -20,20 +20,24 @@ import javax.swing.JFrame
 @SwingGui
 class GuiFrameBuilder {
     var title: String = "App"
-    //private val contentBuilder = PanelBuilder()
+    private val contentBuilder = GuiPanelBuilder()
     private var defaultCloseOperation = JFrame.EXIT_ON_CLOSE
     private var size: Dimension? = null
 
-    //fun content(init: PanelBuilder.() -> Unit) { contentBuilder.init() }
+    fun content(init: GuiPanelBuilder.() -> Unit) { contentBuilder.init() }
     fun size(w: Int, h: Int) { size = Dimension(w, h) }
     fun closeOperation(op: Int) { defaultCloseOperation = op }
 
     fun show() {
+        build().isVisible = true
+    }
+
+    fun build(): JFrame {
         val f = JFrame(title)
         f.defaultCloseOperation = defaultCloseOperation
-        //f.contentPane = contentBuilder.build()
+        f.contentPane = contentBuilder.build()
         size?.let { f.setSize(it) } ?: f.pack()
         f.setLocationRelativeTo(null)
-        f.isVisible = true
+        return f
     }
 }

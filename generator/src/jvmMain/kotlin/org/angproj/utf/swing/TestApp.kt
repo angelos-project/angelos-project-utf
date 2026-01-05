@@ -316,6 +316,15 @@ object TestAppKt {
             })
             examplesMenu.add(jSpinnerExample)
 
+            // JSplitPane Example menu item
+            val jSplitPaneExample = JMenuItem("JSplitPane Example")
+            jSplitPaneExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JSplitPaneExample())
+                }
+            })
+            examplesMenu.add(jSplitPaneExample)
+
             // Add more example menu items here as framework grows
 
             // Initial empty panel or welcome

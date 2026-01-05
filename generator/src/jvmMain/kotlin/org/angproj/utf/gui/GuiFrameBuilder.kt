@@ -14,6 +14,26 @@
  */
 package org.angproj.utf.gui
 
+import java.awt.Dimension
+import javax.swing.JFrame
+
 @SwingGui
 class GuiFrameBuilder {
+    var title: String = "App"
+    //private val contentBuilder = PanelBuilder()
+    private var defaultCloseOperation = JFrame.EXIT_ON_CLOSE
+    private var size: Dimension? = null
+
+    //fun content(init: PanelBuilder.() -> Unit) { contentBuilder.init() }
+    fun size(w: Int, h: Int) { size = Dimension(w, h) }
+    fun closeOperation(op: Int) { defaultCloseOperation = op }
+
+    fun show() {
+        val f = JFrame(title)
+        f.defaultCloseOperation = defaultCloseOperation
+        //f.contentPane = contentBuilder.build()
+        size?.let { f.setSize(it) } ?: f.pack()
+        f.setLocationRelativeTo(null)
+        f.isVisible = true
+    }
 }

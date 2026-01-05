@@ -14,15 +14,5 @@
  */
 package org.angproj.utf.gui
 
-import javax.swing.JMenuBar
-
-@SwingGui
-class GuiMenuBarBuilder {
-    private val bar = JMenuBar()
-    fun menu(text: String, init: GuiMenuBuilder.() -> Unit) {
-        val m = GuiMenuBuilder(text)
-        m.init()
-        bar.add(m.build())
-    }
-    fun build(): JMenuBar = bar
+class DemoApp {
 }

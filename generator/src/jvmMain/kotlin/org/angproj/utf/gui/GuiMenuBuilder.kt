@@ -14,6 +14,24 @@
  */
 package org.angproj.utf.gui
 
+import java.awt.event.ActionEvent
+import javax.swing.JMenu
+import javax.swing.JMenuItem
+import javax.swing.KeyStroke
+
 @SwingGui
-class GuiMenuBuilder {
+class GuiMenuBuilder(private val text: String) {
+    private val menu = JMenu(text)
+    fun item(text: String, accel: KeyStroke? = null, action: (ActionEvent?) -> Unit = {}) {
+        val mi = JMenuItem(text)
+        accel?.let { mi.accelerator = it }
+        mi.addActionListener { action(it) }
+        menu.add(mi)
+    }
+    fun submenu(text: String, init: GuiMenuBuilder.() -> Unit) {
+        val sub = GuiMenuBuilder(text)
+        sub.init()
+        menu.add(sub.build())
+    }
+    fun build(): JMenu = menu
 }

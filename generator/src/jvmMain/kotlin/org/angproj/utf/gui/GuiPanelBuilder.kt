@@ -131,6 +131,12 @@ class GuiPanelBuilder(private val panel: JPanel = JPanel()) : Component {
         panel.add(tf)
     }
 
+    fun toggleButtons(init: GuiToggleButtonGroupBuilder.() -> Unit) {
+        val groupBuilder = GuiToggleButtonGroupBuilder(panel)
+        groupBuilder.init()
+        groupBuilder.build()
+    }
+
     fun separator() { panel.add(JSeparator()) }
 
     override fun build(): JPanel = panel

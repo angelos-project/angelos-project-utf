@@ -82,6 +82,14 @@ object DemoAppKt {
                         textField("Type something here") {
                             println("Text field action performed: ${(it.source as javax.swing.JTextField).text}")
                         }
+                        toggleButtons {
+                            toggleButton("Option A", true)
+                            toggleButton("Option B")
+                            toggleButton("Option C")
+                            onClick {
+                                println("Toggled: ${(it.source as javax.swing.JToggleButton).text}")
+                            }
+                        }
                     }
                     onClose(JFrame.EXIT_ON_CLOSE)
                 }.build()

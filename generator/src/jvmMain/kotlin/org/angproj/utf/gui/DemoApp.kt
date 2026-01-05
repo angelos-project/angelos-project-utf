@@ -82,7 +82,7 @@ object DemoAppKt {
                         textField("Type something here") {
                             println("Text field action performed: ${(it.source as javax.swing.JTextField).text}")
                         }
-                        toggleButtons {
+                        toggleGroup {
                             toggleButton("Option A", true)
                             toggleButton("Option B")
                             toggleButton("Option C")

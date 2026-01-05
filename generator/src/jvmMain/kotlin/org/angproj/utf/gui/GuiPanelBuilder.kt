@@ -90,7 +90,7 @@ class GuiPanelBuilder(private val panel: JPanel = JPanel()) : Component {
         panel.add(pb)
     }
 
-    fun radioButtons(init: GuiRadioButtonGroupBuilder.() -> Unit) {
+    fun radioGroup(init: GuiRadioButtonGroupBuilder.() -> Unit) {
         val groupBuilder = GuiRadioButtonGroupBuilder(panel)
         groupBuilder.init()
         groupBuilder.build()
@@ -131,7 +131,7 @@ class GuiPanelBuilder(private val panel: JPanel = JPanel()) : Component {
         panel.add(tf)
     }
 
-    fun toggleButtons(init: GuiToggleButtonGroupBuilder.() -> Unit) {
+    fun toggleGroup(init: GuiToggleButtonGroupBuilder.() -> Unit) {
         val groupBuilder = GuiToggleButtonGroupBuilder(panel)
         groupBuilder.init()
         groupBuilder.build()

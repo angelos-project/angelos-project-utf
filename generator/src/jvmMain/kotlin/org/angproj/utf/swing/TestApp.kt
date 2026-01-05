@@ -388,6 +388,15 @@ object TestAppKt {
             })
             examplesMenu.add(jToolBarExample)
 
+            // JToolTip Example menu item
+            val jToolTipExample = JMenuItem("JToolTip Example")
+            jToolTipExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JToolTipExample())
+                }
+            })
+            examplesMenu.add(jToolTipExample)
+
             // Add more example menu items here as framework grows
 
             // Initial empty panel or welcome

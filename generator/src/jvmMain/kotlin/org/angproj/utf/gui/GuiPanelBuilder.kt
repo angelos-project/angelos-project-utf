@@ -16,9 +16,21 @@ package org.angproj.utf.gui
 
 import java.awt.GridLayout
 import java.awt.LayoutManager
+import java.awt.event.ActionEvent
+import java.nio.channels.SelectionKey
+import java.nio.file.Path
 import javax.swing.BorderFactory
+import javax.swing.JButton
+import javax.swing.JCheckBox
+import javax.swing.JComboBox
+import javax.swing.JFileChooser
 import javax.swing.JLabel
+import javax.swing.JList
 import javax.swing.JPanel
+import javax.swing.JPasswordField
+import javax.swing.JProgressBar
+import javax.swing.JRadioButton
+import javax.swing.JSeparator
 import javax.swing.border.Border
 
 @SwingGui
@@ -43,6 +55,44 @@ class GuiPanelBuilder(private val panel: JPanel = JPanel()) : Component {
         lbl.init()
         panel.add(lbl)
     }
+
+    fun button(text: String, onClick: (ActionEvent) -> Unit = {}) {
+        val b = JButton(text)
+        b.addActionListener { onClick(it) }
+        panel.add(b)
+    }
+
+    fun checkBox(text: String, onClick: (ActionEvent) -> Unit = {}) {
+        val cb = JCheckBox(text)
+        cb.addActionListener { onClick(it) }
+        panel.add(cb)
+    }
+
+    fun list(items: Array<String>) {
+        val lst = JList(items)
+        panel.add(lst)
+    }
+
+    fun passwordField(text: String) {
+        val pf = JPasswordField(text)
+        panel.add(pf)
+    }
+
+    fun progressBar(text: String, value: Int, max: Int) {
+        val pb = JProgressBar(0, max)
+        pb.value = value
+        pb.string = text
+        pb.isStringPainted = true
+        panel.add(pb)
+    }
+
+    fun radioButtons(init: GuiRadioButtonGroupBuilder.() -> Unit) {
+        val groupBuilder = GuiRadioButtonGroupBuilder(panel)
+        groupBuilder.init()
+        groupBuilder.build()
+    }
+
+    fun separator() { panel.add(JSeparator()) }
 
     override fun build(): JPanel = panel
 }

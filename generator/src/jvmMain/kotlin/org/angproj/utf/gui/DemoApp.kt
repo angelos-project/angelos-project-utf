@@ -54,6 +54,24 @@ object DemoAppKt {
                             font = font.deriveFont(16f)
                             foreground = java.awt.Color.BLUE
                         }
+                        separator()
+                        button("Press Me!") {
+                            println("Button was pressed!")
+                        }
+                        checkBox("Check Me!") {
+                            println("Checkbox state changed: ${it.source}")
+                        }
+                        list(arrayOf("Item 1", "Item 2", "Item 3"))
+                        passwordField("Enter Password")
+                        progressBar("Update", 50, 100)
+                        radioButtons {
+                            radioButton("Select Me!", true)
+                            radioButton("Or Me!")
+                            radioButton("Not Me!")
+                            onClick {
+                                println("Selected: ${(it.source as javax.swing.JRadioButton).text}")
+                            }
+                        }
                     }
                     onClose(JFrame.EXIT_ON_CLOSE)
                 }.build()

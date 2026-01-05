@@ -18,8 +18,8 @@ import org.angproj.utf.model.SearchName
 
 enum class SwingUI(val component: String) {
     GUI_APPLET("JApplet"),
-    GUI_BUTTON("JButton"),
-    GUI_CHECK_BOX("JCheckBox"),
+    GUI_BUTTON("JButton"), // w
+    GUI_CHECK_BOX("JCheckBox"), // w
     GUI_CHECK_BOX_MENU_ITEM("JCheckBoxMenuItem"),
     GUI_COLOR_CHOOSER("JColorChooser"),
     GUI_COMBO_BOX("JComboBox"),
@@ -31,19 +31,19 @@ enum class SwingUI(val component: String) {
     GUI_FORMATTED_TEXT_FIELD("JFormattedTextField"),
     GUI_FRAME("JFrame"), // --
     GUI_INTERNAL_FRAME("JInternalFrame"),
-    GUI_LABEL("JLabel"),
+    GUI_LABEL("JLabel"), // w
     GUI_LAYER("JLayer"),
     GUI_LAYERED_PANE("JLayeredPane"),
-    GUI_LIST("JList"),
+    GUI_LIST("JList"), // w
     GUI_MENU("JMenu"),
     GUI_MENU_BAR("JMenuBar"),
     GUI_MENU_ITEM("JMenuItem"), // --
     GUI_OPTION_PANE("JOptionPane"),
     GUI_PANEL("JPanel"), // --
-    GUI_PASSWORD_FIELD("JPasswordField"),
+    GUI_PASSWORD_FIELD("JPasswordField"), // w
     GUI_POPUP_MENU("JPopupMenu"),
-    GUI_PROGRESS_BAR("JProgressBar"),
-    GUI_RADIO_BUTTON("JRadioButton"),
+    GUI_PROGRESS_BAR("JProgressBar"), // w
+    GUI_RADIO_BUTTON("JRadioButton"), // w
     GUI_RADIO_BUTTON_MENU_ITEM("JRadioButtonMenuItem"),
     GUI_ROOT_PANE("JRootPane"),
     GUI_SCROLL_BAR("JScrollBar"),

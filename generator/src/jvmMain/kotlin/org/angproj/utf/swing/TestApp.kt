@@ -307,6 +307,15 @@ object TestAppKt {
             })
             examplesMenu.add(jSliderExample)
 
+            // JSpinner Example menu item
+            val jSpinnerExample = JMenuItem("JSpinner Example")
+            jSpinnerExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JSpinnerExample())
+                }
+            })
+            examplesMenu.add(jSpinnerExample)
+
             // Add more example menu items here as framework grows
 
             // Initial empty panel or welcome

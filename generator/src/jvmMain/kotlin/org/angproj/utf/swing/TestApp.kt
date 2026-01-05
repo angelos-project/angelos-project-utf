@@ -325,6 +325,15 @@ object TestAppKt {
             })
             examplesMenu.add(jSplitPaneExample)
 
+            // JTabbedPane Example menu item
+            val jTabbedPaneExample = JMenuItem("JTabbedPane Example")
+            jTabbedPaneExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JTabbedPaneExample())
+                }
+            })
+            examplesMenu.add(jTabbedPaneExample)
+
             // Add more example menu items here as framework grows
 
             // Initial empty panel or welcome

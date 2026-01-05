@@ -49,15 +49,15 @@ enum class SwingUI(val component: String) {
     GUI_SCROLL_BAR("JScrollBar"),
     GUI_SCROLL_PANE("JScrollPane"),
     GUI_SEPARATOR("JSeparator"), // w
-    GUI_SLIDER("JSlider"),
-    GUI_SPINNER("JSpinner"),
+    GUI_SLIDER("JSlider"), // w
+    GUI_SPINNER("JSpinner"), // w
     GUI_SPLIT_PANE("JSplitPane"),
     GUI_TABBED_PANE("JTabbedPane"),
     GUI_TABLE("JTable"),
-    GUI_TEXT_AREA("JTextArea"),
-    GUI_TEXT_FIELD("JTextField"),
+    GUI_TEXT_AREA("JTextArea"), // w
+    GUI_TEXT_FIELD("JTextField"), // w
     GUI_TEXT_PANE("JTextPane"),
-    GUI_TOGGLE_BUTTON("JToggleButton"),
+    GUI_TOGGLE_BUTTON("JToggleButton"), // w
     GUI_TOOL_BAR("JToolBar"),
     GUI_TOOL_TIP("JToolTip"),
     GUI_TREE("JTree"),

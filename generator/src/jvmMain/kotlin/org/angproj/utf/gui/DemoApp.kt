@@ -47,7 +47,7 @@ object DemoAppKt {
                         }
                     }
                     content {
-                        label("Hello, World!")
+                        /*label("Hello, World!")
                         label("This is a demo application using the GUI DSL.")
                         label {
                             text = "This label has custom font and color."
@@ -71,9 +71,16 @@ object DemoAppKt {
                             onClick {
                                 println("Selected: ${(it.source as javax.swing.JRadioButton).text}")
                             }
-                        }
+                        }*/
                         slider {
                             println("Slider value changed: ${(it.source as javax.swing.JSlider).value}")
+                        }
+                        dateSpinner()
+                        numberSpinner(0, 100, 1, 50)
+                        listSpinner(arrayOf("Option 1", "Option 2", "Option 3"))
+                        textArea("This is a JTextArea.\nYou can write multiple lines here.", 4, 30)
+                        textField("Type something here") {
+                            println("Text field action performed: ${(it.source as javax.swing.JTextField).text}")
                         }
                     }
                     onClose(JFrame.EXIT_ON_CLOSE)

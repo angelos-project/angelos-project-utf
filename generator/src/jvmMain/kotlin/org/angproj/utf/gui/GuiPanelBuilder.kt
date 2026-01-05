@@ -17,21 +17,23 @@ package org.angproj.utf.gui
 import java.awt.GridLayout
 import java.awt.LayoutManager
 import java.awt.event.ActionEvent
-import java.nio.channels.SelectionKey
-import java.nio.file.Path
 import javax.swing.BorderFactory
 import javax.swing.JButton
 import javax.swing.JCheckBox
-import javax.swing.JComboBox
-import javax.swing.JFileChooser
 import javax.swing.JLabel
 import javax.swing.JList
 import javax.swing.JPanel
 import javax.swing.JPasswordField
 import javax.swing.JProgressBar
-import javax.swing.JRadioButton
 import javax.swing.JSeparator
 import javax.swing.JSlider
+import javax.swing.JSpinner
+import javax.swing.JSpinner.DateEditor
+import javax.swing.JTextArea
+import javax.swing.JTextField
+import javax.swing.SpinnerDateModel
+import javax.swing.SpinnerListModel
+import javax.swing.SpinnerNumberModel
 import javax.swing.border.Border
 import javax.swing.event.ChangeEvent
 
@@ -98,6 +100,35 @@ class GuiPanelBuilder(private val panel: JPanel = JPanel()) : Component {
         val slider = JSlider(orientation.value)
         slider.addChangeListener { onChange(it) }
         panel.add(slider)
+    }
+
+    fun dateSpinner() {
+        val spinner = JSpinner(SpinnerDateModel())
+        spinner.editor = DateEditor(spinner, "yyyy-MM-dd")
+        panel.add(spinner)
+    }
+
+    fun numberSpinner(min: Int, max: Int, step: Int, initial: Int) {
+        val spinner = JSpinner(SpinnerNumberModel(initial, min, max, step))
+        panel.add(spinner)
+    }
+
+    fun listSpinner(items: Array<String>) {
+        val spinner = JSpinner(SpinnerListModel(items.toList()))
+        panel.add(spinner)
+    }
+
+    fun textArea(text: String, rows: Int = 5, columns: Int = 20) {
+        val ta = JTextArea(text, rows, columns)
+        ta.setLineWrap(true)
+        ta.setWrapStyleWord(true)
+        panel.add(ta)
+    }
+
+    fun textField(text: String, onEnter: (ActionEvent) -> Unit = {}) {
+        val tf = JTextField(text)
+        tf.addActionListener { onEnter(it) }
+        panel.add(tf)
     }
 
     fun separator() { panel.add(JSeparator()) }

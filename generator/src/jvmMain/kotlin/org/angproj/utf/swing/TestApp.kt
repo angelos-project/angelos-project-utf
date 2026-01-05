@@ -397,6 +397,15 @@ object TestAppKt {
             })
             examplesMenu.add(jToolTipExample)
 
+            // JTree Example menu item
+            val jTreeExample = JMenuItem("JTree Example")
+            jTreeExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JTreeExample())
+                }
+            })
+            examplesMenu.add(jTreeExample)
+
             // Add more example menu items here as framework grows
 
             // Initial empty panel or welcome

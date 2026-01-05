@@ -406,6 +406,15 @@ object TestAppKt {
             })
             examplesMenu.add(jTreeExample)
 
+            // JViewport Example menu item
+            val jViewportExample = JMenuItem("JViewport Example")
+            jViewportExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JViewportExample())
+                }
+            })
+            examplesMenu.add(jViewportExample)
+
             // Add more example menu items here as framework grows
 
             // Initial empty panel or welcome

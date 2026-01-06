@@ -20,6 +20,7 @@ import java.awt.event.ActionEvent
 import javax.swing.BorderFactory
 import javax.swing.JButton
 import javax.swing.JCheckBox
+import javax.swing.JComboBox
 import javax.swing.JLabel
 import javax.swing.JList
 import javax.swing.JPanel
@@ -70,6 +71,11 @@ class GuiPanelBuilder(private val panel: JPanel = JPanel()) : Component {
         val cb = JCheckBox(text)
         cb.addActionListener { onClick(it) }
         panel.add(cb)
+    }
+
+    fun comboBox(items: Array<String>) {
+        val comboBox = JComboBox(items)
+        panel.add(comboBox)
     }
 
     fun list(items: Array<String>) {

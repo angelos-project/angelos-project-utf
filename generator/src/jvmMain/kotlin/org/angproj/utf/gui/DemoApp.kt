@@ -72,6 +72,7 @@ object DemoAppKt {
                                 println("Selected: ${(it.source as javax.swing.JRadioButton).text}")
                             }
                         }*/
+                        comboBox(arrayOf("Choice 1", "Choice 2", "Choice 3"))
                         slider {
                             println("Slider value changed: ${(it.source as javax.swing.JSlider).value}")
                         }

@@ -14,10 +14,12 @@
  */
 package org.angproj.utf.gui
 
+import java.awt.GraphicsEnvironment
 import javax.swing.JFrame
 import javax.swing.JPanel
 import javax.swing.SwingUtilities
 import javax.swing.UIManager
+
 
 object DemoAppKt {
     private lateinit var frame: JFrame
@@ -96,7 +98,9 @@ object DemoAppKt {
                 }.build()
             }
 
-            frame.setSize(800, 600)
+            val bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds()
+            frame.setBounds(bounds)
+            //frame.setSize(800, 600)
 
             frame.setVisible(true)
         }

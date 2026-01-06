@@ -55,6 +55,66 @@ object TestAppKt {
             val examplesMenu = JMenu("Examples")
             menuBar.add(examplesMenu)
 
+            // JDesktopPane Example menu item
+            val jDesktopPaneExample = JMenuItem("JDesktopPane Example")
+            jDesktopPaneExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JDesktopPaneExample(frame))
+                }
+            })
+            examplesMenu.add(jDesktopPaneExample)
+
+            // JEditorPane Example menu item
+            val jEditorPaneExample = JMenuItem("JEditorPane Example")
+            jEditorPaneExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JEditorPaneExample())
+                }
+            })
+            examplesMenu.add(jEditorPaneExample)
+
+            // JInternalFrame Example menu item
+            val jInternalFrameExample = JMenuItem("JInternalFrame Example")
+            jInternalFrameExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JInternalFrameExample())
+                }
+            })
+            examplesMenu.add(jInternalFrameExample)
+
+            // JLayeredPane Example menu item
+            val jLayeredPaneExample = JMenuItem("JLayeredPane Example")
+            jLayeredPaneExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JLayeredPaneExample())
+                }
+            })
+            examplesMenu.add(jLayeredPaneExample)
+
+            // JLayer Example menu item
+            val jLayerExample = JMenuItem("JLayer Example")
+            jLayerExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JLayerExample())
+                }
+            })
+            examplesMenu.add(jLayerExample)
+
+            // JRootPane Example menu item
+            val jRootPaneExample = JMenuItem("JRootPane Example")
+            jRootPaneExample.addActionListener(object : ActionListener {
+                override fun actionPerformed(e: ActionEvent?) {
+                    switchPanel(JRootPaneExample())
+                }
+            })
+            examplesMenu.add(jRootPaneExample)
+
+            examplesMenu.add(JSeparator())
+
+
+
+            examplesMenu.add(JSeparator())
+
             // JButton Example menu item
             val jButtonItem = JMenuItem("JButton Example")
             jButtonItem.addActionListener(object : ActionListener {
@@ -100,15 +160,6 @@ object TestAppKt {
             })
             examplesMenu.add(jComboBoxExample)
 
-            // JDesktopPane Example menu item
-            val jDesktopPaneExample = JMenuItem("JDesktopPane Example")
-            jDesktopPaneExample.addActionListener(object : ActionListener {
-                override fun actionPerformed(e: ActionEvent?) {
-                    switchPanel(JDesktopPaneExample(frame))
-                }
-            })
-            examplesMenu.add(jDesktopPaneExample)
-
             // JDialog Example menu item
             val jDialogExample = JMenuItem("JDialog Example")
             jDialogExample.addActionListener(object : ActionListener {
@@ -117,15 +168,6 @@ object TestAppKt {
                 }
             })
             examplesMenu.add(jDialogExample)
-
-            // JEditorPane Example menu item
-            val jEditorPaneExample = JMenuItem("JEditorPane Example")
-            jEditorPaneExample.addActionListener(object : ActionListener {
-                override fun actionPerformed(e: ActionEvent?) {
-                    switchPanel(JEditorPaneExample())
-                }
-            })
-            examplesMenu.add(jEditorPaneExample)
 
             // JFileChooser Example menu item
             val jFileChooserExample = JMenuItem("JFileChooser Example")
@@ -145,15 +187,6 @@ object TestAppKt {
             })
             examplesMenu.add(jFormattedTextFieldExample)
 
-            // JInternalFrame Example menu item
-            val jInternalFrameExample = JMenuItem("JInternalFrame Example")
-            jInternalFrameExample.addActionListener(object : ActionListener {
-                override fun actionPerformed(e: ActionEvent?) {
-                    switchPanel(JInternalFrameExample())
-                }
-            })
-            examplesMenu.add(jInternalFrameExample)
-
             // JLabel Example menu item
             val jLabelExample = JMenuItem("JLabel Example")
             jLabelExample.addActionListener(object : ActionListener {
@@ -162,24 +195,6 @@ object TestAppKt {
                 }
             })
             examplesMenu.add(jLabelExample)
-
-            // JLayer Example menu item
-            val jLayerExample = JMenuItem("JLayer Example")
-            jLayerExample.addActionListener(object : ActionListener {
-                override fun actionPerformed(e: ActionEvent?) {
-                    switchPanel(JLayerExample())
-                }
-            })
-            examplesMenu.add(jLayerExample)
-
-            // JLayeredPane Example menu item
-            val jLayeredPaneExample = JMenuItem("JLayeredPane Example")
-            jLayeredPaneExample.addActionListener(object : ActionListener {
-                override fun actionPerformed(e: ActionEvent?) {
-                    switchPanel(JLayeredPaneExample())
-                }
-            })
-            examplesMenu.add(jLayeredPaneExample)
 
             // JList Example menu item
             val jListExample = JMenuItem("JList Example")
@@ -261,15 +276,6 @@ object TestAppKt {
                 }
             })
             examplesMenu.add(jRadioButtonMenuItemExample)
-
-            // JRootPane Example menu item
-            val jRootPaneExample = JMenuItem("JRootPane Example")
-            jRootPaneExample.addActionListener(object : ActionListener {
-                override fun actionPerformed(e: ActionEvent?) {
-                    switchPanel(JRootPaneExample())
-                }
-            })
-            examplesMenu.add(jRootPaneExample)
 
             // JScrollBar Example menu item
             val jScrollBarExample = JMenuItem("JScrollBar Example")

@@ -33,6 +33,12 @@ object DemoWorkspaceKt {
         gui {
             panel = panel {
                 label("This is a test panel")
+                buildTextField {
+                    text = "Edit Me"
+                    onChange { newText ->
+                        println("Text field changed: $newText")
+                    }
+                }
                 buildCheckBox {
                     text = "Check Me"
                     isChecked = true
@@ -91,6 +97,12 @@ object DemoWorkspaceKt {
                             item ("Exit") {
                                 frame.dispose()
                             }
+                        }
+                        menu("Edit") {
+                            item("Cut") {}
+                            item("Copy") {}
+                            item("Paste") {}
+                            item("Select All") {}
                         }
                         menu("Layout") {
                             item("Minimize All") {

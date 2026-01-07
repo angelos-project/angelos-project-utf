@@ -14,5 +14,8 @@
  */
 package org.angproj.utf.gui
 
-class MetaTextFieldWidget {
+interface MetaTextFieldWidget : MetaWidget {
+    var align: TextAlign
+    var cols: Int
+    fun onChange(action: (String) -> Unit)
 }

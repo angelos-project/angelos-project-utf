@@ -16,26 +16,26 @@ package org.angproj.utf.gui
 
 import javax.swing.JTextField
 
-class WidgetTextFieldBuilder : AbstractWidgetBuilder() {
+class WidgetTextFieldBuilder : AbstractWidgetBuilder(), MetaTextFieldWidget {
     private var _alignment = TextAlign.LEFT
-    var align: TextAlign
+    override var align: TextAlign
         get() = _alignment
         set(value) { _alignment = value }
 
     private var _columns: Int = 0
-    var cols: Int
+    override var cols: Int
         get() = _columns
         set(value) { _columns = value }
 
     private var onChange: (String) -> Unit = {}
-    fun onChange(action: (String) -> Unit) {
+    override fun onChange(action: (String) -> Unit) {
         onChange = action
     }
 
     fun build(): JTextField {
         val textField = JTextField(_text, _columns)
         textField.horizontalAlignment = _alignment.value
-        textField.addActionListener {
+        textField.addCaretListener {
             _text = textField.text
             onChange(_text)
         }

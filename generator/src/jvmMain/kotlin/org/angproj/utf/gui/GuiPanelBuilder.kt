@@ -149,6 +149,12 @@ class GuiPanelBuilder(private val panel: JPanel = JPanel()) : Component {
         panel.add(tf)
     }
 
+    fun buildTextField(init: WidgetTextFieldBuilder.() -> Unit) {
+        val builder = WidgetTextFieldBuilder()
+        builder.init()
+        panel.add(builder.build())
+    }
+
     fun toggleGroup(init: GuiToggleButtonGroupBuilder.() -> Unit) {
         val groupBuilder = GuiToggleButtonGroupBuilder(panel)
         groupBuilder.init()

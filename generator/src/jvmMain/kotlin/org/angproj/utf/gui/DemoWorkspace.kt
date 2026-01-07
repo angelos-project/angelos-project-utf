@@ -14,14 +14,19 @@
  */
 package org.angproj.utf.gui
 
+import java.awt.Toolkit
+import java.awt.event.ActionEvent
+import java.awt.event.KeyEvent
 import javax.swing.JComponent
 import javax.swing.JDesktopPane
 import javax.swing.JDialog
 import javax.swing.JFrame
 import javax.swing.JInternalFrame
 import javax.swing.JPanel
+import javax.swing.KeyStroke
 import javax.swing.SwingUtilities
 import javax.swing.UIManager
+import javax.swing.text.JTextComponent
 
 
 object DemoWorkspaceKt {
@@ -99,10 +104,43 @@ object DemoWorkspaceKt {
                             }
                         }
                         menu("Edit") {
-                            item("Cut") {}
-                            item("Copy") {}
-                            item("Paste") {}
-                            item("Select All") {}
+                            item("Cut") {
+                                when(frame.focusOwner) {
+                                    is JTextComponent -> {
+                                        val comp = frame.focusOwner as JTextComponent
+                                        comp.cut()
+                                    }
+                                    else -> { /* No operation */ Toolkit.getDefaultToolkit().beep() }
+                                }
+                            }
+                            item("Copy") {
+                                when(frame.focusOwner) {
+                                    is JTextComponent -> {
+                                        val comp = frame.focusOwner as JTextComponent
+                                        comp.copy()
+                                    }
+                                    else -> { /* No operation */ Toolkit.getDefaultToolkit().beep() }
+                                }
+                            }
+                            item("Paste") {
+                                when(frame.focusOwner) {
+                                    is JTextComponent -> {
+                                        val comp = frame.focusOwner as JTextComponent
+                                        comp.paste()
+                                    }
+                                    else -> { /* No operation */ Toolkit.getDefaultToolkit().beep() }
+                                }
+                            }
+                            separator()
+                            item("Select All") {
+                                when(frame.focusOwner) {
+                                    is JTextComponent -> {
+                                        val comp = frame.focusOwner as JTextComponent
+                                        comp.selectAll()
+                                    }
+                                    else -> { /* No operation */ }
+                                }
+                            }
                         }
                         menu("Layout") {
                             item("Minimize All") {

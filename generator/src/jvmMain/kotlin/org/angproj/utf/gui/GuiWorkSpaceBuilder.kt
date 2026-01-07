@@ -15,25 +15,19 @@
 package org.angproj.utf.gui
 
 import java.awt.Dimension
+import java.awt.GraphicsEnvironment
+import javax.swing.JDesktopPane
 import javax.swing.JFrame
 
 @SwingGui
-class GuiFrameBuilder {
+class GuiWorkSpaceBuilder {
     var title: String = "App"
-    var frameSize: FrameSize = FrameSize.PACKED
+    private val menuBarBuilder = GuiMenuBarBuilder()
+    private var defaultCloseOperation = JFrame.EXIT_ON_CLOSE
     private var size: Dimension? = null
 
-    private val menuBarBuilder = GuiMenuBarBuilder()
-    private val contentBuilder = GuiPanelBuilder()
-    private var defaultCloseOperation = JFrame.EXIT_ON_CLOSE
-
     fun menuBar(init: GuiMenuBarBuilder.() -> Unit) { menuBarBuilder.init() }
-    fun content(init: GuiPanelBuilder.() -> Unit) { contentBuilder.init() }
-    fun size(w: Int, h: Int) {
-        size = Dimension(w, h)
-        frameSize = FrameSize.FIXED
-    }
-    fun fullSize() { frameSize = FrameSize.FULL }
+    fun size(w: Int, h: Int) { size = Dimension(w, h) }
     fun onClose(op: Int) { defaultCloseOperation = op }
 
     fun show() {
@@ -44,13 +38,11 @@ class GuiFrameBuilder {
         val f = JFrame(title)
         f.defaultCloseOperation = defaultCloseOperation
         f.jMenuBar = menuBarBuilder.build()
-        f.contentPane = contentBuilder.build()
-        when (frameSize) {
-            FrameSize.FULL -> f.bounds = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().maximumWindowBounds
-            FrameSize.PACKED -> f.pack()
-            FrameSize.FIXED -> f.size = size // Size is already set below
-        }
-        f.setLocationRelativeTo(null)
+        size?.let { f.setSize(it) } ?: f.pack()
+
+        val bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds()
+        f.setBounds(bounds)
+        //f.setLocationRelativeTo(null)
         return f
     }
 }

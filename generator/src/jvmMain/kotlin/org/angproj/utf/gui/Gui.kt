@@ -22,6 +22,12 @@ class Gui {
         return builder
     }
 
+    fun panel(block: GuiPanelBuilder.() -> Unit): GuiPanelBuilder {
+        val builder = GuiPanelBuilder()
+        builder.block()
+        return builder
+    }
+
     fun menuBar(block: GuiMenuBarBuilder.() -> Unit): GuiMenuBarBuilder {
         val builder = GuiMenuBarBuilder()
         builder.block()

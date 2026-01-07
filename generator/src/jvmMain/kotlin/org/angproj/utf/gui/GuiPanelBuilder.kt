@@ -67,10 +67,22 @@ class GuiPanelBuilder(private val panel: JPanel = JPanel()) : Component {
         panel.add(b)
     }
 
+    fun buildButton(init: WidgetButtonBuilder.() -> Unit) {
+        val builder = WidgetButtonBuilder()
+        builder.init()
+        panel.add(builder.build())
+    }
+
     fun checkBox(text: String, onClick: (ActionEvent) -> Unit = {}) {
         val cb = JCheckBox(text)
         cb.addActionListener { onClick(it) }
         panel.add(cb)
+    }
+
+    fun buildCheckBox(init: WidgetCheckBoxBuilder.() -> Unit) {
+        val builder = WidgetCheckBoxBuilder()
+        builder.init()
+        panel.add(builder.build())
     }
 
     fun comboBox(items: Array<String>) {

@@ -33,8 +33,18 @@ object DemoWorkspaceKt {
         gui {
             panel = panel {
                 label("This is a test panel")
-                button("Click Me") {
-                    println("Button in test panel clicked")
+                buildCheckBox {
+                    text = "Check Me"
+                    isChecked = true
+                    onChange { selected ->
+                        println("Checkbox changed: $selected")
+                    }
+                }
+                buildButton {
+                    text = "Click Me"
+                    onClick {
+                        println("Button in test panel clicked")
+                    }
                 }
             }.build()
         }

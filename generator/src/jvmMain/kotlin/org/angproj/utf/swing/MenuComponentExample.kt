@@ -19,7 +19,7 @@ import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
 import javax.swing.*
 
-internal class MenuComponentsExample(private val parentFrame: JFrame?) : JPanel() {
+internal class MenuComponentExample(private val parentFrame: JFrame?) : JPanel() {
     private val statusLabel: JLabel
 
     init {

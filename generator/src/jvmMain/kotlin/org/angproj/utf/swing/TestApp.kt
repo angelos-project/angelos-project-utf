@@ -434,7 +434,7 @@ object TestAppKt {
             val jMenuComponentExample = JMenuItem("JMenuComponent Example")
             jMenuComponentExample.addActionListener(object : ActionListener {
                 override fun actionPerformed(e: ActionEvent?) {
-                    switchPanel(MenuComponentExample(frame))
+                    switchPanel(MenuComponentsExample(frame))
                 }
             })
             examplesMenu.add(jMenuComponentExample)

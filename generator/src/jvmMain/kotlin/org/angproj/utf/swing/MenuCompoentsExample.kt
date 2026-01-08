@@ -48,17 +48,6 @@ class MenuComponentsExample(parent: JFrame) : JPanel() {
         openItem.addActionListener({ e -> statusLabel.setText("Status: Open selected") })
         fileMenu.add(openItem)
 
-        // Radio buttons in group for menu
-        val radioGroup: ButtonGroup = ButtonGroup()
-        val radio1: JRadioButtonMenuItem = JRadioButtonMenuItem("Option 1", true)
-        radio1.addActionListener({ e -> statusLabel.setText("Status: Option 1 selected") })
-        val radio2: JRadioButtonMenuItem = JRadioButtonMenuItem("Option 2")
-        radio2.addActionListener({ e -> statusLabel.setText("Status: Option 2 selected") })
-        radioGroup.add(radio1)
-        radioGroup.add(radio2)
-        fileMenu.add(radio1)
-        fileMenu.add(radio2)
-
         // Checkbox menu items
         val check1: JCheckBoxMenuItem = JCheckBoxMenuItem("Check 1")
         check1.addActionListener({ e -> statusLabel.setText("Status: Check 1 toggled to " + check1.isSelected()) })
@@ -76,6 +65,17 @@ class MenuComponentsExample(parent: JFrame) : JPanel() {
         submenu.add(subItem1)
         submenu.add(subItem2)
         fileMenu.add(submenu)
+
+        // Radio buttons in group for menu
+        val radioGroup: ButtonGroup = ButtonGroup()
+        val radio1: JRadioButtonMenuItem = JRadioButtonMenuItem("Option 1", true)
+        radio1.addActionListener({ e -> statusLabel.setText("Status: Option 1 selected") })
+        val radio2: JRadioButtonMenuItem = JRadioButtonMenuItem("Option 2")
+        radio2.addActionListener({ e -> statusLabel.setText("Status: Option 2 selected") })
+        radioGroup.add(radio1)
+        radioGroup.add(radio2)
+        submenu.add(radio1)
+        submenu.add(radio2)
 
         menuBar.add(fileMenu)
         tempFrame.setJMenuBar(menuBar)

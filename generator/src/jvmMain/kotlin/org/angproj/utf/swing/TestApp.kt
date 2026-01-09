@@ -61,11 +61,18 @@ object TestAppKt {
                 menuItem("JLayeredPane Example") { switchPanel(JLayeredPaneExample()) }
                 menuItem("JLayer Example") { switchPanel(JLayerExample()) }
                 menuItem("JRootPane Example") { switchPanel(JRootPaneExample()) }
-
                 separator()
+
+                menuItem("JMenuBar Example") { switchPanel(JMenuBarExample()) }
+                menuItem("JPopupMenu Example") { switchPanel(JPopupMenuExample()) }
+                menuItem("JMenu Example") { switchPanel(JMenuExample()) }
+                menuItem("JCheckBoxMenuItem Example") { switchPanel(JCheckBoxMenuItemExample()) }
+                menuItem("JRadioButtonMenuItem Example") { switchPanel(JRadioButtonMenuItemExample()) }
+                menuItem("JMenuComponent Example") { switchPanel(MenuComponentsExample(frame)) }
+                separator()
+
                 menuItem("JButton Example") { switchPanel(JButtonExample()) }
                 menuItem("JCheckBox Example") { switchPanel(JCheckBoxExample()) }
-                menuItem("JCheckBoxMenuItem Example") { switchPanel(JCheckBoxMenuItemExample()) }
                 menuItem("JColorChooser Example") { switchPanel(JColorChooserExample()) }
                 menuItem("JComboBox Example") { switchPanel(JComboBoxExample()) }
                 menuItem("JDialog Example") { switchPanel(JDialogExample(frame)) }
@@ -73,14 +80,10 @@ object TestAppKt {
                 menuItem("JFormattedTextField Example") { switchPanel(JFormattedTextFieldExample()) }
                 menuItem("JLabel Example") { switchPanel(JLabelExample()) }
                 menuItem("JList Example") { switchPanel(JListExample()) }
-                menuItem("JMenu Example") { switchPanel(JMenuExample()) }
-                menuItem("JMenuBar Example") { switchPanel(JMenuBarExample()) }
                 menuItem("JOptionPane Example") { switchPanel(JOptionPaneExample(frame)) }
                 menuItem("JPasswordField Example") { switchPanel(JPasswordFieldExample()) }
-                menuItem("JPopupMenu Example") { switchPanel(JPopupMenuExample()) }
                 menuItem("JProgressBar Example") { switchPanel(JProgressBarExample()) }
                 menuItem("JRadioButton Example") { switchPanel(JRadioButtonExample()) }
-                menuItem("JRadioButtonMenuItem Example") { switchPanel(JRadioButtonMenuItemExample()) }
                 menuItem("JScrollBar Example") { switchPanel(JScrollBarExample()) }
                 menuItem("JScrollPane Example") { switchPanel(JScrollPaneExample()) }
                 menuItem("JSeparator Example") { switchPanel(JSeparatorExample()) }
@@ -98,7 +101,6 @@ object TestAppKt {
                 menuItem("JTree Example") { switchPanel(JTreeExample()) }
                 menuItem("JViewport Example") { switchPanel(JViewportExample()) }
                 menuItem("JWindow Example") { switchPanel(JWindowExample(frame)) }
-                menuItem("JMenuComponent Example") { switchPanel(MenuComponentsExample(frame)) }
 
                 menuBar.add(build())
             }

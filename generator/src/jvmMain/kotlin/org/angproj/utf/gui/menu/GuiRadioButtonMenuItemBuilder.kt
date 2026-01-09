@@ -16,6 +16,7 @@ package org.angproj.utf.gui.menu
 
 import org.angproj.utf.gui.SwingGui
 import javax.swing.JRadioButtonMenuItem
+import javax.swing.KeyStroke
 
 @SwingGui
 class GuiRadioButtonMenuItemBuilder: AbstractMenuItemBuilder(), MetaRadioButtonMenuItem {
@@ -30,7 +31,7 @@ class GuiRadioButtonMenuItemBuilder: AbstractMenuItemBuilder(), MetaRadioButtonM
     fun build(): JRadioButtonMenuItem {
         return JRadioButtonMenuItem(text).apply {
             isSelected = _checked
-            accel?.let { this.accelerator = it }
+            if(_cmd != noCmd) { this.accelerator = KeyStroke.getKeyStroke(_cmd.first, _cmd.second) }
             icon?.let { this.icon = it }
         }
     }

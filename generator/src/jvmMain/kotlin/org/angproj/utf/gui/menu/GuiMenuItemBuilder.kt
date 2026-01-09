@@ -17,6 +17,7 @@ package org.angproj.utf.gui.menu
 import org.angproj.utf.gui.SwingGui
 import java.awt.event.ActionEvent
 import javax.swing.JMenuItem
+import javax.swing.KeyStroke
 
 @SwingGui
 class GuiMenuItemBuilder: AbstractMenuItemBuilder() {
@@ -29,7 +30,7 @@ class GuiMenuItemBuilder: AbstractMenuItemBuilder() {
 
     fun build(): JMenuItem {
         return JMenuItem(text).apply {
-            accel?.let { this.accelerator = it }
+            if(_cmd != noCmd) { this.accelerator = KeyStroke.getKeyStroke(_cmd.first, _cmd.second) }
             icon?.let { this.icon = it }
             this.addActionListener { onCommand(it) }
         }

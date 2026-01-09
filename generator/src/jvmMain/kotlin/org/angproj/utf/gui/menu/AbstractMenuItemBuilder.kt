@@ -26,9 +26,9 @@ abstract class AbstractMenuItemBuilder : MetaMenuItem {
             _text = value
         }
 
-    private var _cmd: Pair<Int, Int> = Pair(0, 0)
+    protected var _cmd: Pair<Int, Int> = noCmd
 
-    fun setCmd(key: OrdinaryKey, vararg mask: SpecialKey) {
+    override fun setCmd(key: OrdinaryKey, vararg mask: SpecialKey) {
         _cmd = Pair(key.code, mask.sumOf { it.mask })
     }
 
@@ -38,4 +38,8 @@ abstract class AbstractMenuItemBuilder : MetaMenuItem {
         set(value) {
             _icon = value
         }
+
+    companion object {
+        val noCmd = Pair(0, 0)
+    }
 }

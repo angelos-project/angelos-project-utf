@@ -18,17 +18,17 @@ import org.angproj.utf.gui.SwingGui
 import javax.swing.JCheckBoxMenuItem
 
 @SwingGui
-class GuiCheckBoxMenuItemBuilder: AbstractMenuItemBuilder() {
+class GuiCheckBoxMenuItemBuilder: AbstractMenuItemBuilder(), MetaCheckBoxMenuItem {
     private var _checked: Boolean = false
     private var onChange: (Boolean) -> Unit = {}
 
-    var isChecked: Boolean
+    override var isChecked: Boolean
         get() = _checked
         set(value) {
             _checked = value
         }
 
-    fun onChange(action: (Boolean) -> Unit) {
+    override fun onChange(action: (Boolean) -> Unit) {
         onChange = action
     }
 

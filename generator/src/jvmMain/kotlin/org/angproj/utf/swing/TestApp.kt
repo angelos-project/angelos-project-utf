@@ -81,7 +81,7 @@ object TestAppKt {
                 menuItem {
                     text = "JDialog Example"
                     setCmd(OrdinaryKey.D, SpecialKey.META)
-                    switchPanel(JDialogExample(frame))
+                    onCommand { switchPanel(JDialogExample(frame)) }
                 }
                 menuItem("JFileChooser Example") { switchPanel(JFileChooserExample(frame)) }
                 menuItem("JFormattedTextField Example") { switchPanel(JFormattedTextFieldExample()) }
@@ -89,7 +89,11 @@ object TestAppKt {
                 menuItem("JList Example") { switchPanel(JListExample()) }
                 menuItem("JOptionPane Example") { switchPanel(JOptionPaneExample(frame)) }
                 menuItem("JPasswordField Example") { switchPanel(JPasswordFieldExample()) }
-                menuItem("JProgressBar Example") { switchPanel(JProgressBarExample()) }
+                menuItem {
+                    text = "JProgressBar Example"
+                    setCmd(OrdinaryKey.P, SpecialKey.META)
+                    onCommand { switchPanel(JProgressBarExample()) }
+                }
                 menuItem("JRadioButton Example") { switchPanel(JRadioButtonExample()) }
                 menuItem("JScrollBar Example") { switchPanel(JScrollBarExample()) }
                 menuItem("JScrollPane Example") { switchPanel(JScrollPaneExample()) }

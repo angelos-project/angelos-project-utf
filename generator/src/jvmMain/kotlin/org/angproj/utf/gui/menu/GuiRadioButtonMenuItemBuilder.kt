@@ -19,9 +19,17 @@ import javax.swing.JRadioButtonMenuItem
 
 @SwingGui
 class GuiRadioButtonMenuItemBuilder: AbstractMenuItemBuilder() {
+    private var _checked: Boolean = false
+
+    var isChecked: Boolean
+        get() = _checked
+        set(value) {
+            _checked = value
+        }
 
     fun build(): JRadioButtonMenuItem {
         return JRadioButtonMenuItem(text).apply {
+            isSelected = _checked
             accel?.let { this.accelerator = it }
             icon?.let { this.icon = it }
         }

@@ -19,7 +19,7 @@ import javax.swing.JCheckBoxMenuItem
 
 @SwingGui
 class GuiCheckBoxMenuItemBuilder: AbstractMenuItemBuilder() {
-    var _checked: Boolean = false
+    private var _checked: Boolean = false
     private var onChange: (Boolean) -> Unit = {}
 
     var isChecked: Boolean

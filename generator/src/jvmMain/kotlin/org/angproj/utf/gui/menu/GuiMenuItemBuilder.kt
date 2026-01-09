@@ -12,15 +12,16 @@
  * Contributors:
  *      Kristoffer Paulsson - initial implementation
  */
-package org.angproj.utf.gui
+package org.angproj.utf.gui.menu
 
+import org.angproj.utf.gui.SwingGui
 import java.awt.event.ActionEvent
 import javax.swing.JMenu
 import javax.swing.JMenuItem
 import javax.swing.KeyStroke
 
 @SwingGui
-class GuiMenuBuilder(private val text: String) {
+class GuiMenuItemBuilder(private val text: String) {
     private val menu = JMenu(text)
 
     fun item(text: String, accel: KeyStroke? = null, action: (ActionEvent?) -> Unit = {}) {
@@ -34,8 +35,8 @@ class GuiMenuBuilder(private val text: String) {
         menu.addSeparator()
     }
 
-    fun submenu(text: String, init: GuiMenuBuilder.() -> Unit) {
-        val sub = GuiMenuBuilder(text)
+    fun submenu(text: String, init: GuiMenuItemBuilder.() -> Unit) {
+        val sub = GuiMenuItemBuilder(text)
         sub.init()
         menu.add(sub.build())
     }

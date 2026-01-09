@@ -29,9 +29,9 @@ class GuiRadioGroupMenuBuilder : MetaMenuNode {
     }
 
     fun radioItem(text: String) { radioItem { this.text = text } }
-    fun radioItem(init: GuiRadioButtonMenuItemBuilder.() -> Unit) {
+    fun radioItem(config: GuiRadioButtonMenuItemBuilder.() -> Unit) {
         val builder = GuiRadioButtonMenuItemBuilder()
-        builder.init()
+        builder.config()
         buttons.add(builder)
     }
 

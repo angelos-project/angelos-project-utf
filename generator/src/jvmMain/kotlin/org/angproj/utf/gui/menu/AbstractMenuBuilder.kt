@@ -31,9 +31,9 @@ class AbstractMenuBuilder : MetaMenuNode {
         this.text = text
         onCommand(action)
     } }
-    fun menuItem(buildAction: GuiMenuItemBuilder.() -> Unit) {
+    fun menuItem(config: GuiMenuItemBuilder.() -> Unit) {
         val builder = GuiMenuItemBuilder()
-        builder.buildAction()
+        builder.config()
         items.add(builder)
     }
 
@@ -41,21 +41,21 @@ class AbstractMenuBuilder : MetaMenuNode {
         this.text = text
         onChange(action)
     } }
-    fun checkItem(buildAction: GuiCheckBoxMenuItemBuilder.() -> Unit) {
+    fun checkItem(config: GuiCheckBoxMenuItemBuilder.() -> Unit) {
         val builder = GuiCheckBoxMenuItemBuilder()
-        builder.buildAction()
+        builder.config()
         items.add(builder)
     }
 
-    fun radioGroup(buildAction: GuiRadioGroupMenuBuilder.() -> Unit) {
+    fun radioGroup(config: GuiRadioGroupMenuBuilder.() -> Unit) {
         val builder = GuiRadioGroupMenuBuilder()
-        builder.buildAction()
+        builder.config()
         items.add(builder)
     }
 
-    fun subMenu(buildAction: AbstractMenuBuilder.() -> Unit) {
+    fun subMenu(config: AbstractMenuBuilder.() -> Unit) {
         val builder = AbstractMenuBuilder()
-        builder.buildAction()
+        builder.config()
         items.add(builder)
     }
 

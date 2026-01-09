@@ -18,10 +18,10 @@ import org.angproj.utf.gui.SwingGui
 import javax.swing.JRadioButtonMenuItem
 
 @SwingGui
-class GuiRadioButtonMenuItemBuilder: AbstractMenuItemBuilder() {
+class GuiRadioButtonMenuItemBuilder: AbstractMenuItemBuilder(), MetaRadioButtonMenuItem {
     private var _checked: Boolean = false
 
-    var isChecked: Boolean
+    override var isChecked: Boolean
         get() = _checked
         set(value) {
             _checked = value

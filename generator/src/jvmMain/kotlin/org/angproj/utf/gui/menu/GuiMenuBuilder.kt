@@ -37,7 +37,7 @@ class GuiMenuBuilder : AbstractMenuBuilder() {
                     is GuiMenuItemBuilder -> this.add((it).build())
                     is GuiCheckBoxMenuItemBuilder -> this.add((it).build())
                     is GuiRadioGroupMenuBuilder -> {}
-                    is GuiMenuBuilder -> add(it.build())
+                    is GuiSubMenuBuilder -> add(it.build())
                     else -> error("Unhandled GUI builder") // Ignore unknown types
                 }
             }

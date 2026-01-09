@@ -14,14 +14,20 @@
  */
 package org.angproj.utf.gui.menu
 
+import org.angproj.utf.gui.MetaWidget
 import org.angproj.utf.gui.SwingGui
 import java.awt.event.ActionEvent
-import javax.swing.JMenu
 
 @SwingGui
-class AbstractMenuBuilder : MetaMenuNode {
+abstract class AbstractMenuBuilder : MetaMenuNode, MetaWidget {
+    private var _text: String = ""
+    override var text: String
+        get() = _text
+        set(value) {
+            _text = value
+        }
 
-    private val items: MutableList<MetaMenuNode> = mutableListOf()
+    protected val items: MutableList<MetaMenuNode> = mutableListOf()
 
     fun separator() {
         items.add(object : MetaMenuSeparator {})
@@ -53,18 +59,9 @@ class AbstractMenuBuilder : MetaMenuNode {
         items.add(builder)
     }
 
-    fun subMenu(config: AbstractMenuBuilder.() -> Unit) {
-        val builder = AbstractMenuBuilder()
+    fun subMenu(config: GuiSubMenuBuilder.() -> Unit) {
+        val builder = GuiSubMenuBuilder()
         builder.config()
         items.add(builder)
-    }
-
-    fun build(): JMenu {
-        /*return JMenu(text).apply {
-            accel?.let { this.accelerator = it }
-            this.addActionListener { onCommand(it) }
-            items.forEach { this.add(it) }
-        }*/
-        return JMenu()
     }
 }

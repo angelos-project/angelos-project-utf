@@ -60,4 +60,5 @@ enum class OrdinaryKey(val code: Int) {
     COMMA(58),
     PERIOD(59),
     HYPHEN(60),
+    DISABLED(-1)
 }

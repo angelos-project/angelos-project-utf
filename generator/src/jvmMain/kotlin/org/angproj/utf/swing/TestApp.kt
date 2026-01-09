@@ -14,6 +14,7 @@
  */
 package org.angproj.utf.swing
 
+import org.angproj.utf.gui.OrdinaryKey
 import org.angproj.utf.gui.menu.GuiMenuBuilder
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
@@ -54,6 +55,7 @@ object TestAppKt {
 
             with(GuiMenuBuilder()) {
                 text = "Examples"
+                mnemonic = OrdinaryKey.E
 
                 menuItem("JDesktopPane Example") { switchPanel(JDesktopPaneExample(frame)) }
                 menuItem("JEditorPane Example") { switchPanel(JEditorPaneExample()) }

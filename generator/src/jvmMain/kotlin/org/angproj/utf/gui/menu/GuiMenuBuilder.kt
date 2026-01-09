@@ -14,13 +14,14 @@
  */
 package org.angproj.utf.gui.menu
 
+import org.angproj.utf.gui.OrdinaryKey
 import org.angproj.utf.gui.SwingGui
 import javax.swing.JMenu
 
 @SwingGui
 class GuiMenuBuilder : AbstractMenuBuilder() {
-    private var _mnemonic: Int = 0
-    var mnemonic: Int
+    private var _mnemonic: OrdinaryKey = OrdinaryKey.DISABLED
+    var mnemonic: OrdinaryKey
         get() = _mnemonic
         set(value) {
             _mnemonic = value
@@ -28,14 +29,14 @@ class GuiMenuBuilder : AbstractMenuBuilder() {
 
     fun build(): JMenu {
         return JMenu(text).apply {
-            if (mnemonic != 0) {
-                this.mnemonic = mnemonic
+            if (_mnemonic != OrdinaryKey.DISABLED) {
+                mnemonic = _mnemonic.code
             }
             items.forEach {
                 when (it) {
                     is MetaMenuSeparator -> addSeparator()
-                    is GuiMenuItemBuilder -> this.add((it).build())
-                    is GuiCheckBoxMenuItemBuilder -> this.add((it).build())
+                    is GuiMenuItemBuilder -> add((it).build())
+                    is GuiCheckBoxMenuItemBuilder -> add((it).build())
                     is GuiRadioGroupMenuBuilder -> {}
                     is GuiSubMenuBuilder -> add(it.build())
                     else -> error("Unhandled GUI builder") // Ignore unknown types

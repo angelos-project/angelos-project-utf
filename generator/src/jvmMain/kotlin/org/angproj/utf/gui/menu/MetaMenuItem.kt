@@ -14,17 +14,13 @@
  */
 package org.angproj.utf.gui.menu
 
-import org.angproj.utf.gui.SwingGui
-import javax.swing.JMenuItem
+import org.angproj.utf.gui.MetaWidget
+import java.awt.event.ActionEvent
+import javax.swing.ImageIcon
+import javax.swing.KeyStroke
 
-@SwingGui
-class GuiMenuItemBuilder: AbstractMenuItemBuilder() {
-
-    fun build(): JMenuItem {
-        return JMenuItem(text).apply {
-            accel?.let { this.accelerator = it }
-            icon?.let { this.icon = it }
-            this.addActionListener { onCommand(it) }
-        }
-    }
+interface MetaMenuItem : MetaWidget {
+    var accel: KeyStroke?
+    var onCommand: (ActionEvent) -> Unit
+    var icon: ImageIcon?
 }

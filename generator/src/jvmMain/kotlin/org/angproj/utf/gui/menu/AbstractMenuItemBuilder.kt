@@ -14,8 +14,9 @@
  */
 package org.angproj.utf.gui.menu
 
+import org.angproj.utf.gui.OrdinaryKey
+import org.angproj.utf.gui.SpecialKey
 import javax.swing.ImageIcon
-import javax.swing.KeyStroke
 
 abstract class AbstractMenuItemBuilder : MetaMenuItem {
     private var _text: String = ""
@@ -25,12 +26,11 @@ abstract class AbstractMenuItemBuilder : MetaMenuItem {
             _text = value
         }
 
-    private var _accel: KeyStroke? = null
-    override var accel: KeyStroke?
-        get() = _accel
-        set(value) {
-            _accel = value
-        }
+    private var _cmd: Pair<Int, Int> = Pair(0, 0)
+
+    fun setCmd(key: OrdinaryKey, vararg mask: SpecialKey) {
+        _cmd = Pair(key.code, mask.sumOf { it.mask })
+    }
 
     private var _icon: ImageIcon? = null
     override var icon: ImageIcon?

@@ -15,10 +15,11 @@
 package org.angproj.utf.gui.menu
 
 import org.angproj.utf.gui.MetaWidget
+import org.angproj.utf.gui.OrdinaryKey
+import org.angproj.utf.gui.SpecialKey
 import javax.swing.ImageIcon
-import javax.swing.KeyStroke
 
 interface MetaMenuItem : MetaWidget, MetaMenuNode {
-    var accel: KeyStroke?
+    fun setCmd(key: OrdinaryKey, vararg mask: SpecialKey)
     var icon: ImageIcon?
 }

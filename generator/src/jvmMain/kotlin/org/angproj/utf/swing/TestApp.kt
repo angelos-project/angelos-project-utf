@@ -15,6 +15,7 @@
 package org.angproj.utf.swing
 
 import org.angproj.utf.gui.OrdinaryKey
+import org.angproj.utf.gui.SpecialKey
 import org.angproj.utf.gui.menu.GuiMenuBuilder
 import java.awt.event.ActionEvent
 import java.awt.event.ActionListener
@@ -77,7 +78,11 @@ object TestAppKt {
                 menuItem("JCheckBox Example") { switchPanel(JCheckBoxExample()) }
                 menuItem("JColorChooser Example") { switchPanel(JColorChooserExample()) }
                 menuItem("JComboBox Example") { switchPanel(JComboBoxExample()) }
-                menuItem("JDialog Example") { switchPanel(JDialogExample(frame)) }
+                menuItem {
+                    text = "JDialog Example"
+                    setCmd(OrdinaryKey.D, SpecialKey.META)
+                    switchPanel(JDialogExample(frame))
+                }
                 menuItem("JFileChooser Example") { switchPanel(JFileChooserExample(frame)) }
                 menuItem("JFormattedTextField Example") { switchPanel(JFormattedTextFieldExample()) }
                 menuItem("JLabel Example") { switchPanel(JLabelExample()) }

@@ -14,8 +14,12 @@
  */
 package org.angproj.utf.gui.menu
 
+import org.angproj.utf.gui.OrdinaryKey
+import org.angproj.utf.gui.SpecialKey
 import org.angproj.utf.gui.SwingGui
 import java.awt.event.ActionEvent
+import java.awt.event.InputEvent
+import java.awt.event.KeyEvent
 import javax.swing.JMenuItem
 import javax.swing.KeyStroke
 
@@ -30,7 +34,18 @@ class GuiMenuItemBuilder: AbstractMenuItemBuilder() {
 
     fun build(): JMenuItem {
         return JMenuItem(text).apply {
-            if(_cmd != noCmd) { this.accelerator = KeyStroke.getKeyStroke(_cmd.first, _cmd.second) }
+            if(_cmd.first != OrdinaryKey.DISABLED) {
+                var modifiers = 0
+                _cmd.second.forEach {
+                    modifiers = modifiers or when(it) {
+                        SpecialKey.ALT -> InputEvent.ALT_DOWN_MASK
+                        SpecialKey.CTRL -> InputEvent.CTRL_DOWN_MASK
+                        SpecialKey.META -> InputEvent.META_DOWN_MASK
+                        SpecialKey.SHIFT -> InputEvent.SHIFT_DOWN_MASK
+                    }
+                }
+                this.accelerator = KeyStroke.getKeyStroke(_cmd.first.code, modifiers)
+            }
             icon?.let { this.icon = it }
             this.addActionListener { onCommand(it) }
         }

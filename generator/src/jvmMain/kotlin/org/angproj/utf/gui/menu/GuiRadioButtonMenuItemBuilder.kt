@@ -14,7 +14,10 @@
  */
 package org.angproj.utf.gui.menu
 
+import org.angproj.utf.gui.OrdinaryKey
+import org.angproj.utf.gui.SpecialKey
 import org.angproj.utf.gui.SwingGui
+import java.awt.event.InputEvent
 import javax.swing.JRadioButtonMenuItem
 import javax.swing.KeyStroke
 
@@ -31,7 +34,18 @@ class GuiRadioButtonMenuItemBuilder: AbstractMenuItemBuilder(), MetaRadioButtonM
     fun build(): JRadioButtonMenuItem {
         return JRadioButtonMenuItem(text).apply {
             isSelected = _checked
-            if(_cmd != noCmd) { this.accelerator = KeyStroke.getKeyStroke(_cmd.first, _cmd.second) }
+            if(_cmd.first != OrdinaryKey.DISABLED) {
+                var modifiers = 0
+                _cmd.second.forEach {
+                    modifiers = modifiers or when(it) {
+                        SpecialKey.ALT -> InputEvent.ALT_DOWN_MASK
+                        SpecialKey.CTRL -> InputEvent.CTRL_DOWN_MASK
+                        SpecialKey.META -> InputEvent.META_DOWN_MASK
+                        SpecialKey.SHIFT -> InputEvent.SHIFT_DOWN_MASK
+                    }
+                }
+                this.accelerator = KeyStroke.getKeyStroke(_cmd.first.code, modifiers)
+            }
             icon?.let { this.icon = it }
         }
     }

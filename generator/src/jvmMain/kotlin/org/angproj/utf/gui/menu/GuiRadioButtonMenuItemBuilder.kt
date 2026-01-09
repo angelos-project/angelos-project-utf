@@ -15,24 +15,15 @@
 package org.angproj.utf.gui.menu
 
 import org.angproj.utf.gui.SwingGui
-import java.awt.event.ActionEvent
-import javax.swing.JMenuItem
+import javax.swing.JRadioButtonMenuItem
 
 @SwingGui
-class GuiMenuItemBuilder: AbstractMenuItemBuilder() {
+class GuiRadioButtonMenuItemBuilder: AbstractMenuItemBuilder() {
 
-    private var _command: (ActionEvent) -> Unit = {}
-    var onCommand: (ActionEvent) -> Unit
-        get() = _command
-        set(value) {
-            _command = value
-        }
-
-    fun build(): JMenuItem {
-        return JMenuItem(text).apply {
+    fun build(): JRadioButtonMenuItem {
+        return JRadioButtonMenuItem(text).apply {
             accel?.let { this.accelerator = it }
             icon?.let { this.icon = it }
-            this.addActionListener { onCommand(it) }
         }
     }
 }

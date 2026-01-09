@@ -15,12 +15,10 @@
 package org.angproj.utf.gui.menu
 
 import org.angproj.utf.gui.MetaWidget
-import java.awt.event.ActionEvent
 import javax.swing.ImageIcon
 import javax.swing.KeyStroke
 
 interface MetaMenuItem : MetaWidget {
     var accel: KeyStroke?
-    var onCommand: (ActionEvent) -> Unit
     var icon: ImageIcon?
 }

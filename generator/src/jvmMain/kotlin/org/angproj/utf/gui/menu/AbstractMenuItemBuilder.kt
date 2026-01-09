@@ -14,7 +14,6 @@
  */
 package org.angproj.utf.gui.menu
 
-import java.awt.event.ActionEvent
 import javax.swing.ImageIcon
 import javax.swing.KeyStroke
 
@@ -31,13 +30,6 @@ abstract class AbstractMenuItemBuilder() : MetaMenuItem {
         get() = _accel
         set(value) {
             _accel = value
-        }
-
-    private var _command: (ActionEvent) -> Unit = {}
-    override var onCommand: (ActionEvent) -> Unit
-        get() = _command
-        set(value) {
-            _command = value
         }
 
     private var _icon: ImageIcon? = null

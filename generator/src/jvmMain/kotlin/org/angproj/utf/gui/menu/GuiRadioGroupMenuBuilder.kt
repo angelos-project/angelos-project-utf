@@ -20,7 +20,7 @@ import javax.swing.ButtonGroup
 import javax.swing.JRadioButtonMenuItem
 
 @SwingGui
-class GuiRadioGroupMenuBuilder {
+class GuiRadioGroupMenuBuilder : MetaMenuNode {
     private val buttons = mutableListOf<GuiRadioButtonMenuItemBuilder>()
     private var onChange: (String) -> Unit = {}
 

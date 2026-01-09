@@ -14,5 +14,4 @@
  */
 package org.angproj.utf.gui.menu
 
-interface MetaMenuSeparator : MetaMenuNode {
-}
+interface MetaMenuSeparator : MetaMenuNode

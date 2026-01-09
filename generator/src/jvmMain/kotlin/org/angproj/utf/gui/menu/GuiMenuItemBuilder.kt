@@ -21,12 +21,11 @@ import javax.swing.JMenuItem
 @SwingGui
 class GuiMenuItemBuilder: AbstractMenuItemBuilder() {
 
-    private var _command: (ActionEvent) -> Unit = {}
-    var onCommand: (ActionEvent) -> Unit
-        get() = _command
-        set(value) {
-            _command = value
-        }
+    private var onCommand: (ActionEvent) -> Unit = {}
+
+    fun onCommand(action: (ActionEvent) -> Unit) {
+        onCommand = action
+    }
 
     fun build(): JMenuItem {
         return JMenuItem(text).apply {

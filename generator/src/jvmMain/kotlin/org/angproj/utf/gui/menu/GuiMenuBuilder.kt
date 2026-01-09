@@ -14,11 +14,13 @@
  */
 package org.angproj.utf.gui.menu
 
-import org.angproj.utf.gui.MetaWidget
-import javax.swing.ImageIcon
+import org.angproj.utf.gui.SwingGui
+import java.awt.event.ActionEvent
+import javax.swing.JMenu
+import javax.swing.JMenuItem
 import javax.swing.KeyStroke
 
-interface MetaMenuItem : MetaWidget, MetaMenuNode {
-    var accel: KeyStroke?
-    var icon: ImageIcon?
+@SwingGui
+class GuiMenuBuilder() {
+
 }

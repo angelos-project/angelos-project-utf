@@ -17,7 +17,7 @@ package org.angproj.utf.gui.menu
 import javax.swing.ImageIcon
 import javax.swing.KeyStroke
 
-abstract class AbstractMenuItemBuilder() : MetaMenuItem {
+abstract class AbstractMenuItemBuilder : MetaMenuItem {
     private var _text: String = ""
     override var text: String
         get() = _text

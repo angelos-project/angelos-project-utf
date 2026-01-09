@@ -14,11 +14,5 @@
  */
 package org.angproj.utf.gui.menu
 
-import org.angproj.utf.gui.MetaWidget
-import javax.swing.ImageIcon
-import javax.swing.KeyStroke
-
-interface MetaMenuItem : MetaWidget, MetaMenuNode {
-    var accel: KeyStroke?
-    var icon: ImageIcon?
+interface MetaMenuSeparator : MetaMenuNode {
 }

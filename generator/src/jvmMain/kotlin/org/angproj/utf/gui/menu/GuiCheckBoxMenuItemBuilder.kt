@@ -20,7 +20,7 @@ import javax.swing.JCheckBoxMenuItem
 @SwingGui
 class GuiCheckBoxMenuItemBuilder: AbstractMenuItemBuilder(), MetaCheckBoxMenuItem {
     private var _checked: Boolean = false
-    private var onChange: (Boolean) -> Unit = {}
+    private var onChange: (String, Boolean) -> Unit = { s, b -> }
 
     override var isChecked: Boolean
         get() = _checked
@@ -28,7 +28,7 @@ class GuiCheckBoxMenuItemBuilder: AbstractMenuItemBuilder(), MetaCheckBoxMenuIte
             _checked = value
         }
 
-    override fun onChange(action: (Boolean) -> Unit) {
+    override fun onChange(action: (String, Boolean) -> Unit) {
         onChange = action
     }
 
@@ -38,7 +38,7 @@ class GuiCheckBoxMenuItemBuilder: AbstractMenuItemBuilder(), MetaCheckBoxMenuIte
             accelerator = getKeyStroke()
             icon?.let { this.icon = it }
             addActionListener {
-                onChange(isSelected)
+                onChange(this.text, isSelected)
             }
         }
     }

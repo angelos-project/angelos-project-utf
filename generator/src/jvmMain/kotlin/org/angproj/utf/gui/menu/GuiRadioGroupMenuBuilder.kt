@@ -23,9 +23,9 @@ import javax.swing.JRadioButtonMenuItem
 @SwingGui
 class GuiRadioGroupMenuBuilder : MetaMenuNode {
     private val buttons = mutableListOf<GuiRadioButtonMenuItemBuilder>()
-    private var onChange: (String) -> Unit = {}
+    private var onChange: (String, Int) -> Unit = { s, i -> }
 
-    fun onChange(action: (String) -> Unit) {
+    fun onChange(action: (String, Int) -> Unit) {
         onChange = action
     }
 
@@ -38,12 +38,13 @@ class GuiRadioGroupMenuBuilder : MetaMenuNode {
 
     fun build(comp: JComponent) {
         val buttonGroup = ButtonGroup()
-        for (button in buttons) {
+        buttons.forEachIndexed { index, button ->
             val menuItem = button.build()
             buttonGroup.add(menuItem)
             comp.add(menuItem)
             menuItem.addActionListener { event: ActionEvent ->
-                onChange((event.source as JRadioButtonMenuItem).text)
+                val num = index
+                onChange((event.source as JRadioButtonMenuItem).text, num)
             }
         }
     }

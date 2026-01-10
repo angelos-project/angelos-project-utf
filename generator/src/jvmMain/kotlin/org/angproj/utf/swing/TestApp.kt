@@ -44,7 +44,11 @@ object TestAppKt {
                 menu {
                     text = "File"
                     mnemonic = OrdinaryKey.F
-                    menuItem("Exit") { exitProcess(0) }
+                    menuItem {
+                        text = "Exit"
+                        setCmd(OrdinaryKey.Q, SpecialKey.META)
+                        onCommand { exitProcess(0)  }
+                    }
                 }
                 menu {
                     text = "Examples"
@@ -104,6 +108,35 @@ object TestAppKt {
                     menuItem("JTree Example") { switchPanel(JTreeExample()) }
                     menuItem("JViewport Example") { switchPanel(JViewportExample()) }
                     menuItem("JWindow Example") { switchPanel(JWindowExample(frame)) }
+                }
+                menu {
+                    text = "Demo"
+                    mnemonic = OrdinaryKey.D
+
+                    subMenu {
+                        text = "Checkboxes"
+                        checkItem {
+                            text = "Checkbox 1"
+                            onChange { s, b -> println("${if(b) "C" else "Unc"}hecked $s") }
+                        }
+                        checkItem {
+                            text = "Checkbox 2"
+                            onChange { s, b -> println("${if(b) "C" else "Unc"}hecked $s") }
+                        }
+                        checkItem {
+                            text = "Checkbox 3"
+                            onChange { s, b -> println("${if(b) "C" else "Unc"}hecked $s") }
+                        }
+                    }
+                    subMenu {
+                        text = "Radiobuttons"
+                        radioGroup {
+                            onChange { s, i -> println("Selected Radio: $s - at $i") }
+                            radioItem("Radiobutton 1")
+                            radioItem("Radiobutton 2")
+                            radioItem("Radiobutton 3")
+                        }
+                    }
                 }
 
                 frame.jMenuBar = build()

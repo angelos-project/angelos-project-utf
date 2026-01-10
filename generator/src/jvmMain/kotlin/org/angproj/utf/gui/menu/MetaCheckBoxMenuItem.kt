@@ -16,5 +16,5 @@ package org.angproj.utf.gui.menu
 
 interface MetaCheckBoxMenuItem : MetaMenuItem {
     var isChecked: Boolean
-    fun onChange(action: (Boolean) -> Unit)
+    fun onChange(action: (String, Boolean) -> Unit)
 }

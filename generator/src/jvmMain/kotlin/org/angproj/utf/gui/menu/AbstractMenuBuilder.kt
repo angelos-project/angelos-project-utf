@@ -45,7 +45,7 @@ abstract class AbstractMenuBuilder : MetaMenuNode, MetaWidget {
         items.add(builder)
     }
 
-    fun checkItem(text: String, action: (Boolean) -> Unit) { checkItem {
+    fun checkItem(text: String, action: (String, Boolean) -> Unit) { checkItem {
         this.text = text
         onChange(action)
     } }

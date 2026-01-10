@@ -61,9 +61,10 @@ abstract class AbstractMenuBuilder : MetaMenuNode, MetaWidget {
         items.add(builder)
     }
 
-    fun subMenu(config: GuiSubMenuBuilder.() -> Unit) {
+    fun subMenu(text: String, config: GuiSubMenuBuilder.() -> Unit) {
         val builder = GuiSubMenuBuilder()
         builder.config()
+        builder.text = text
         items.add(builder)
     }
 

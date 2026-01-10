@@ -62,11 +62,6 @@ object TestAppKt {
                     menuItem("JRootPane Example") { switchPanel(JRootPaneExample()) }
                     separator()
 
-                    menuItem("JMenuBar Example") { switchPanel(JMenuBarExample()) }
-                    menuItem("JPopupMenu Example") { switchPanel(JPopupMenuExample()) }
-                    menuItem("JMenu Example") { switchPanel(JMenuExample()) }
-                    menuItem("JCheckBoxMenuItem Example") { switchPanel(JCheckBoxMenuItemExample()) }
-                    menuItem("JRadioButtonMenuItem Example") { switchPanel(JRadioButtonMenuItemExample()) }
                     menuItem("JMenuComponent Example") { switchPanel(MenuComponentsExample(frame)) }
                     separator()
 
@@ -113,8 +108,7 @@ object TestAppKt {
                     text = "Demo"
                     mnemonic = OrdinaryKey.D
 
-                    subMenu {
-                        text = "Checkboxes"
+                    subMenu("Checkboxes") {
                         checkItem {
                             text = "Checkbox 1"
                             onChange { s, b -> println("${if(b) "C" else "Unc"}hecked $s") }
@@ -123,13 +117,9 @@ object TestAppKt {
                             text = "Checkbox 2"
                             onChange { s, b -> println("${if(b) "C" else "Unc"}hecked $s") }
                         }
-                        checkItem {
-                            text = "Checkbox 3"
-                            onChange { s, b -> println("${if(b) "C" else "Unc"}hecked $s") }
-                        }
+                        checkItem("Checkbox 3") { s, b -> println("${if(b) "C" else "Unc"}hecked $s") }
                     }
-                    subMenu {
-                        text = "Radiobuttons"
+                    subMenu("Radiobuttons") {
                         radioGroup {
                             onChange { s, i -> println("Selected Radio: $s - at $i") }
                             radioItem("Radiobutton 1")

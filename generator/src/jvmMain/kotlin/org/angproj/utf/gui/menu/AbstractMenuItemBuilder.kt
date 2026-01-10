@@ -16,7 +16,9 @@ package org.angproj.utf.gui.menu
 
 import org.angproj.utf.gui.OrdinaryKey
 import org.angproj.utf.gui.SpecialKey
+import java.awt.event.InputEvent
 import javax.swing.ImageIcon
+import javax.swing.KeyStroke
 
 abstract class AbstractMenuItemBuilder : MetaMenuItem {
     private var _text: String = ""
@@ -38,6 +40,24 @@ abstract class AbstractMenuItemBuilder : MetaMenuItem {
         set(value) {
             _icon = value
         }
+
+    /**
+     * Should be refactored away
+     * */
+    protected fun getKeyStroke(): KeyStroke? {
+        return if(_cmd.first != OrdinaryKey.DISABLED) {
+            var modifiers = 0
+            _cmd.second.forEach {
+                modifiers = modifiers or when(it) {
+                    SpecialKey.ALT -> InputEvent.ALT_DOWN_MASK
+                    SpecialKey.CTRL -> InputEvent.CTRL_DOWN_MASK
+                    SpecialKey.META -> InputEvent.META_DOWN_MASK
+                    SpecialKey.SHIFT -> InputEvent.SHIFT_DOWN_MASK
+                }
+            }
+            KeyStroke.getKeyStroke(_cmd.first.code, modifiers)
+        } else null
+    }
 
     companion object {
         val noCmd = Pair(OrdinaryKey.DISABLED, listOf<SpecialKey>())

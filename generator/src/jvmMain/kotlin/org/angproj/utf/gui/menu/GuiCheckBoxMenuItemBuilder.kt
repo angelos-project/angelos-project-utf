@@ -14,12 +14,8 @@
  */
 package org.angproj.utf.gui.menu
 
-import org.angproj.utf.gui.OrdinaryKey
-import org.angproj.utf.gui.SpecialKey
 import org.angproj.utf.gui.SwingGui
-import java.awt.event.InputEvent
 import javax.swing.JCheckBoxMenuItem
-import javax.swing.KeyStroke
 
 @SwingGui
 class GuiCheckBoxMenuItemBuilder: AbstractMenuItemBuilder(), MetaCheckBoxMenuItem {
@@ -39,18 +35,7 @@ class GuiCheckBoxMenuItemBuilder: AbstractMenuItemBuilder(), MetaCheckBoxMenuIte
     fun build(): JCheckBoxMenuItem {
         return JCheckBoxMenuItem(text).apply {
             isSelected = _checked
-            if(_cmd.first != OrdinaryKey.DISABLED) {
-                var modifiers = 0
-                _cmd.second.forEach {
-                    modifiers = modifiers or when(it) {
-                        SpecialKey.ALT -> InputEvent.ALT_DOWN_MASK
-                        SpecialKey.CTRL -> InputEvent.CTRL_DOWN_MASK
-                        SpecialKey.META -> InputEvent.META_DOWN_MASK
-                        SpecialKey.SHIFT -> InputEvent.SHIFT_DOWN_MASK
-                    }
-                }
-                this.accelerator = KeyStroke.getKeyStroke(_cmd.first.code, modifiers)
-            }
+            accelerator = getKeyStroke()
             icon?.let { this.icon = it }
             addActionListener {
                 onChange(isSelected)

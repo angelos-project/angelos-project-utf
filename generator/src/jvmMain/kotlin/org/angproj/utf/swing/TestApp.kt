@@ -16,10 +16,10 @@ package org.angproj.utf.swing
 
 import org.angproj.utf.gui.OrdinaryKey
 import org.angproj.utf.gui.SpecialKey
-import org.angproj.utf.gui.menu.GuiMenuBuilder
-import java.awt.event.ActionEvent
-import java.awt.event.ActionListener
+import org.angproj.utf.gui.menu.GuiMenuBarBuilder
+
 import javax.swing.*
+import kotlin.system.exitProcess
 
 
 object TestAppKt {
@@ -40,80 +40,73 @@ object TestAppKt {
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
             frame.setSize(800, 600)
 
-            val menuBar = JMenuBar()
-            frame.setJMenuBar(menuBar)
-
-            // File menu with Exit
-            val fileMenu = JMenu("File")
-            val exitItem = JMenuItem("Exit")
-            exitItem.addActionListener(object : ActionListener {
-                override fun actionPerformed(e: ActionEvent?) {
-                    System.exit(0)
+            with(GuiMenuBarBuilder()) {
+                menu {
+                    text = "File"
+                    mnemonic = OrdinaryKey.F
+                    menuItem("Exit") { exitProcess(0) }
                 }
-            })
-            fileMenu.add(exitItem)
-            menuBar.add(fileMenu)
+                menu {
+                    text = "Examples"
+                    mnemonic = OrdinaryKey.E
 
-            with(GuiMenuBuilder()) {
-                text = "Examples"
-                mnemonic = OrdinaryKey.E
+                    menuItem("JDesktopPane Example") { switchPanel(JDesktopPaneExample(frame)) }
+                    menuItem("JEditorPane Example") { switchPanel(JEditorPaneExample()) }
+                    menuItem("JInternalFrame Example") { switchPanel(JInternalFrameExample()) }
+                    menuItem("JLayeredPane Example") { switchPanel(JLayeredPaneExample()) }
+                    menuItem("JLayer Example") { switchPanel(JLayerExample()) }
+                    menuItem("JRootPane Example") { switchPanel(JRootPaneExample()) }
+                    separator()
 
-                menuItem("JDesktopPane Example") { switchPanel(JDesktopPaneExample(frame)) }
-                menuItem("JEditorPane Example") { switchPanel(JEditorPaneExample()) }
-                menuItem("JInternalFrame Example") { switchPanel(JInternalFrameExample()) }
-                menuItem("JLayeredPane Example") { switchPanel(JLayeredPaneExample()) }
-                menuItem("JLayer Example") { switchPanel(JLayerExample()) }
-                menuItem("JRootPane Example") { switchPanel(JRootPaneExample()) }
-                separator()
+                    menuItem("JMenuBar Example") { switchPanel(JMenuBarExample()) }
+                    menuItem("JPopupMenu Example") { switchPanel(JPopupMenuExample()) }
+                    menuItem("JMenu Example") { switchPanel(JMenuExample()) }
+                    menuItem("JCheckBoxMenuItem Example") { switchPanel(JCheckBoxMenuItemExample()) }
+                    menuItem("JRadioButtonMenuItem Example") { switchPanel(JRadioButtonMenuItemExample()) }
+                    menuItem("JMenuComponent Example") { switchPanel(MenuComponentsExample(frame)) }
+                    separator()
 
-                menuItem("JMenuBar Example") { switchPanel(JMenuBarExample()) }
-                menuItem("JPopupMenu Example") { switchPanel(JPopupMenuExample()) }
-                menuItem("JMenu Example") { switchPanel(JMenuExample()) }
-                menuItem("JCheckBoxMenuItem Example") { switchPanel(JCheckBoxMenuItemExample()) }
-                menuItem("JRadioButtonMenuItem Example") { switchPanel(JRadioButtonMenuItemExample()) }
-                menuItem("JMenuComponent Example") { switchPanel(MenuComponentsExample(frame)) }
-                separator()
-
-                menuItem("JButton Example") { switchPanel(JButtonExample()) }
-                menuItem("JCheckBox Example") { switchPanel(JCheckBoxExample()) }
-                menuItem("JColorChooser Example") { switchPanel(JColorChooserExample()) }
-                menuItem("JComboBox Example") { switchPanel(JComboBoxExample()) }
-                menuItem {
-                    text = "JDialog Example"
-                    setCmd(OrdinaryKey.D, SpecialKey.META)
-                    onCommand { switchPanel(JDialogExample(frame)) }
+                    menuItem("JButton Example") { switchPanel(JButtonExample()) }
+                    menuItem("JCheckBox Example") { switchPanel(JCheckBoxExample()) }
+                    menuItem("JColorChooser Example") { switchPanel(JColorChooserExample()) }
+                    menuItem("JComboBox Example") { switchPanel(JComboBoxExample()) }
+                    menuItem {
+                        text = "JDialog Example"
+                        setCmd(OrdinaryKey.D, SpecialKey.META)
+                        onCommand { switchPanel(JDialogExample(frame)) }
+                    }
+                    menuItem("JFileChooser Example") { switchPanel(JFileChooserExample(frame)) }
+                    menuItem("JFormattedTextField Example") { switchPanel(JFormattedTextFieldExample()) }
+                    menuItem("JLabel Example") { switchPanel(JLabelExample()) }
+                    menuItem("JList Example") { switchPanel(JListExample()) }
+                    menuItem("JOptionPane Example") { switchPanel(JOptionPaneExample(frame)) }
+                    menuItem("JPasswordField Example") { switchPanel(JPasswordFieldExample()) }
+                    menuItem {
+                        text = "JProgressBar Example"
+                        setCmd(OrdinaryKey.P, SpecialKey.META)
+                        onCommand { switchPanel(JProgressBarExample()) }
+                    }
+                    menuItem("JRadioButton Example") { switchPanel(JRadioButtonExample()) }
+                    menuItem("JScrollBar Example") { switchPanel(JScrollBarExample()) }
+                    menuItem("JScrollPane Example") { switchPanel(JScrollPaneExample()) }
+                    menuItem("JSeparator Example") { switchPanel(JSeparatorExample()) }
+                    menuItem("JSlider Example") { switchPanel(JSliderExample()) }
+                    menuItem("JSpinner Example") { switchPanel(JSpinnerExample()) }
+                    menuItem("JSplitPane Example") { switchPanel(JSplitPaneExample()) }
+                    menuItem("JTabbedPane Example") { switchPanel(JTabbedPaneExample()) }
+                    menuItem("JTable Example") { switchPanel(JTableExample()) }
+                    menuItem("JTextArea Example") { switchPanel(JTextAreaExample()) }
+                    menuItem("JTextField Example") { switchPanel(JTextFieldExample()) }
+                    menuItem("JTextPane Example") { switchPanel(JTextPaneExample()) }
+                    menuItem("JToggleButton Example") { switchPanel(JToggleButtonExample()) }
+                    menuItem("JToolBar Example") { switchPanel(JToolBarExample()) }
+                    menuItem("JToolTip Example") { switchPanel(JToolTipExample()) }
+                    menuItem("JTree Example") { switchPanel(JTreeExample()) }
+                    menuItem("JViewport Example") { switchPanel(JViewportExample()) }
+                    menuItem("JWindow Example") { switchPanel(JWindowExample(frame)) }
                 }
-                menuItem("JFileChooser Example") { switchPanel(JFileChooserExample(frame)) }
-                menuItem("JFormattedTextField Example") { switchPanel(JFormattedTextFieldExample()) }
-                menuItem("JLabel Example") { switchPanel(JLabelExample()) }
-                menuItem("JList Example") { switchPanel(JListExample()) }
-                menuItem("JOptionPane Example") { switchPanel(JOptionPaneExample(frame)) }
-                menuItem("JPasswordField Example") { switchPanel(JPasswordFieldExample()) }
-                menuItem {
-                    text = "JProgressBar Example"
-                    setCmd(OrdinaryKey.P, SpecialKey.META)
-                    onCommand { switchPanel(JProgressBarExample()) }
-                }
-                menuItem("JRadioButton Example") { switchPanel(JRadioButtonExample()) }
-                menuItem("JScrollBar Example") { switchPanel(JScrollBarExample()) }
-                menuItem("JScrollPane Example") { switchPanel(JScrollPaneExample()) }
-                menuItem("JSeparator Example") { switchPanel(JSeparatorExample()) }
-                menuItem("JSlider Example") { switchPanel(JSliderExample()) }
-                menuItem("JSpinner Example") { switchPanel(JSpinnerExample()) }
-                menuItem("JSplitPane Example") { switchPanel(JSplitPaneExample()) }
-                menuItem("JTabbedPane Example") { switchPanel(JTabbedPaneExample()) }
-                menuItem("JTable Example") { switchPanel(JTableExample()) }
-                menuItem("JTextArea Example") { switchPanel(JTextAreaExample()) }
-                menuItem("JTextField Example") { switchPanel(JTextFieldExample()) }
-                menuItem("JTextPane Example") { switchPanel(JTextPaneExample()) }
-                menuItem("JToggleButton Example") { switchPanel(JToggleButtonExample()) }
-                menuItem("JToolBar Example") { switchPanel(JToolBarExample()) }
-                menuItem("JToolTip Example") { switchPanel(JToolTipExample()) }
-                menuItem("JTree Example") { switchPanel(JTreeExample()) }
-                menuItem("JViewport Example") { switchPanel(JViewportExample()) }
-                menuItem("JWindow Example") { switchPanel(JWindowExample(frame)) }
 
-                menuBar.add(build())
+                frame.jMenuBar = build()
             }
 
             // Add more example menu items here as framework grows

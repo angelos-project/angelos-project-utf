@@ -75,9 +75,9 @@ abstract class AbstractMenuBuilder : MetaMenuNode, MetaWidget {
             items.forEach {
                 when (it) {
                     is MetaMenuSeparator -> add(JSeparator())
-                    is GuiMenuItemBuilder -> add((it).build())
-                    is GuiCheckBoxMenuItemBuilder -> add((it).build())
-                    is GuiRadioGroupMenuBuilder -> {}
+                    is GuiMenuItemBuilder -> add(it.build())
+                    is GuiCheckBoxMenuItemBuilder -> add(it.build())
+                    is GuiRadioGroupMenuBuilder -> { it.build(this) }
                     is GuiSubMenuBuilder -> add(it.build())
                     else -> error("Unhandled GUI builder") // Ignore unknown types
                 }

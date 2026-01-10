@@ -17,6 +17,7 @@ package org.angproj.utf.gui.menu
 import org.angproj.utf.gui.SwingGui
 import java.awt.event.ActionEvent
 import javax.swing.ButtonGroup
+import javax.swing.JComponent
 import javax.swing.JRadioButtonMenuItem
 
 @SwingGui
@@ -35,11 +36,12 @@ class GuiRadioGroupMenuBuilder : MetaMenuNode {
         buttons.add(builder)
     }
 
-    fun build() {
+    fun build(comp: JComponent) {
         val buttonGroup = ButtonGroup()
         for (button in buttons) {
             val menuItem = button.build()
             buttonGroup.add(menuItem)
+            comp.add(menuItem)
             menuItem.addActionListener { event: ActionEvent ->
                 onChange((event.source as JRadioButtonMenuItem).text)
             }

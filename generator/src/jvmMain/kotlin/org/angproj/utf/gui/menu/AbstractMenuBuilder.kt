@@ -55,6 +55,17 @@ abstract class AbstractMenuBuilder : MetaMenuNode, MetaWidget {
         items.add(builder)
     }
 
+    fun radioGroup(items: List<String>, selected: Int = -1, onChange: (String, Int) -> Unit) {
+        radioGroup {
+            onChange(onChange)
+            items.forEachIndexed { index, item ->
+                if(index == selected) radioItem {
+                    text = item
+                    isSelected = true
+                } else radioItem(item)
+            }
+        }
+    }
     fun radioGroup(config: GuiRadioGroupMenuBuilder.() -> Unit) {
         val builder = GuiRadioGroupMenuBuilder()
         builder.config()

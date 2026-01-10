@@ -34,12 +34,13 @@ internal class MenuComponentsExample(private val parentFrame: JFrame) : JPanel()
 
         with(GuiPopupMenuBuilder()) {
             menuItem("Popup Item") { statusLabel.text = "Popup Item selected" }
+            checkItem("CheckBox") { string, bool -> statusLabel.text = "Checkbox $bool" }
             subMenu("SubMenu") {
                 menuItem("Menu Item") { statusLabel.text = "Menu Item selected" }
                 menuItem("Menu Item 2") { statusLabel.text = "Menu Item2 selected" }
             }
             separator()
-            checkItem("CheckBox") { string, bool -> statusLabel.text = "Checkbox $bool" }
+            radioGroup(listOf("Radio 1", "Radio 2", "Radio 3"), 1) { s, i -> statusLabel.text = "Selected: $s at index $i" }
 
             popupButton.componentPopupMenu = build()
         }

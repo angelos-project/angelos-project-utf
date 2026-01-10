@@ -15,5 +15,5 @@
 package org.angproj.utf.gui.menu
 
 interface MetaRadioButtonMenuItem : MetaMenuItem {
-    var isChecked: Boolean
+    var isSelected: Boolean
 }

@@ -21,16 +21,7 @@ import javax.swing.JMenu
 class GuiSubMenuBuilder : AbstractMenuBuilder() {
     fun build(): JMenu {
         return JMenu(text).apply {
-            items.forEach {
-                when (it) {
-                    is MetaMenuSeparator -> addSeparator()
-                    is GuiMenuItemBuilder -> this.add((it).build())
-                    is GuiCheckBoxMenuItemBuilder -> this.add((it).build())
-                    is GuiRadioGroupMenuBuilder -> {}
-                    is GuiSubMenuBuilder -> add(it.build())
-                    else -> error("Unhandled GUI builder") // Ignore unknown types
-                }
-            }
+            someBuild(this)
         }
     }
 }

@@ -32,16 +32,7 @@ class GuiMenuBuilder : AbstractMenuBuilder() {
             if (_mnemonic != OrdinaryKey.DISABLED) {
                 mnemonic = _mnemonic.code
             }
-            items.forEach {
-                when (it) {
-                    is MetaMenuSeparator -> addSeparator()
-                    is GuiMenuItemBuilder -> add((it).build())
-                    is GuiCheckBoxMenuItemBuilder -> add((it).build())
-                    is GuiRadioGroupMenuBuilder -> {}
-                    is GuiSubMenuBuilder -> add(it.build())
-                    else -> error("Unhandled GUI builder") // Ignore unknown types
-                }
-            }
+            someBuild(this)
         }
     }
 }

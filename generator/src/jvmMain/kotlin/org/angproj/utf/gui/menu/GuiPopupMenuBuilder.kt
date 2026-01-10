@@ -22,16 +22,7 @@ class GuiPopupMenuBuilder : AbstractMenuBuilder() {
 
     fun build(): JPopupMenu {
         return JPopupMenu(text).apply {
-            items.forEach {
-                when (it) {
-                    is MetaMenuSeparator -> addSeparator()
-                    is GuiMenuItemBuilder -> this.add((it).build())
-                    is GuiCheckBoxMenuItemBuilder -> this.add((it).build())
-                    is GuiRadioGroupMenuBuilder -> {}
-                    is GuiSubMenuBuilder -> add(it.build())
-                    else -> error("Unhandled GUI builder") // Ignore unknown types
-                }
-            }
+            someBuild(this)
         }
     }
 }

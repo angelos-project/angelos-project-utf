@@ -17,6 +17,8 @@ package org.angproj.utf.gui.menu
 import org.angproj.utf.gui.MetaWidget
 import org.angproj.utf.gui.SwingGui
 import java.awt.event.ActionEvent
+import javax.swing.JComponent
+import javax.swing.JSeparator
 
 @SwingGui
 abstract class AbstractMenuBuilder : MetaMenuNode, MetaWidget {
@@ -63,5 +65,23 @@ abstract class AbstractMenuBuilder : MetaMenuNode, MetaWidget {
         val builder = GuiSubMenuBuilder()
         builder.config()
         items.add(builder)
+    }
+
+    /**
+     * To be refactored away
+     * */
+    protected fun someBuild(comp: JComponent) {
+        comp.apply {
+            items.forEach {
+                when (it) {
+                    is MetaMenuSeparator -> add(JSeparator())
+                    is GuiMenuItemBuilder -> add((it).build())
+                    is GuiCheckBoxMenuItemBuilder -> add((it).build())
+                    is GuiRadioGroupMenuBuilder -> {}
+                    is GuiSubMenuBuilder -> add(it.build())
+                    else -> error("Unhandled GUI builder") // Ignore unknown types
+                }
+            }
+        }
     }
 }

@@ -40,7 +40,9 @@ internal class MenuComponentsExample(private val parentFrame: JFrame) : JPanel()
                 menuItem("Menu Item 2") { statusLabel.text = "Menu Item2 selected" }
             }
             separator()
-            radioGroup(listOf("Radio 1", "Radio 2", "Radio 3"), 1) { s, i -> statusLabel.text = "Selected: $s at index $i" }
+            radioGroup(listOf("Radio 1", "Radio 2", "Radio 3"), 1) { s, i ->
+                statusLabel.text = "Selected: $s at index $i"
+            }
 
             popupButton.componentPopupMenu = build()
         }
